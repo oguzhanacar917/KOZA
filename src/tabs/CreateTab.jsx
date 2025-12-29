@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { generateStorybook, generateGame } from '../services/geminiService';
-import { Sparkles, BookOpen, Gamepad2, Loader2 } from 'lucide-react';
+import { validateStoryInput } from '../utils/validation';
+import { Sparkles, BookOpen, Gamepad2, Loader2, AlertCircle } from 'lucide-react';
 
 const CreateTab = () => {
-    const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory, setAnalysisResult, analysisResult } = useApp();
+    const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory, setAnalysisResult, analysisResult, addToast } = useApp();
     const [stage, setStage] = useState('');
+    const [error, setError] = useState(null);
 
     const handleGenerate = async (type) => {
-        if (!activeStory.trim() || isProcessing) return;
+        setError(null);
+
+        const validation = validateStoryInput(activeStory);
+        if (!validation.isValid) {
+            setError(validation.errors[0]);
+            return;
+        }
 
         setIsProcessing(true);
         setStage(type === 'story' ? 'Hikaye oluşturuluyor...' : 'Oyun tasarlanıyor...');
 
         try {
             const result = type === 'story'
-                ? await generateStorybook(activeStory)
-                : await generateGame(activeStory);
+                ? await generateStorybook(validation.sanitized)
+                : await generateGame(validation.sanitized);
 
             const data = {
                 type,
                 title: type === 'story' ? (result[0]?.title || 'Dönüşüm Hikayesi') : (result.title || 'Dönüşüm Oyunu'),
-                content: activeStory,
+                content: validation.sanitized,
                 [type === 'story' ? 'pages' : 'levels']: type === 'story' ? result : result.levels
             };
 
@@ -33,8 +41,11 @@ const CreateTab = () => {
 
             saveStory(data);
             awardXP(500, type === 'story' ? 'Hikaye oluşturuldu' : 'Oyun oluşturuldu');
+            addToast('success', 'Başarılı!', type === 'story' ? 'Hikaye oluşturuldu' : 'Oyun oluşturuldu');
         } catch (error) {
             console.error('Generation failed:', error);
+            setError(error.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+            addToast('error', 'Hata', error.message || 'Oluşturma başarısız oldu');
         } finally {
             setIsProcessing(false);
             setStage('');
@@ -71,11 +82,22 @@ const CreateTab = () => {
                     </label>
                     <textarea
                         value={activeStory}
-                        onChange={(e) => setActiveStory(e.target.value)}
+                        onChange={(e) => {
+                            setActiveStory(e.target.value);
+                            setError(null);
+                        }}
                         placeholder="Başına gelen bir zorbalık olayını, seni üzen bir deneyimi ya da aşmak istediğin bir zorluğu anlat..."
-                        className="w-full h-48 px-4 py-3 border border-neutral-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className={`w-full h-48 px-4 py-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${error ? 'border-red-300 bg-red-50' : 'border-neutral-200'
+                            }`}
                         disabled={isProcessing}
                     />
+
+                    {error && (
+                        <div className="mt-2 flex items-start gap-2 text-sm text-red-600">
+                            <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
+                            <span>{error}</span>
+                        </div>
+                    )}
 
                     {isProcessing && (
                         <div className="mt-4 flex items-center gap-3 text-sm text-neutral-600">

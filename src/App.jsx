@@ -6,10 +6,12 @@ import LearnTab from './tabs/LearnTab';
 import ProfileTab from './tabs/ProfileTab';
 import StoryView from './views/StoryView';
 import GameView from './views/GameView';
+import Toast from './components/Toast';
+import Onboarding from './components/Onboarding';
 import { Bell, PlusCircle, Users, BookOpen, User } from 'lucide-react';
 
 const App = () => {
-    const { currentView, setCurrentView, activeTab, setActiveTab, notification, user } = useApp();
+    const { currentView, setCurrentView, activeTab, setActiveTab, notification, user, toasts, showOnboarding, setShowOnboarding } = useApp();
 
     const renderContent = () => {
         if (currentView?.type === 'story') {
@@ -38,6 +40,9 @@ const App = () => {
 
     return (
         <div className="min-h-screen bg-neutral-50 pb-20">
+            {/* Onboarding */}
+            {showOnboarding && <Onboarding onComplete={() => setShowOnboarding(false)} />}
+
             {/* Header */}
             <header className="fixed top-0 left-0 right-0 bg-white border-b border-neutral-200 z-40">
                 <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -110,6 +115,18 @@ const App = () => {
                     </div>
                 </div>
             )}
+
+            {/* Toast Notifications */}
+            <div className="fixed top-20 right-4 z-50 space-y-2">
+                {toasts.map(toast => (
+                    <Toast
+                        key={toast.id}
+                        type={toast.type}
+                        title={toast.title}
+                        message={toast.message}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

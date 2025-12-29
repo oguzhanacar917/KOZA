@@ -1,16 +1,150 @@
-# React + Vite
+# KOZA - Enhanced Project Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Quick Start
 
-Currently, two official plugins are available:
+```bash
+npm install
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Visit `http://localhost:5173` to see the app.
 
-## React Compiler
+## 📁 Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+├── components/       # Reusable UI components
+├── context/         # React context providers
+├── hooks/           # Custom React hooks
+├── services/        # API services
+├── tabs/            # Main tab components
+├── utils/           # Utility functions
+└── views/           # Full-page views
+```
 
-## Expanding the ESLint configuration
+## 🎯 Core Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Story & Game Creation
+- AI-powered story generation using Gemini 2.0
+- Interactive game creation with decision-based gameplay
+- Input validation and error handling
+- Retry logic with exponential backoff
+- Response caching for performance
+
+### User Progression
+- XP system with level progression
+- 8 unique achievements
+- Daily login streak tracking
+- Comprehensive profile statistics
+
+### Community
+- Browse user-generated content
+- Search and filter functionality
+- Category-based organization
+
+### Learning Academy
+- Educational modules
+- Emotional intelligence training
+- Digital safety resources
+
+## 🛠️ Technical Stack
+
+- **Framework:** React 19
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS 4
+- **Icons:** Lucide React
+- **AI:** Google Gemini 2.0 Flash
+
+## 🔧 Utilities
+
+### Analytics (`utils/analytics.js`)
+Track user interactions and app usage:
+```javascript
+import { analytics } from './utils/analytics';
+analytics.track('event_name', { data });
+```
+
+### Validation (`utils/validation.js`)
+Validate and sanitize user inputs:
+```javascript
+import { validateStoryInput } from './utils/validation';
+const result = validateStoryInput(input);
+```
+
+### Achievements (`utils/achievements.js`)
+Check and award achievements:
+```javascript
+import { checkAchievements } from './utils/achievements';
+const newAchievements = checkAchievements(stats, unlocked);
+```
+
+### Performance (`utils/performance.js`)
+Monitor app performance:
+```javascript
+import { performanceMonitor } from './utils/performance';
+performanceMonitor.measureAsync('task', asyncFn);
+```
+
+### Accessibility (`utils/accessibility.js`)
+Improve accessibility:
+```javascript
+import { announceToScreenReader } from './utils/accessibility';
+announceToScreenReader('Message for screen readers');
+```
+
+## 🎨 Components
+
+### ErrorBoundary
+Catches and handles React errors gracefully.
+
+### Toast
+Non-intrusive notifications with auto-dismiss.
+
+### SkeletonLoader
+Loading states for better UX.
+
+### Onboarding
+4-step tutorial for new users.
+
+## 🔐 Security
+
+- Input validation on all user inputs
+- HTML sanitization to prevent XSS
+- API key should be moved to environment variables
+- CORS protection via API configuration
+
+## 📊 State Management
+
+Global state managed via React Context (`AppContext`):
+- User data and progression
+- Saved stories and games
+- UI state (active tab, current view)
+- Notifications and toasts
+- Onboarding status
+
+## 🎯 Best Practices
+
+1. **Error Handling:** All async operations wrapped in try-catch
+2. **Validation:** User inputs validated before processing
+3. **Accessibility:** ARIA labels and keyboard navigation
+4. **Performance:** API caching and retry logic
+5. **UX:** Loading states and error feedback
+
+## 🚧 Future Enhancements
+
+- [ ] TypeScript migration
+- [ ] Unit and integration tests
+- [ ] Dark mode support
+- [ ] Story sharing functionality
+- [ ] Offline support with service workers
+- [ ] API key environment variable
+- [ ] Rate limiting
+- [ ] Image optimization
+
+## 📝 License
+
+Private project - All rights reserved
+
+## 🤝 Contributing
+
+This is a private project. Contact the maintainer for contribution guidelines.
