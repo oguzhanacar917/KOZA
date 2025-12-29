@@ -47,6 +47,14 @@ Kurallar:
 
 JSON dışında hiçbir şey yazma.`;
 
+// Simple in-memory cache
+const cache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+const getCacheKey = (prompt, userInput) => {
+  return `${prompt.substring(0, 50)}_${userInput.substring(0, 100)}`;
+};
+
 const cleanJSON = (text) => {
   try {
     let cleaned = text.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -74,40 +82,98 @@ const cleanJSON = (text) => {
   }
 };
 
-const callGemini = async (prompt, userInput) => {
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{
-          role: 'user',
-          parts: [{ text: `${prompt}\n\nKullanıcının deneyimi: ${userInput}` }]
-        }],
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 8192,
-          responseMimeType: 'application/json'
-        }
-      })
-    }
-  );
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
+const callGemini = async (prompt, userInput, retries = 3) => {
+  // Check cache first
+  const cacheKey = getCacheKey(prompt, userInput);
+  const cached = cache.get(cacheKey);
+
+  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+    console.log('📦 Using cached response');
+    return cached.data;
   }
 
-  const data = await response.json();
-  const content = data.candidates[0].content.parts[0].text;
+  let lastError;
 
-  return JSON.parse(cleanJSON(content));
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              role: 'user',
+              parts: [{ text: `${prompt}\n\nKullanıcının deneyimi: ${userInput}` }]
+            }],
+            generationConfig: {
+              temperature: 0.8,
+              maxOutputTokens: 8192,
+              responseMimeType: 'application/json'
+            }
+          })
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API error ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.candidates || !data.candidates[0]) {
+        throw new Error('Invalid API response structure');
+      }
+
+      const content = data.candidates[0].content.parts[0].text;
+      const parsed = JSON.parse(cleanJSON(content));
+
+      // Cache successful response
+      cache.set(cacheKey, {
+        data: parsed,
+        timestamp: Date.now()
+      });
+
+      return parsed;
+
+    } catch (error) {
+      lastError = error;
+      console.error(`Attempt ${attempt + 1} failed:`, error.message);
+
+      if (attempt < retries - 1) {
+        const delay = Math.min(1000 * Math.pow(2, attempt), 5000);
+        console.log(`Retrying in ${delay}ms...`);
+        await sleep(delay);
+      }
+    }
+  }
+
+  throw new Error(`Failed after ${retries} attempts: ${lastError.message}`);
 };
 
 export const generateStorybook = async (userStory) => {
+  if (!userStory || userStory.trim().length < 10) {
+    throw new Error('Lütfen en az 10 karakter uzunluğunda bir hikaye girin');
+  }
   return callGemini(STORY_PROMPT, userStory);
 };
 
 export const generateGame = async (userStory) => {
+  if (!userStory || userStory.trim().length < 10) {
+    throw new Error('Lütfen en az 10 karakter uzunluğunda bir deneyim girin');
+  }
   return callGemini(GAME_PROMPT, userStory);
 };
+
+// Clear old cache entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of cache.entries()) {
+    if (now - value.timestamp > CACHE_DURATION) {
+      cache.delete(key);
+    }
+  }
+}, CACHE_DURATION);

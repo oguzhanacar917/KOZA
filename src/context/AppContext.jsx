@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
+import { analytics } from '../utils/analytics';
+import { checkAchievements } from '../utils/achievements';
 
 const AppContext = createContext(null);
 
@@ -9,12 +11,18 @@ const DEFAULT_USER = {
     nextLevelXp: 1000,
     storiesRead: 3,
     gamesPlayed: 1,
+    storiesCreated: 0,
+    gamesCreated: 0,
+    totalXP: 850,
+    dailyStreak: 0,
+    lastVisit: null,
     title: "Empati Çırağı",
     badges: [
         { id: 1, name: "İlk Adım", unlocked: true },
         { id: 2, name: "Hikaye Anlatıcısı", unlocked: false },
         { id: 3, name: "Topluluk Yıldızı", unlocked: false },
-    ]
+    ],
+    achievements: []
 };
 
 const COMMUNITY_WORKS = [
@@ -69,38 +77,95 @@ export const AppProvider = ({ children }) => {
     const [activeTab, setActiveTab] = useState('create');
     const [notification, setNotification] = useState(null);
     const [analysisResult, setAnalysisResult] = useState(null);
+    const [toasts, setToasts] = useState([]);
+    const [showOnboarding, setShowOnboarding] = useState(
+        !localStorage.getItem('koza-onboarding-complete')
+    );
+
+    // Track daily streak
+    useEffect(() => {
+        const today = new Date().toDateString();
+        const lastVisit = user.lastVisit;
+
+        if (lastVisit !== today) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toDateString();
+
+            setUser(prev => ({
+                ...prev,
+                lastVisit: today,
+                dailyStreak: lastVisit === yesterdayStr ? prev.dailyStreak + 1 : 1
+            }));
+        }
+    }, []);
+
+    const addToast = useCallback((type, title, message) => {
+        const id = Date.now();
+        setToasts(prev => [...prev, { id, type, title, message }]);
+        setTimeout(() => {
+            setToasts(prev => prev.filter(t => t.id !== id));
+        }, 3000);
+    }, []);
 
     const awardXP = useCallback((amount, reason) => {
+        analytics.track('xp_awarded', { amount, reason });
+
         setUser(prev => {
             const newXP = prev.xp + amount;
+            const newTotalXP = prev.totalXP + amount;
             const leveledUp = newXP >= prev.nextLevelXp;
+
+            const updatedUser = leveledUp ? {
+                ...prev,
+                xp: newXP - prev.nextLevelXp,
+                level: prev.level + 1,
+                nextLevelXp: Math.floor(prev.nextLevelXp * 1.5),
+                totalXP: newTotalXP
+            } : {
+                ...prev,
+                xp: newXP,
+                totalXP: newTotalXP
+            };
+
+            // Check for new achievements
+            const newAchievements = checkAchievements(
+                {
+                    storiesCreated: updatedUser.storiesCreated,
+                    gamesCreated: updatedUser.gamesCreated,
+                    level: updatedUser.level,
+                    totalXP: updatedUser.totalXP,
+                    dailyStreak: updatedUser.dailyStreak
+                },
+                updatedUser.achievements
+            );
+
+            if (newAchievements.length > 0) {
+                newAchievements.forEach(achievement => {
+                    addToast('success', 'Başarı Kazanıldı!', `${achievement.icon} ${achievement.name}`);
+                    analytics.track('achievement_unlocked', { achievementId: achievement.id });
+                });
+                updatedUser.achievements = [...updatedUser.achievements, ...newAchievements.map(a => a.id)];
+            }
 
             if (leveledUp) {
                 setNotification({
                     type: 'levelup',
                     title: 'Seviye Atladın!',
-                    message: `Yeni seviye: ${prev.level + 1}`
+                    message: `Yeni seviye: ${updatedUser.level}`
                 });
-
-                return {
-                    ...prev,
-                    xp: newXP - prev.nextLevelXp,
-                    level: prev.level + 1,
-                    nextLevelXp: Math.floor(prev.nextLevelXp * 1.5)
-                };
+            } else {
+                setNotification({
+                    type: 'xp',
+                    title: `+${amount} XP`,
+                    message: reason
+                });
             }
 
-            setNotification({
-                type: 'xp',
-                title: `+${amount} XP`,
-                message: reason
-            });
-
-            return { ...prev, xp: newXP };
+            setTimeout(() => setNotification(null), 3000);
+            return updatedUser;
         });
-
-        setTimeout(() => setNotification(null), 3000);
-    }, [setUser]);
+    }, [setUser, addToast]);
 
     const saveStory = useCallback((story) => {
         const newStory = {
@@ -109,7 +174,18 @@ export const AppProvider = ({ children }) => {
             createdAt: new Date().toISOString()
         };
         setSavedStories(prev => [newStory, ...prev].slice(0, 50));
-    }, [setSavedStories]);
+
+        // Track story creation
+        const eventType = story.type === 'story' ? 'story_created' : 'game_created';
+        analytics.track(eventType, { title: story.title });
+
+        // Update user stats
+        setUser(prev => ({
+            ...prev,
+            storiesCreated: story.type === 'story' ? prev.storiesCreated + 1 : prev.storiesCreated,
+            gamesCreated: story.type === 'game' ? prev.gamesCreated + 1 : prev.gamesCreated
+        }));
+    }, [setSavedStories, setUser]);
 
     const deleteStory = useCallback((id) => {
         setSavedStories(prev => prev.filter(s => s.id !== id));
@@ -133,7 +209,11 @@ export const AppProvider = ({ children }) => {
         communityWorks: COMMUNITY_WORKS,
         awardXP,
         saveStory,
-        deleteStory
+        deleteStory,
+        toasts,
+        addToast,
+        showOnboarding,
+        setShowOnboarding
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
