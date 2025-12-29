@@ -2,6 +2,8 @@
  * Analytics and tracking utilities
  */
 
+import { googleAnalytics } from './googleAnalytics';
+
 class Analytics {
     constructor() {
         this.events = [];
@@ -20,6 +22,14 @@ class Analytics {
 
         // Store in localStorage for persistence
         this.saveToStorage();
+
+        // Send to Google Analytics
+        googleAnalytics.trackEvent(
+            'app_interaction',
+            eventName,
+            properties.label || '',
+            properties.value || undefined
+        );
 
         console.log('📊 Analytics:', eventName, properties);
     }

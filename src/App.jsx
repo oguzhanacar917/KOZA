@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApp } from './context/AppContext';
+import { useAuth } from './context/AuthContext';
 import CreateTab from './tabs/CreateTab';
 import CommunityTab from './tabs/CommunityTab';
 import LearnTab from './tabs/LearnTab';
@@ -8,10 +9,38 @@ import StoryView from './views/StoryView';
 import GameView from './views/GameView';
 import Toast from './components/Toast';
 import Onboarding from './components/Onboarding';
-import { Bell, PlusCircle, Users, BookOpen, User } from 'lucide-react';
+import HomePage from './pages/HomePage';
+import { googleAnalytics } from './utils/googleAnalytics';
+import { Bell, PlusCircle, Users, BookOpen, User, LogOut } from 'lucide-react';
 
 const App = () => {
     const { currentView, setCurrentView, activeTab, setActiveTab, notification, user, toasts, showOnboarding, setShowOnboarding } = useApp();
+    const { user: authUser, loading: authLoading, signOut } = useAuth();
+
+    // Track page views
+    useEffect(() => {
+        const path = currentView ? `/${currentView.type}` : `/${activeTab}`;
+        googleAnalytics.trackPageView(path);
+    }, [currentView, activeTab]);
+
+    // Show loading state while checking auth
+    if (authLoading) {
+        return (
+            <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4 animate-pulse">
+                        K
+                    </div>
+                    <p className="text-neutral-600">Yükleniyor...</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Show HomePage if not authenticated
+    if (!authUser) {
+        return <HomePage />;
+    }
 
     const renderContent = () => {
         if (currentView?.type === 'story') {
@@ -38,6 +67,10 @@ const App = () => {
         { id: 'profile', label: 'Profil', icon: User }
     ];
 
+    const handleSignOut = async () => {
+        await signOut();
+    };
+
     return (
         <div className="min-h-screen bg-neutral-50 pb-20">
             {/* Onboarding */}
@@ -59,12 +92,31 @@ const App = () => {
                         KOZA
                     </button>
 
-                    <div className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-3 text-sm">
                         <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-neutral-100 rounded-full">
                             <div className="w-2 h-2 bg-primary-600 rounded-full" />
                             <span className="font-medium">{user.xp} / {user.nextLevelXp} XP</span>
                             <span className="text-neutral-500">Seviye {user.level}</span>
                         </div>
+
+                        {authUser && (
+                            <div className="flex items-center gap-2">
+                                {authUser.photoURL && (
+                                    <img
+                                        src={authUser.photoURL}
+                                        alt={authUser.displayName || 'User'}
+                                        className="w-8 h-8 rounded-full"
+                                    />
+                                )}
+                                <button
+                                    onClick={handleSignOut}
+                                    className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                                    title="Çıkış Yap"
+                                >
+                                    <LogOut size={18} />
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </header>
