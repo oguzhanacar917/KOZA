@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { FIREBASE_CONFIG } from '../config';
 import { googleAnalytics } from '../utils/googleAnalytics';
+import { initializeFirestore } from '../services/firestoreService';
 
 const AuthContext = createContext(null);
 
@@ -16,6 +17,7 @@ const AuthContext = createContext(null);
 let app = null;
 let auth = null;
 let provider = null;
+let firestore = null;
 
 const initializeFirebase = () => {
     if (!FIREBASE_CONFIG.apiKey) {
@@ -27,6 +29,7 @@ const initializeFirebase = () => {
         app = initializeApp(FIREBASE_CONFIG);
         auth = getAuth(app);
         provider = new GoogleAuthProvider();
+        firestore = initializeFirestore(app);
         return true;
     } catch (error) {
         console.error('Firebase initialization failed:', error);
@@ -112,6 +115,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         firebaseEnabled,
+        firestoreEnabled: !!firestore,
         signInWithGoogle,
         signOut
     };

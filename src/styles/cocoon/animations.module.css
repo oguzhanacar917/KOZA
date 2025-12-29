@@ -1,0 +1,496 @@
+/* Cocoon Metamorphosis - Base Animations */
+
+/* ==================== BREATHING ANIMATION ==================== */
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+    }
+
+    50% {
+        transform: scale(1.03) translateY(-2px);
+    }
+}
+
+@keyframes subtlePulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ==================== GLOW EFFECTS ==================== */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--glow-color, rgba(139, 115, 85, 0.3));
+        filter: brightness(1);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--glow-color, rgba(139, 115, 85, 0.5));
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes intensifyGlow {
+    0% {
+        box-shadow: 0 0 10px var(--glow-color);
+    }
+
+    100% {
+        box-shadow: 0 0 60px var(--glow-color),
+            0 0 100px var(--glow-color);
+    }
+}
+
+/* ==================== CRACK ANIMATIONS ==================== */
+@keyframes crackAppear {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 1000;
+    }
+
+    100% {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes crackGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 2px #FFD700);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 8px #FFD700) drop-shadow(0 0 12px #FFA500);
+    }
+}
+
+@keyframes crackSpread {
+    0% {
+        clip-path: circle(0% at 50% 50%);
+    }
+
+    100% {
+        clip-path: circle(100% at 50% 50%);
+    }
+}
+
+/* ==================== BREAKING THROUGH ==================== */
+@keyframes fragmentFall {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--fall-x, 0), var(--fall-y, 200px)) rotate(var(--fall-rotation, 180deg));
+        opacity: 0;
+    }
+}
+
+@keyframes lightBeam {
+    0% {
+        opacity: 0;
+        transform: scaleY(0) rotate(var(--beam-angle, 0deg));
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(1) rotate(var(--beam-angle, 0deg));
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleY(0.5) rotate(calc(var(--beam-angle, 0deg) + 45deg));
+    }
+}
+
+@keyframes energyBurst {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* ==================== EMERGENCE ==================== */
+@keyframes emerge {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8) translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes chrysalisShimmer {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes transformationRipple {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* ==================== WING UNFURLING ==================== */
+@keyframes unfurlWings {
+    0% {
+        transform: scaleX(0) scaleY(0.8) rotate(-90deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scaleX(0.5) scaleY(0.9) rotate(-45deg);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scaleX(1) scaleY(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes wingColorReveal {
+    0% {
+        filter: grayscale(100%) brightness(0.5);
+    }
+
+    100% {
+        filter: grayscale(0%) brightness(1);
+    }
+}
+
+@keyframes iridescentShimmer {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* ==================== FLIGHT ANIMATIONS ==================== */
+@keyframes flutter {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(-8px) rotate(-5deg);
+    }
+}
+
+@keyframes wingFlap {
+
+    0%,
+    100% {
+        transform: rotateX(0deg);
+    }
+
+    50% {
+        transform: rotateX(30deg);
+    }
+}
+
+@keyframes flightPath {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(30px, -20px);
+    }
+
+    50% {
+        transform: translate(0, -40px);
+    }
+
+    75% {
+        transform: translate(-30px, -20px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes hover {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ==================== MAJESTIC BUTTERFLY ==================== */
+@keyframes majesticFlight {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(50px, -30px) rotate(10deg);
+    }
+
+    40% {
+        transform: translate(80px, -10px) rotate(-5deg);
+    }
+
+    60% {
+        transform: translate(50px, 20px) rotate(5deg);
+    }
+
+    80% {
+        transform: translate(-30px, -20px) rotate(-10deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes cosmicAura {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 30px rgba(139, 0, 255, 0.6),
+            0 0 60px rgba(65, 105, 225, 0.4),
+            0 0 90px rgba(255, 20, 147, 0.3);
+    }
+
+    50% {
+        box-shadow:
+            0 0 50px rgba(139, 0, 255, 0.8),
+            0 0 100px rgba(65, 105, 225, 0.6),
+            0 0 150px rgba(255, 20, 147, 0.5);
+    }
+}
+
+@keyframes etherealGlow {
+
+    0%,
+    100% {
+        filter: brightness(1) saturate(1);
+    }
+
+    50% {
+        filter: brightness(1.3) saturate(1.5);
+    }
+}
+
+/* ==================== PARTICLE ANIMATIONS ==================== */
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-10px) translateX(5px);
+    }
+
+    75% {
+        transform: translateY(-5px) translateX(-5px);
+    }
+}
+
+@keyframes swirl {
+    0% {
+        transform: rotate(0deg) translateX(var(--swirl-radius, 30px)) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(var(--swirl-radius, 30px)) rotate(-360deg);
+    }
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes trail {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+/* ==================== TRANSITION ANIMATIONS ==================== */
+@keyframes stageTransition {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes celebrationBurst {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ==================== UTILITY ANIMATIONS ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ==================== RESPONSIVE ANIMATIONS ==================== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

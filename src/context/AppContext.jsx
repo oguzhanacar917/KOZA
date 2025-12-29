@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 import useLocalStorage from '../hooks/useLocalStorage';
 import { analytics } from '../utils/analytics';
 import { checkAchievements } from '../utils/achievements';
+import { useAuth } from './AuthContext';
+import * as firestoreService from '../services/firestoreService';
 
 const AppContext = createContext(null);
 
@@ -69,6 +71,7 @@ const COMMUNITY_WORKS = [
 ];
 
 export const AppProvider = ({ children }) => {
+    const { user: authUser, firestoreEnabled } = useAuth();
     const [user, setUser] = useLocalStorage('koza-user', DEFAULT_USER);
     const [savedStories, setSavedStories] = useLocalStorage('koza-stories', []);
     const [activeStory, setActiveStory] = useState('');
@@ -81,6 +84,8 @@ export const AppProvider = ({ children }) => {
     const [showOnboarding, setShowOnboarding] = useState(
         !localStorage.getItem('koza-onboarding-complete')
     );
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [cloudSynced, setCloudSynced] = useState(false);
 
     // Track daily streak
     useEffect(() => {
@@ -99,6 +104,75 @@ export const AppProvider = ({ children }) => {
             }));
         }
     }, []);
+
+    // Sync with Firestore when user signs in
+    useEffect(() => {
+        if (!authUser || !firestoreEnabled || cloudSynced) return;
+
+        const syncData = async () => {
+            setIsSyncing(true);
+            try {
+                console.log('🔄 Syncing data with cloud...');
+
+                const localData = {
+                    user,
+                    stories: savedStories
+                };
+
+                const result = await firestoreService.syncLocalToCloud(authUser.uid, localData);
+
+                if (result.migrated) {
+                    addToast('success', 'Data Synced', 'Your data has been backed up to the cloud');
+                } else if (result.cloudData) {
+                    // Load cloud data
+                    setUser(result.cloudData);
+
+                    // Load cloud stories
+                    const cloudStories = await firestoreService.getUserStories(authUser.uid);
+                    setSavedStories(cloudStories);
+
+                    addToast('success', 'Data Loaded', 'Your data has been loaded from the cloud');
+                }
+
+                setCloudSynced(true);
+            } catch (error) {
+                console.error('Sync error:', error);
+                addToast('error', 'Sync Failed', 'Could not sync with cloud. Using local data.');
+            } finally {
+                setIsSyncing(false);
+            }
+        };
+
+        syncData();
+    }, [authUser, firestoreEnabled]);
+
+    // Subscribe to real-time updates
+    useEffect(() => {
+        if (!authUser || !firestoreEnabled || !cloudSynced) return;
+
+        console.log('👂 Subscribing to real-time updates...');
+
+        const unsubscribeProfile = firestoreService.subscribeToProfile(
+            authUser.uid,
+            (cloudProfile) => {
+                console.log('📥 Profile updated from cloud');
+                setUser(prev => ({ ...prev, ...cloudProfile }));
+            }
+        );
+
+        const unsubscribeStories = firestoreService.subscribeToStories(
+            authUser.uid,
+            (cloudStories) => {
+                console.log('📥 Stories updated from cloud');
+                setSavedStories(cloudStories);
+            }
+        );
+
+        return () => {
+            unsubscribeProfile();
+            unsubscribeStories();
+        };
+    }, [authUser, firestoreEnabled, cloudSynced]);
 
     const addToast = useCallback((type, title, message) => {
         const id = Date.now();
@@ -165,9 +239,25 @@ export const AppProvider = ({ children }) => {
             setTimeout(() => setNotification(null), 3000);
             return updatedUser;
         });
-    }, [setUser, addToast]);
 
-    const saveStory = useCallback((story) => {
+        // Sync to cloud if authenticated
+        if (authUser && firestoreEnabled && cloudSynced) {
+            setTimeout(async () => {
+                try {
+                    await firestoreService.updateUserProfile(authUser.uid, {
+                        xp: user.xp,
+                        level: user.level,
+                        nextLevelXp: user.nextLevelXp,
+                        totalXP: user.totalXP
+                    });
+                } catch (error) {
+                    console.error('Failed to sync XP to cloud:', error);
+                }
+            }, 100);
+        }
+    }, [setUser, addToast, authUser, firestoreEnabled, cloudSynced, user]);
+
+    const saveStory = useCallback(async (story) => {
         const newStory = {
             id: Date.now(),
             ...story,
@@ -185,11 +275,32 @@ export const AppProvider = ({ children }) => {
             storiesCreated: story.type === 'story' ? prev.storiesCreated + 1 : prev.storiesCreated,
             gamesCreated: story.type === 'game' ? prev.gamesCreated + 1 : prev.gamesCreated
         }));
-    }, [setSavedStories, setUser]);
 
-    const deleteStory = useCallback((id) => {
+        // Sync to cloud if authenticated
+        if (authUser && firestoreEnabled && cloudSynced) {
+            try {
+                await firestoreService.saveStory(authUser.uid, newStory);
+                console.log('✅ Story saved to cloud');
+            } catch (error) {
+                console.error('Failed to save story to cloud:', error);
+                addToast('error', 'Sync Failed', 'Story saved locally but not synced to cloud');
+            }
+        }
+    }, [setSavedStories, setUser, authUser, firestoreEnabled, cloudSynced, addToast]);
+
+    const deleteStory = useCallback(async (id) => {
         setSavedStories(prev => prev.filter(s => s.id !== id));
-    }, [setSavedStories]);
+
+        // Delete from cloud if authenticated
+        if (authUser && firestoreEnabled && cloudSynced) {
+            try {
+                await firestoreService.deleteStory(authUser.uid, id);
+                console.log('✅ Story deleted from cloud');
+            } catch (error) {
+                console.error('Failed to delete story from cloud:', error);
+            }
+        }
+    }, [setSavedStories, authUser, firestoreEnabled, cloudSynced]);
 
     const value = {
         user,

@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../context/AppContext';
 import { ACHIEVEMENTS, getAchievementProgress } from '../utils/achievements';
 import { Trash2, BookOpen, Gamepad2, Award, TrendingUp, Lock } from 'lucide-react';
+import CocoonStage from '../components/cocoon/CocoonStage';
+import MilestoneNotification from '../components/cocoon/MilestoneNotification';
+import { getOzToNextStage } from '../utils/cocoon/stageCalculator';
 
 const ProfileTab = () => {
     const { user, savedStories, deleteStory, setCurrentView } = useApp();
+    const [previousOz, setPreviousOz] = useState(user.totalXP);
+    const prevOzRef = useRef(user.totalXP);
 
     const progressPercent = (user.xp / user.nextLevelXp) * 100;
+    const ozToNextStage = getOzToNextStage(user.totalXP);
+
+    // Track ÖZ changes for milestone notifications
+    useEffect(() => {
+        if (user.totalXP !== prevOzRef.current) {
+            setPreviousOz(prevOzRef.current);
+            prevOzRef.current = user.totalXP;
+        }
+    }, [user.totalXP]);
 
     // Get unlocked and locked achievements
     const unlockedAchievements = ACHIEVEMENTS.filter(a => user.achievements?.includes(a.id));
@@ -22,6 +36,41 @@ const ProfileTab = () => {
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
+            {/* Milestone Notifications */}
+            <MilestoneNotification previousOz={previousOz} currentOz={user.totalXP} />
+
+            {/* Cocoon Transformation Display */}
+            <div className="bg-white rounded-2xl border border-neutral-200 p-8 mb-6">
+                <div className="text-center mb-6">
+                    <h2 className="text-2xl font-bold mb-2">Dönüşüm Yolculuğun</h2>
+                    <p className="text-neutral-600">Her ÖZ ile kelebeğe yaklaşıyorsun</p>
+                </div>
+
+                {/* Cocoon Display */}
+                <div style={{ minHeight: '600px', position: 'relative' }}>
+                    <CocoonStage totalOz={user.totalXP} />
+                </div>
+
+                {/* ÖZ Progress Info */}
+                <div className="mt-8 text-center">
+                    <div className="inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-primary-50 to-purple-50 rounded-full">
+                        <div>
+                            <p className="text-sm text-neutral-600">Toplam ÖZ</p>
+                            <p className="text-2xl font-bold text-primary-600">{user.totalXP}</p>
+                        </div>
+                        {ozToNextStage > 0 && (
+                            <>
+                                <div className="w-px h-8 bg-neutral-300" />
+                                <div>
+                                    <p className="text-sm text-neutral-600">Sonraki Aşamaya</p>
+                                    <p className="text-xl font-semibold text-neutral-800">{ozToNextStage} ÖZ</p>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+
             {/* Stats Card */}
             <div className="bg-white rounded-2xl border border-neutral-200 p-8 mb-6">
                 <div className="flex items-center justify-between mb-6">
@@ -33,7 +82,7 @@ const ProfileTab = () => {
                     <div className="text-right">
                         <p className="text-sm text-neutral-600 mb-1">İlerleme</p>
                         <p className="text-2xl font-semibold text-primary-600">
-                            {user.xp} / {user.nextLevelXp} XP
+                            {user.xp} / {user.nextLevelXp} ÖZ
                         </p>
                     </div>
                 </div>
@@ -58,7 +107,7 @@ const ProfileTab = () => {
                     </div>
                     <div className="p-4 bg-neutral-50 rounded-lg">
                         <div className="text-2xl font-bold mb-1">{stats.totalXP}</div>
-                        <div className="text-sm text-neutral-600">Toplam XP</div>
+                        <div className="text-sm text-neutral-600">Toplam ÖZ</div>
                     </div>
                     <div className="p-4 bg-neutral-50 rounded-lg">
                         <div className="text-2xl font-bold mb-1">{stats.dailyStreak}</div>
@@ -90,7 +139,7 @@ const ProfileTab = () => {
                                     <div className="text-3xl mb-2">{achievement.icon}</div>
                                     <p className="font-semibold text-sm mb-1">{achievement.name}</p>
                                     <p className="text-xs text-neutral-600 mb-2">{achievement.description}</p>
-                                    <p className="text-xs font-medium text-primary-600">+{achievement.xp} XP</p>
+                                    <p className="text-xs font-medium text-primary-600">+{achievement.xp} ÖZ</p>
                                 </div>
                             ))}
                         </div>
@@ -118,7 +167,7 @@ const ProfileTab = () => {
                                             </p>
                                             <p className="text-xs text-neutral-600 mb-2">{achievement.description}</p>
                                             <div className="flex items-center justify-between">
-                                                <p className="text-xs font-medium text-neutral-500">+{achievement.xp} XP</p>
+                                                <p className="text-xs font-medium text-neutral-500">+{achievement.xp} ÖZ</p>
                                                 <p className="text-xs font-medium text-primary-600">{Math.round(progress)}%</p>
                                             </div>
                                         </div>
