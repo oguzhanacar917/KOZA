@@ -1,3 +1,9 @@
+import React, { useState } from 'react';
+import { useApp } from '../context/AppContext';
+import { generateStorybook, generateGame } from '../services/geminiService';
+import { validateStoryInput } from '../utils/validation';
+import { Sparkles, BookOpen, Gamepad2, AlertCircle } from 'lucide-react';
+import MessageBox from '../components/input/MessageBox';
 import Loader from '../components/Loader';
 
 const CreateTab = () => {

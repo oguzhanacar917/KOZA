@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { generateStorybook } from '../services/geminiService';
-import { Sparkles, BookOpen, Loader2 } from 'lucide-react';
+import { Sparkles, BookOpen } from 'lucide-react';
+import Loader from '../components/Loader';
 
 const CreateView = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory } = useApp();

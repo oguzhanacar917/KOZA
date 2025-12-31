@@ -116,13 +116,10 @@ const HomePage = () => {
                     <button
                         onClick={handleSignIn}
                         disabled={isSigningIn}
-                        className="group relative flex items-center gap-4 px-10 py-5 bg-white text-black rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="group relative flex items-center justify-center gap-4 px-10 py-5 bg-white text-black rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[300px]"
                     >
                         {isSigningIn ? (
-                            <>
-                                <Loader2 size={24} className="animate-spin" />
-                                BAĞLANTI KURULUYOR...
-                            </>
+                            <Loader message="BAĞLANTI KURULUYOR..." />
                         ) : (
                             <>
                                 <svg width="24" height="24" viewBox="0 0 24 24">
