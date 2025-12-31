@@ -18,9 +18,11 @@ const CreateView = () => {
 
             const story = {
                 type: 'story',
-                title: result[0]?.title || 'Dönüşüm Hikayesi',
+                title: result.pages?.[0]?.title || 'Dönüşüm Hikayesi',
                 content: activeStory,
-                pages: result
+                pages: result.pages || [],
+                themeColor: result.themeColor || '#9333EA',
+                visualMood: result.visualMood || 'Magical Shimmer'
             };
 
             saveStory(story);

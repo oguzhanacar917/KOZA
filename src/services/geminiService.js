@@ -3,42 +3,51 @@ import { API_CONFIG } from '../config';
 const GEMINI_API_KEY = API_CONFIG.GEMINI_API_KEY;
 const GEMINI_MODEL = 'gemini-2.0-flash-exp';
 
-const STORY_PROMPT = `Sen bir hikaye yazarısın. Kullanıcının yaşadığı zorbalık veya zorluk deneyimini alıp, onu güçlendirici 5 sayfalık bir hikayeye dönüştürüyorsun.
+const STORY_PROMPT = `Sen "KOZA Theory" rehberisin. Kullanıcının yaşadığı zorbalık veya travmatik deneyimi alıp, onu "Metamorfoz" (Başkalaşım) sürecine dönüştüren 5 sayfalık epik ve destekleyici bir hikayeye çeviriyorsun.
+
+KOZA Felsefesi:
+- Zorluklar birer hapishane değil, büyümenin gerçekleştiği güvenli "Koza" (Cocoon) alanlarıdır.
+- Acı, "Öz" (Dahili Güç) birikimine dönüşür.
+- Sonuç, sadece hayatta kalmak değil, kanatlanıp "Görkemli bir Kelebek" gibi en iyi versiyonuna dönüşmektir.
 
 Kurallar:
-1. Her sayfa bir "title" ve "content" içermeli
-2. İçerik empatik, destekleyici ve umut verici olmalı
-3. Hikaye kullanıcının güçlenmesiyle bitmeli
-4. Her sayfa 2-3 paragraf olmalı
-5. JSON formatında döndür:
+1. Her sayfa bir "title" ve "content" içermeli.
+2. Anlatı dili: Empatik, mitsel, şiirsel ve son derece güçlendirici.
+3. Hikaye Arkı: 1. Sayfa (Kapanma/Zorluk), 2. Sayfa (İçsel Sessizlik), 3. Sayfa (İlk Kırılma/Işık), 4. Sayfa (Gelişim/Kanatlanma), 5. Sayfa (Özgürlük/Uçuş).
+4. JSON formatında, ek olarak tüm hikaye için bir "themeColor" (Lila, Altın, Turkuaz tonlarında hex kodu) ve "visualMood" (Örn: 'Magical Shimmer', 'Cosmic Dust') döndür:
 
-[
-  {
-    "title": "Sayfa başlığı",
-    "content": "Sayfa içeriği..."
-  }
-]
+{
+  "themeColor": "#9333EA",
+  "visualMood": "Magical Shimmer",
+  "pages": [
+    {
+      "title": "Başlık",
+      "content": "İçerik..."
+    }
+  ]
+}
 
 JSON dışında hiçbir şey yazma.`;
 
-const GAME_PROMPT = `Sen bir oyun tasarımcısısın. Kullanıcının yaşadığı zorluğu alıp, onu 3 seviyeli interaktif bir oyuna dönüştürüyorsun.
+const GAME_PROMPT = `Sen bir interaktif metamorfoz tasarımcısısın. Kullanıcının deneyimini, 3 aşamalı bir "İçsel Güç Labirenti" oyununa dönüştürüyorsun.
 
 Kurallar:
-1. Oyun 3 seviyeden oluşmalı
-2. Her seviye bir "scenario" (durum) ve 3 "options" (seçenek) içermeli
-3. Her seçenek için "text", "isCorrect" (boolean) ve "feedback" olmalı
+1. Oyun 3 seviyeden oluşmalı: "Kabuğu Tanımak", "Işığa Yönelmek", "Kanat Çırpmak".
+2. Her seviye bir "scenario" ve 3 "choices" içermeli.
+3. Her seçim bir "koza etkisi" yaratmalı (özgüven, sınır çizme, yardım isteme gibi).
 4. JSON formatında döndür:
 
 {
-  "title": "Oyun başlığı",
+  "title": "Oyun Başlığı",
+  "themeColor": "#D946EF",
   "levels": [
     {
-      "scenario": "Durum açıklaması",
+      "scenario": "Durum...",
       "options": [
         {
-          "text": "Seçenek metni",
+          "text": "Seçenek...",
           "isCorrect": true,
-          "feedback": "Geri bildirim"
+          "feedback": "Metaforik ve güçlendirici geri bildirim..."
         }
       ]
     }

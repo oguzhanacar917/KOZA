@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useRef } from 'react';
-import { calculateStage, calculateStageProgress, STAGE_DESCRIPTIONS } from '../../utils/cocoon/stageCalculator';
+import { calculateStage, calculateStageProgress } from '../../utils/cocoon/stageCalculator';
 import SealedCocoon from './stages/SealedCocoon';
 import EarlyStirring from './stages/EarlyStirring';
 import BreakingThrough from './stages/BreakingThrough';
@@ -8,12 +8,30 @@ import WingUnfurling from './stages/WingUnfurling';
 import FirstFlight from './stages/FirstFlight';
 import MajesticButterfly from './stages/MajesticButterfly';
 import styles from '../../styles/cocoon/base.module.css';
+import TransformationCanvas from './TransformationCanvas';
+import { useUser } from '../../context/UserContext';
+import { useStory } from '../../context/StoryContext';
+
+const STAGE_DESCRIPTIONS = {
+    1: { title: "Mühürlü Başlangıç", text: "Her yolculuk sessiz bir karar ile başlar. Kozan şu an mühürlü, içindeki 'Öz' birikmeyi bekliyor." },
+    2: { title: "İlk Kıvılcım", text: "İçeride bir şeyler hareket ediyor. Deneyimlerin kozanı titretmeye ve ışığını sızdırmaya başladı." },
+    3: { title: "Kabuğu Kırmak", text: "Artık sığmıyorsun. Zorluklar çatlıyor, içindeki ışık her yarıktan fışkırıyor." },
+    4: { title: "Varoluşun Ortaya Çıkışı", text: "Kozandan çıktın. Henüz yeni ve hassassın ama artık özgürsün." },
+    5: { title: "Kanatların Açılışı", text: "Kanatların kurumaya ve güçlenmeye başladı. Renklerin hayat buluyor." },
+    6: { title: "İlk Kanat Çırpış", text: "Yerden kesilme vakti. Gücünü test et ve havalan." },
+    7: { title: "Görkemli Dönüşüm", text: "Sen artık bir kelebeksin. Işığınla başkalarına da ilham ol." }
+};
 
 const CocoonStage = ({ totalOz, onStageChange }) => {
+    const { user } = useUser();
+    const { savedStories } = useStory();
+    const lastStory = savedStories?.[0];
+    const themeColor = lastStory?.themeColor || '#9333EA';
+
     const stage = useMemo(() => calculateStage(totalOz), [totalOz]);
     const progress = useMemo(() => calculateStageProgress(totalOz), [totalOz]);
-    const description = STAGE_DESCRIPTIONS[stage];
-    
+    const stageInfo = STAGE_DESCRIPTIONS[stage];
+
     // Parallax Tilt State
     const [rotation, setRotation] = useState({ x: 0, y: 0 });
     const containerRef = useRef(null);
@@ -47,7 +65,7 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
 
     const renderStage = () => {
         const commonProps = { progress, key: stage }; // Key triggers remount animation
-        
+
         switch (stage) {
             case 1: return <SealedCocoon {...commonProps} />;
             case 2: return <EarlyStirring {...commonProps} />;
@@ -61,76 +79,56 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
     };
 
     return (
-        <div 
+        <div
             ref={containerRef}
             className={styles.cocoonContainer}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <div 
+            {/* High-Fidelity Magical Particles */}
+            <TransformationCanvas
+                color={themeColor}
+                intensity={stage / 3}
+                active={true}
+            />
+
+            <div
                 className={styles.cocoonWrapper}
                 style={{
                     transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
                 }}
             >
                 {renderStage()}
-                
-                {/* Global Atmosphere/Glass Effect Overlay */}
-                <div style={{
-                    position: 'absolute',
-                    inset: -20,
-                    background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 60%)',
-                    pointerEvents: 'none',
-                    borderRadius: '50%',
-                    filter: 'blur(20px)',
-                    zIndex: -1
-                }} />
+
+                {/* Dynamic Aura tinting */}
+                <div
+                    className={styles.cosmicAura}
+                    style={{ background: `radial-gradient(circle, ${themeColor}33 0%, transparent 70%)` }}
+                />
             </div>
 
-            {/* Stage Description - Floating Card */}
-            <div style={{
-                position: 'absolute',
-                bottom: '-80px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                textAlign: 'center',
-                width: '120%',
-                backdropFilter: 'blur(8px)',
-                background: 'rgba(255,255,255,0.6)',
-                padding: '12px',
-                borderRadius: '16px',
-                border: '1px solid rgba(255,255,255,0.4)',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                opacity: 0,
-                animation: 'fadeScaleIn 0.8s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards'
+            {/* Premium Description Card */}
+            <div className={`absolute bottom-0 left-0 right-0 p-6 ${styles.glassMaterial} rounded-2xl animate-fade-in`} style={{
+                transform: 'translateY(50%)',
+                zIndex: 10
             }}>
-                <p style={{
-                    fontSize: '15px',
-                    color: '#4B5563',
-                    fontWeight: 600,
-                    margin: 0,
-                    letterSpacing: '-0.01em'
-                }}>
-                    {description}
+                <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-bold text-lg text-primary-900">{stageInfo?.title}</h3>
+                    <span className="text-xs font-semibold px-2 py-1 bg-primary-100 text-primary-700 rounded-full">
+                        {Math.round(progress)}% Metamorfoz
+                    </span>
+                </div>
+                <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
+                    {stageInfo?.text}
                 </p>
-                <div style={{
-                    marginTop: '8px',
-                    height: '6px',
-                    background: 'rgba(0,0,0,0.05)',
-                    borderRadius: '99px',
-                    overflow: 'hidden',
-                    maxWidth: '80%',
-                    margin: '8px auto 0'
-                }}>
-                    <div style={{
-                        height: '100%',
-                        background: 'linear-gradient(90deg, #9333ea, #c084fc, #e879f9)',
-                        backgroundSize: '200% 100%',
-                        width: `${progress}%`,
-                        transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                        borderRadius: '99px',
-                        animation: 'shimmer 2s infinite linear'
-                    }} />
+                <div className="h-1.5 w-full bg-neutral-100 rounded-full overflow-hidden">
+                    <div
+                        className="h-full transition-all duration-1000 ease-out"
+                        style={{
+                            width: `${progress}%`,
+                            background: `linear-gradient(90deg, ${themeColor}, #c084fc, #e879f9)`
+                        }}
+                    />
                 </div>
             </div>
         </div>
