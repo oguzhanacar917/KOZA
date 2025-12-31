@@ -154,7 +154,19 @@
 
 /* ==================== STAGE 2: EARLY STIRRING ==================== */
 .earlyStirring {
-    composes: sealedCocoon;
+    position: relative;
+    width: 80%;
+    height: 90%;
+    /* Richer, multi-layered gradient for depth */
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+        linear-gradient(135deg, #8B7355 0%, #5D4E37 60%, #3E3221 100%);
+    border-radius: 48% 52% 50% 50% / 60% 60% 40% 40%;
+    /* Shadow will be overridden but kept for base */
+    box-shadow:
+        inset 0 -20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 10px 30px rgba(255, 255, 255, 0.15),
+        0 20px 60px rgba(0, 0, 0, 0.3);
+    transform-origin: center top;
     animation:
         breathe 3s ease-in-out infinite,
         morphShape 6s ease-in-out infinite alternate,
@@ -394,7 +406,16 @@
 }
 
 .majesticWing {
-    composes: wingBase;
+    position: absolute;
+    /* Gradient mesh simulation */
+    background:
+        radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 20%),
+        linear-gradient(135deg, #FF1493 0%, #9370DB 50%, #00CED1 100%);
+    background-size: 200% 200%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Glass-like quality */
+    opacity: 0.95;
+    mix-blend-mode: normal;
     width: 50%;
     height: 65%;
     top: 15%;
