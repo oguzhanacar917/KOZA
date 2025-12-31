@@ -14,9 +14,9 @@ const App = () => {
 
     // Track page views
     useEffect(() => {
-        const path = currentView ? `/${currentView.type}` : `/${activeTab}`;
+        const path = authUser ? (currentView ? `/${currentView.type}` : `/${activeTab}`) : '/landing';
         googleAnalytics.trackPageView(path);
-    }, [currentView, activeTab]);
+    }, [currentView, activeTab, authUser]);
 
     // Show loading state while checking auth
     if (authLoading) {
