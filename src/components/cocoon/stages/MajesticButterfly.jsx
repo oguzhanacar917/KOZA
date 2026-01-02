@@ -6,67 +6,59 @@ import styles from '../../../styles/cocoon/base.module.css';
 const MajesticButterfly = ({ progress }) => {
     return (
         <div className={styles.majesticButterfly}>
-            {/* Cosmic aura */}
+            {/* Cosmic aura radiance */}
             <div className={styles.cosmicAura} />
 
-            {/* Butterfly body */}
-            <div className={styles.butterflyBody} style={{
-                background: 'linear-gradient(to bottom, #2C2C2C 0%, #1A1A1A 100%)',
-                boxShadow: '0 0 20px rgba(139, 0, 255, 0.5)'
+            <div className={styles.butterflyBody} />
+
+            {/* Multi-layered Majestic Wings */}
+            {/* Primary Wings */}
+            <div className={styles.majesticWingLeft}>
+                <div className={styles.wingPattern} style={{ opacity: 0.8 }} />
+                <div className={styles.wingInnerShine} />
+            </div>
+            <div className={styles.majesticWingRight}>
+                <div className={styles.wingPattern} style={{ opacity: 0.8 }} />
+                <div className={styles.wingInnerShine} />
+            </div>
+
+            {/* Secondary Prismatic Overlays */}
+            <div className={styles.majesticWingLeft} style={{
+                opacity: 0.4,
+                filter: 'hue-rotate(30deg) blur(2px)',
+                transform: 'scale(1.05) translate(-2%, -2%)',
+                animationDelay: '-1s'
+            }} />
+            <div className={styles.majesticWingRight} style={{
+                opacity: 0.4,
+                filter: 'hue-rotate(-30deg) blur(2px)',
+                transform: 'scale(1.05) translate(2%, -2%)',
+                animationDelay: '-1s'
             }} />
 
-            {/* Majestic wings */}
-            <div className={styles.majesticWingLeft}>
-                <div className={styles.wingPattern} />
+            {/* Orbiting Elements */}
+            <AuraParticles count={30} />
+            <CosmicDust count={60} />
 
-                {/* Additional wing details */}
-                <div style={{
-                    position: 'absolute',
-                    inset: '15%',
-                    background: 'radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%)',
-                    borderRadius: 'inherit',
-                    pointerEvents: 'none'
-                }} />
-            </div>
-
-            <div className={styles.majesticWingRight}>
-                <div className={styles.wingPattern} />
-
-                {/* Additional wing details */}
-                <div style={{
-                    position: 'absolute',
-                    inset: '15%',
-                    background: 'radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%)',
-                    borderRadius: 'inherit',
-                    pointerEvents: 'none'
-                }} />
-            </div>
-
-            {/* Aura particles orbiting */}
-            <AuraParticles count={40} />
-
-            {/* Cosmic dust background */}
-            <CosmicDust count={100} />
-
-            {/* Multiple butterflies in background */}
+            {/* Background "Ghost" Butterflies */}
             {[0, 1].map((i) => (
                 <div
                     key={i}
+                    className="absolute pointer-events-none"
                     style={{
-                        position: 'absolute',
-                        left: `${20 + i * 60}%`,
-                        top: `${30 + i * 20}%`,
-                        width: '60%',
-                        height: '60%',
-                        opacity: 0.3,
-                        transform: `scale(${0.5 + i * 0.2})`,
-                        animation: `majesticFlight ${8 + i * 2}s cubic-bezier(0.4, 0.0, 0.2, 1) infinite`,
-                        animationDelay: `${i * 2}s`,
-                        pointerEvents: 'none'
+                        left: `${15 + i * 50}%`,
+                        top: `${20 + i * 30}%`,
+                        width: '50%',
+                        height: '50%',
+                        opacity: 0.15,
+                        filter: 'blur(4px)',
+                        transform: `scale(${0.4 + i * 0.2})`,
+                        animation: `float ${10 + i * 5}s ease-in-out infinite`,
+                        zIndex: -1
                     }}
                 >
-                    <div className={styles.majesticWingLeft} style={{ opacity: 0.6 }} />
-                    <div className={styles.majesticWingRight} style={{ opacity: 0.6 }} />
+                    <div className={styles.majesticWingLeft} />
+                    <div className={styles.majesticWingRight} />
                 </div>
             ))}
         </div>

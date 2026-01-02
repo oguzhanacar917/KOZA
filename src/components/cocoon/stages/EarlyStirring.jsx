@@ -21,10 +21,9 @@ const EarlyStirring = ({ progress }) => {
 
     return (
         <div className={styles.earlyStirring}>
-            {/* Silk texture */}
             <div className={styles.silkTexture} />
+            <div className={styles.silkTexture} style={{ transform: 'rotate(90deg)', opacity: 0.4 }} />
 
-            {/* Cracks appearing */}
             {cracks.map((crack, index) => (
                 <div
                     key={index}
@@ -34,13 +33,17 @@ const EarlyStirring = ({ progress }) => {
                         right: crack.right,
                         transform: `rotate(${crack.rotation}deg)`,
                         animationDelay: `${crack.delay}s`,
-                        opacity: 0.4 + (progress / 200) // Base opacity + progress boost
+                        opacity: 0.5 + (progress / 150),
+                        boxShadow: `0 0 ${10 + (progress / 5)}px rgba(255, 215, 0, 0.4)`
                     }}
                 />
             ))}
 
-            {/* Sparkle particles emanating from cracks */}
-            {progress > 30 && <SparkleParticles count={Math.floor(progress / 5)} />}
+            {/* Internal glow leaking through cracks */}
+            <div className={styles.innerGlow} style={{
+                opacity: 0.1 + (progress / 400),
+                filter: 'blur(30px)'
+            }} />
         </div>
     );
 };

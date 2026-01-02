@@ -92,6 +92,9 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
                 active={true}
             />
 
+            {/* Background "Staircase of Light" Grid */}
+            <div className={styles.staircaseLight} style={{ opacity: 0.1 + (progress / 200) }} />
+
             <div
                 className={styles.cocoonWrapper}
                 style={{
@@ -103,7 +106,10 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
                 {/* Dynamic Aura tinting */}
                 <div
                     className={styles.cosmicAura}
-                    style={{ background: `radial-gradient(circle, ${themeColor}33 0%, transparent 70%)` }}
+                    style={{
+                        background: `radial-gradient(circle, ${themeColor}44 0%, transparent 70%)`,
+                        opacity: 0.5 + (stage / 14)
+                    }}
                 />
             </div>
 
@@ -131,6 +137,23 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
                     />
                 </div>
             </div>
+
+            {/* Organic Movement Filters */}
+            <svg className={styles.liquidFilter}>
+                <defs>
+                    <filter id="liquid-goo">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur" />
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                    </filter>
+                    <filter id="organic-morph">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" seed="1">
+                            <animate attributeName="baseFrequency" dur="10s" values="0.01;0.015;0.01" repeatCount="indefinite" />
+                        </feTurbulence>
+                        <feDisplacementMap in="SourceGraphic" scale="5" />
+                    </filter>
+                </defs>
+            </svg>
         </div>
     );
 };

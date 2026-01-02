@@ -9,45 +9,33 @@ const BreakingThrough = ({ progress }) => {
 
     return (
         <div className={styles.breakingThrough}>
-            {/* Cocoon shell */}
             <div className={styles.cocoonShell}>
-                {/* Major cracks */}
-                <div
-                    className={styles.majorCrack}
-                    style={{
-                        left: '35%',
-                        transform: 'rotate(20deg)',
-                        height: `${Math.min(progress * 1.5, 100)}%`
-                    }}
-                />
-                <div
-                    className={styles.majorCrack}
-                    style={{
-                        left: '50%',
-                        transform: 'rotate(-15deg)',
-                        height: `${Math.min(progress * 1.3, 100)}%`
-                    }}
-                />
-                <div
-                    className={styles.majorCrack}
-                    style={{
-                        right: '35%',
-                        transform: 'rotate(25deg)',
-                        height: `${Math.min(progress * 1.4, 100)}%`
-                    }}
-                />
+                {[35, 50, 65].map((pos, i) => (
+                    <div
+                        key={i}
+                        className={styles.majorCrack}
+                        style={{
+                            left: `${pos}%`,
+                            transform: `translateX(-50%) rotate(${i * 10 - 10}deg)`,
+                            height: `${Math.min(progress * 1.5, 100)}%`,
+                            opacity: 0.6 + (progress / 200)
+                        }}
+                    />
+                ))}
             </div>
 
-            {/* Inner glow intensifying */}
             <div className={styles.innerGlow} style={{
-                opacity: Math.min(progress / 100, 0.8)
+                opacity: Math.min(progress / 80, 0.9),
+                background: 'radial-gradient(circle, rgba(255, 235, 59, 0.6) 0%, transparent 70%)'
             }} />
 
-            {/* Light beams shooting out */}
-            {progress > 20 && <LightBeams count={beamCount} />}
-
-            {/* Cocoon fragments falling */}
-            {progress > 40 && <CocoonFragments count={fragmentCount} />}
+            {/* Dramatic light beams */}
+            {progress > 15 && (
+                <div className={styles.lightBeam} style={{
+                    opacity: progress / 100,
+                    transform: `scale(${1 + progress / 100})`
+                }} />
+            )}
         </div>
     );
 };

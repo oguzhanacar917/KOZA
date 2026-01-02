@@ -6,50 +6,33 @@ const WingUnfurling = ({ progress }) => {
 
     return (
         <div className={styles.wingUnfurling}>
-            {/* Butterfly body */}
             <div className={styles.butterflyBody} />
 
-            {/* Left wing unfurling */}
+            {/* Multi-layered Unfurling Wings */}
             <div
                 className={styles.wingLeft}
                 style={{
-                    transform: `scaleX(${unfurlProgress}) scaleY(${0.8 + unfurlProgress * 0.2})`,
+                    transform: `scale(${unfurlProgress}) rotate(${(1 - unfurlProgress) * 20}deg)`,
                     opacity: unfurlProgress
                 }}
             >
                 <div className={styles.wingPattern} />
+                <div className={styles.wingInnerShine} />
             </div>
 
-            {/* Right wing unfurling */}
             <div
                 className={styles.wingRight}
                 style={{
-                    transform: `scaleX(${unfurlProgress}) scaleY(${0.8 + unfurlProgress * 0.2})`,
+                    transform: `scale(${unfurlProgress}) rotate(${(1 - unfurlProgress) * -20}deg)`,
                     opacity: unfurlProgress
                 }}
             >
                 <div className={styles.wingPattern} />
+                <div className={styles.wingInnerShine} />
             </div>
 
-            {/* Rainbow particles during unfurling */}
-            {Array.from({ length: Math.floor(progress / 2) }).map((_, i) => (
-                <div
-                    key={i}
-                    style={{
-                        position: 'absolute',
-                        left: `${20 + Math.random() * 60}%`,
-                        top: `${20 + Math.random() * 60}%`,
-                        width: '3px',
-                        height: '3px',
-                        background: `hsl(${Math.random() * 360}, 80%, 60%)`,
-                        borderRadius: '50%',
-                        boxShadow: `0 0 6px hsl(${Math.random() * 360}, 80%, 60%)`,
-                        animation: 'float 3s ease-in-out infinite, sparkle 2s ease-in-out infinite',
-                        animationDelay: `${Math.random() * 2}s`,
-                        pointerEvents: 'none'
-                    }}
-                />
-            ))}
+            {/* Glow Aura during unfurling */}
+            <div className={styles.cosmicAura} style={{ opacity: unfurlProgress * 0.5 }} />
         </div>
     );
 };
