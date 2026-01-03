@@ -117,6 +117,7 @@ const CreateTab = () => {
                                     onClick={handleGenerate}
                                     disabled={!activeStory.trim() || isProcessing}
                                     icon={Sparkles}
+                                    variant="magic"
                                 >
                                     {creationMode === 'story' ? 'Hikayeye Dönüştür' : 'Oyuna Dönüştür'}
                                 </GalaxyButton>

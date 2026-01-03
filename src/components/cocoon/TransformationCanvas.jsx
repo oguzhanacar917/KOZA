@@ -52,12 +52,14 @@ const TransformationCanvas = ({ color = '#9333EA', intensity = 1, active = true 
                 ctx.closePath();
 
                 // Prismatic flash based on rotation
+                // Prismatic flash based on rotation - DEEPER COLORS for Light Mode
                 const hue = (this.rotation * 50) % 360;
-                ctx.fillStyle = `hsla(${hue}, 70%, 70%, ${this.opacity})`;
+                // Use darker/richer HSLA for visibility on white
+                ctx.fillStyle = `hsla(${hue}, 85%, 60%, ${this.opacity})`;
                 ctx.fill();
 
-                // Edge highlight
-                ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity * 2})`;
+                // Edge highlight - Darker for definition
+                ctx.strokeStyle = `rgba(147, 51, 234, ${this.opacity})`;
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
 

@@ -89,6 +89,56 @@
     color: #171717;
 }
 
+/* MAGIC VARIANT: THE JEWEL */
+.galaxy-cta.magic {
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+    /* Purple 600 -> Pink 600 */
+    color: #ffffff;
+    border: none;
+    box-shadow:
+        0 4px 15px rgba(147, 51, 234, 0.3),
+        /* Glow */
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        /* Top Highlight */
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    /* Bottom Shadow */
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.galaxy-cta.magic:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 8px 25px rgba(147, 51, 234, 0.5),
+        /* Enhanced Glow */
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.galaxy-cta.magic:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Magic Shine Effect */
+.galaxy-cta.magic::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+}
+
+.galaxy-cta.magic:hover::after {
+    left: 100%;
+    transition: left 0.7s ease-in-out;
+}
+
 /* DISABLED: HIERARCHY REMOVAL */
 .galaxy-cta:disabled {
     background: #f3f4f6;
