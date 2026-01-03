@@ -1,25 +1,29 @@
 import React from 'react';
 import './GalaxyCard.css';
 
-const GalaxyCard = ({ children, className = '', title, subtitle, emoji }) => {
+const GalaxyCard = ({ children, className = '', title, subtitle, emoji, gradient }) => {
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    };
+
     return (
-        <div className={`galaxy-card-container ${className}`}>
-            <div className="galaxy-card">
-                <div className="galaxy-card-content">
-                    {title && <div className="galaxy-card-title">{title}</div>}
-                    {subtitle && <div className="galaxy-card-subtitle">{subtitle}</div>}
+        <div
+            className={`galaxy-card ${className}`}
+            onMouseMove={handleMouseMove}
+        >
+            <div className={`galaxy-card-dots pink-dots ${gradient ? 'opacity-100' : ''}`} />
 
-                    <div className="galaxy-card-body">
-                        {children}
-                    </div>
+            {emoji && (
+                <div className="galaxy-card-emoji">
+                    {emoji}
                 </div>
-
-                {emoji && <div className="galaxy-card-emoji">{emoji}</div>}
-                <div className="galaxy-card-shine"></div>
-                <div className="galaxy-card-dots orange-dots"></div>
                 <div className="galaxy-card-dots pink-dots"></div>
             </div>
-        </div>
+        </div >
     );
 };
 

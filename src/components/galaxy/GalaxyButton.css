@@ -1,105 +1,110 @@
-/* Adapted from Uiverse.io by 0x-Sarthak - hungry-penguin-30 */
-
+/* PREMIUM LIGHT SUPREMACY: ARCHITECTURAL BUTTON */
 .galaxy-cta {
     position: relative;
-    margin: auto;
-    padding: 12px 24px;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    border: 2px solid #9333ea;
-    border-radius: 50px;
-    background: #9333ea;
+    padding: 10px 20px;
+    /* Tighter padding for business feel */
+    border-radius: 6px;
+    /* 6px radius = Professional Standard */
+    border: 1px solid transparent;
+    /* Ready for border states */
+
+    /* TYPOGRAPHY DISCIPLINE */
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    /* Medium, not Bold. "Confident, not loud." */
+    letter-spacing: -0.01em;
+
+    /* MOTION DISCIPLINE: Fast & Sharp */
+    transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+    /* Faster (150ms) */
+
+    /* Surface */
+    background: #171717;
+    /* Near black */
+    color: #ffffff;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(147, 51, 234, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.2);
-}
+    gap: 8px;
+    outline: none;
 
-.galaxy-cta:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.4),
-            rgba(255, 255, 255, 0.2),
-            transparent);
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    transform: skewX(-20deg);
-    z-index: 0;
-}
-
-.galaxy-cta span {
-    position: relative;
-    font-size: 15px;
-    color: white;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    z-index: 1;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: color 0.3s ease;
-}
-
-.galaxy-cta svg {
-    position: relative;
-    z-index: 1;
-    margin-left: 8px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: white;
-    stroke-width: 2.5;
-    transform: translateX(-3px);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.galaxy-cta:hover {
-    transform: translateY(-3px) scale(1.02);
+    /* Edge */
     box-shadow:
-        0 12px 25px -5px rgba(147, 51, 234, 0.4),
-        0 4px 10px -2px rgba(147, 51, 234, 0.2),
-        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* Subtle top light */
 }
 
-.galaxy-cta:hover:before {
-    transform: translateX(50%) skewX(-20deg);
-}
-
-.galaxy-cta:hover svg {
-    transform: translateX(0);
+/* INTERACTION: SHARP */
+.galaxy-cta:hover {
+    background: #000000;
+    transform: translateY(-1px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .galaxy-cta:active {
-    transform: scale(0.96);
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.galaxy-cta:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Secondary variant with light glass feel */
+/* SECONDARY: TONAL AUTHORITY */
 .galaxy-cta.secondary {
-    background: rgba(255, 255, 255, 0.4);
-    border-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: #ffffff;
+    color: #171717;
+    border: 1px solid #e5e5e5;
+    /* Visible boundary */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    /* Extremely subtle */
 }
 
-.galaxy-cta.secondary span {
-    color: #9333ea;
+.galaxy-cta.secondary:hover {
+    background: #f9f9fa;
+    /* Warm off-white */
+    border-color: #d4d4d4;
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Slight lift */
 }
 
-.galaxy-cta.secondary svg {
-    stroke: #9333ea;
+.galaxy-cta.secondary:active {
+    background: #f3f4f6;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.galaxy-cta.secondary:hover:before {
-    background: rgba(255, 255, 255, 0.8);
+/* GHOST: MINIMALIST */
+.galaxy-cta.ghost {
+    background: transparent;
+    color: #525252;
+    box-shadow: none;
+    border-color: transparent;
+    font-weight: 500;
+}
+
+.galaxy-cta.ghost:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #171717;
+}
+
+/* DISABLED: HIERARCHY REMOVAL */
+.galaxy-cta:disabled {
+    background: #f3f4f6;
+    color: #a3a3a3;
+    border-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.galaxy-cta svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.15s ease;
+}
+
+.galaxy-cta:hover svg {
+    transform: translateX(2px);
 }

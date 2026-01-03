@@ -38,14 +38,17 @@
 
     body {
         @apply font-sans antialiased text-neutral-900;
-        /* Richer, multi-layered gradient for depth */
-        background:
-            radial-gradient(circle at 15% 50%, rgba(232, 213, 255, 0.5) 0%, transparent 25%),
-            radial-gradient(circle at 85% 30%, rgba(224, 242, 254, 0.5) 0%, transparent 25%),
-            linear-gradient(135deg, #f8fafd 0%, #f3f4f6 100%);
-        background-attachment: fixed;
+
+        /* PREMIUM LIGHT HIERARCHY */
+        /* Application Background: Warm Off-White (Never #fff) */
+        background-color: #f9f9fa;
+        background-image: none;
+        /* Kill the gradients, we want solid structure */
+
+        /* Text Discipline: Near Black, not Pure Black */
+        color: #1a1a1a;
+
         font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
-        /* Added ss01 for alternative glyphs if available */
     }
 
     h1,
@@ -54,7 +57,11 @@
     h4,
     h5,
     h6 {
+        /* Headings: Tighter tracking for that "editorial/expensive" feel */
         @apply font-semibold tracking-tight;
+        letter-spacing: -0.025em;
+        color: #111827;
+        /* Slightly darker than body */
     }
 
     /* Screen reader only */
