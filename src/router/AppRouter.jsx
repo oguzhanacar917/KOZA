@@ -6,7 +6,7 @@ import LearnTab from '../tabs/LearnTab';
 import ProfileTab from '../tabs/ProfileTab';
 import StoryView from '../views/StoryView';
 import GameView from '../views/GameView';
-import GalaxyLabTab from '../tabs/GalaxyLabTab';
+import GameView from '../views/GameView';
 
 const AppRouter = () => {
     const { currentView, setCurrentView, activeTab } = useApp();
@@ -26,7 +26,6 @@ const AppRouter = () => {
         case 'community': return <CommunityTab />;
         case 'learn': return <LearnTab />;
         case 'profile': return <ProfileTab />;
-        case 'lab': return <GalaxyLabTab />;
         default: return <CreateTab />;
     }
 };

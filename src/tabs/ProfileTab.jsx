@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../context/AppContext';
 import { ACHIEVEMENTS, getAchievementProgress } from '../utils/achievements';
-import { Trash2, BookOpen, Gamepad2, Award, TrendingUp, Lock } from 'lucide-react';
+import { Trash2, BookOpen, Gamepad2, Award, TrendingUp, Lock, Star, Zap } from 'lucide-react';
 import CocoonStage from '../components/cocoon/CocoonStage';
 import MilestoneNotification from '../components/cocoon/MilestoneNotification';
 import { getOzToNextStage } from '../utils/cocoon/stageCalculator';
 import GalaxyCard from '../components/galaxy/GalaxyCard';
 import GalaxyButton from '../components/galaxy/GalaxyButton';
+import GalaxyStat from '../components/galaxy/GalaxyStat';
+import GalaxyProgress from '../components/galaxy/GalaxyProgress';
+import GalaxyGrid from '../components/galaxy/GalaxyGrid';
+import { GalaxyList, GalaxyListItem } from '../components/galaxy/GalaxyList';
+import GalaxyBadge from '../components/galaxy/GalaxyBadge';
+import GalaxyContainer from '../components/galaxy/GalaxyContainer';
 
 const ProfileTab = () => {
     const { user, savedStories, deleteStory, setCurrentView } = useApp();
@@ -169,44 +175,39 @@ const ProfileTab = () => {
             <GalaxyCard title="Hikayelerim" subtitle={`(${savedStories.length})`} emoji="📚">
 
                 {savedStories.length === 0 ? (
-                    <div className="text-center py-12">
-                        <BookOpen size={48} className="mx-auto mb-4 text-neutral-700" />
-                        <p className="text-neutral-500 mb-4">Henüz hikaye oluşturmadın</p>
+                    <div className="text-center py-12 opacity-60">
+                        <BookOpen size={48} className="mx-auto mb-4 text-neutral-400" />
+                        <p className="text-neutral-500 font-medium">Henüz bir hikaye oluşturmadın.</p>
                     </div>
                 ) : (
-                    <div className="space-y-3">
+                    <GalaxyList>
                         {savedStories.map(story => (
-                            <div
+                            <GalaxyListItem
                                 key={story.id}
-                                className="flex items-start gap-4 p-4 border border-white/10 rounded-xl hover:border-primary-500/30 bg-white/5 transition-all group"
-                            >
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${story.type === 'story' ? 'bg-primary-500/10 text-primary-400' : 'bg-neutral-800 text-neutral-300'
-                                    }`}>
-                                    {story.type === 'story' ? <BookOpen size={20} /> : <Gamepad2 size={20} />}
-                                </div>
-                                <button
-                                    onClick={() => setCurrentView({ type: story.type, data: story })}
-                                    className="flex-1 text-left"
-                                >
-                                    <h4 className="font-semibold mb-1 text-neutral-900 group-hover:text-primary-600 transition-colors">
-                                        {story.title}
-                                    </h4>
-                                    <p className="text-sm text-neutral-400 line-clamp-2 mb-1">
-                                        {story.content}
-                                    </p>
-                                    <p className="text-xs text-neutral-500 uppercase tracking-widest font-bold">
-                                        {new Date(story.createdAt).toLocaleDateString('tr-TR')}
-                                    </p>
-                                </button>
-                                <button
-                                    onClick={() => deleteStory(story.id)}
-                                    className="p-2 text-neutral-600 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all"
-                                >
-                                    <Trash2 size={16} />
-                                </button>
-                            </div>
+                                icon={story.type === 'story' ? BookOpen : Gamepad2}
+                                title={story.title}
+                                subtitle={
+                                    <span className="flex items-center gap-2">
+                                        <span>{new Date(story.createdAt).toLocaleDateString('tr-TR')}</span>
+                                        <span className="w-1 h-1 rounded-full bg-neutral-400" />
+                                        <span className="truncate max-w-[200px]">{story.content}</span>
+                                    </span>
+                                }
+                                onClick={() => setCurrentView({ type: story.type, data: story })}
+                                action={
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            deleteStory(story.id);
+                                        }}
+                                        className="p-2 text-neutral-400 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                                    >
+                                        <Trash2 size={18} />
+                                    </button>
+                                }
+                            />
                         ))}
-                    </div>
+                    </GalaxyList>
                 )}
             </GalaxyCard>
         </div>

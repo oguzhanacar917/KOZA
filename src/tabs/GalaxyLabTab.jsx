@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Bell, Settings, Star, Heart, Share2, MoreHorizontal, Calendar, Activity, Zap, Check, AlertTriangle, X } from 'lucide-react';
+import { User, Bell, Settings, Star, Heart, Share2, MoreHorizontal, Calendar, Activity, Zap, Check, AlertTriangle, X, Map } from 'lucide-react';
 import GalaxyContainer from '../components/galaxy/GalaxyContainer';
 import GalaxyPaper from '../components/galaxy/GalaxyPaper';
 import GalaxyGrid from '../components/galaxy/GalaxyGrid';
