@@ -38,9 +38,14 @@
 
     body {
         @apply font-sans antialiased text-neutral-900;
-        background: radial-gradient(circle at top left, #f8fafd 0%, #eef2ff 50%, #f5f3ff 100%);
+        /* Richer, multi-layered gradient for depth */
+        background:
+            radial-gradient(circle at 15% 50%, rgba(232, 213, 255, 0.5) 0%, transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(224, 242, 254, 0.5) 0%, transparent 25%),
+            linear-gradient(135deg, #f8fafd 0%, #f3f4f6 100%);
         background-attachment: fixed;
-        font-feature-settings: "rlig" 1, "calt" 1;
+        font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+        /* Added ss01 for alternative glyphs if available */
     }
 
     h1,
@@ -185,6 +190,38 @@
             rgba(255, 255, 255, 0.3) 50%,
             transparent 100%);
     background-size: 1000px 100%;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
 }
 
 /* Reduced motion support */

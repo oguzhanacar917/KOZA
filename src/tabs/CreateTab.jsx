@@ -6,6 +6,7 @@ import { Sparkles, BookOpen, Gamepad2, AlertCircle } from 'lucide-react';
 import GalaxyButton from '../components/galaxy/GalaxyButton';
 import GalaxyCard from '../components/galaxy/GalaxyCard';
 import GalaxyLoader from '../components/galaxy/GalaxyLoader';
+import MessageBox from '../components/input/MessageBox';
 
 const CreateTab = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory, setAnalysisResult, analysisResult, addToast } = useApp();

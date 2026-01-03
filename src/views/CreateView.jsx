@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { generateStorybook } from '../services/geminiService';
 import { Sparkles, BookOpen } from 'lucide-react';
-import Loader from '../components/Loader';
+import GalaxyLoader from '../components/galaxy/GalaxyLoader';
+import GalaxyCard from '../components/galaxy/GalaxyCard';
+import MessageBox from '../components/input/MessageBox';
 
 const CreateView = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory } = useApp();
@@ -53,48 +55,36 @@ const CreateView = () => {
                 </p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
-                <label className="block text-sm font-medium mb-2">
-                    Deneyimini Anlat
-                </label>
-                <textarea
-                    value={activeStory}
-                    onChange={(e) => setActiveStory(e.target.value)}
-                    placeholder="Başına gelen bir zorbalık olayını, seni üzen bir deneyimi ya da aşmak istediğin bir zorluğu anlat..."
-                    className="w-full h-48 px-4 py-3 border border-neutral-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    disabled={isProcessing}
-                />
+            <MessageBox
+                value={activeStory}
+                onChange={(val) => {
+                    setActiveStory(val);
+                }}
+                onSend={handleGenerate}
+                placeholder="Başına gelen bir zorbalık olayını anlat..."
+                disabled={isProcessing}
+            />
 
-                {isProcessing && (
-                    <div className="mt-4 flex items-center gap-3 text-sm text-neutral-600">
-                        <Loader2 size={16} className="animate-spin" />
-                        <span>{stage}</span>
-                    </div>
-                )}
+            {isProcessing && (
+                <div className="mt-6 flex flex-col items-center gap-4">
+                    <GalaxyLoader size="medium" />
+                    <span className="text-primary-600 font-bold animate-pulse text-sm">{stage}</span>
+                </div>
+            )}
 
-                <button
-                    onClick={handleGenerate}
-                    disabled={!activeStory.trim() || isProcessing}
-                    className="mt-4 w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
-                >
-                    <BookOpen size={20} />
-                    {isProcessing ? 'Oluşturuluyor...' : 'Hikaye Oluştur'}
-                </button>
-            </div>
+            <button
+                onClick={handleGenerate}
+                disabled={!activeStory.trim() || isProcessing}
+                className="mt-4 w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            >
+                <BookOpen size={20} />
+                {isProcessing ? 'Oluşturuluyor...' : 'Hikaye Oluştur'}
+            </button>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div className="p-4 bg-white rounded-lg border border-neutral-200">
-                    <div className="text-2xl font-bold text-primary-600 mb-1">5</div>
-                    <div className="text-sm text-neutral-600">Sayfa Hikaye</div>
-                </div>
-                <div className="p-4 bg-white rounded-lg border border-neutral-200">
-                    <div className="text-2xl font-bold text-primary-600 mb-1">AI</div>
-                    <div className="text-sm text-neutral-600">Destekli</div>
-                </div>
-                <div className="p-4 bg-white rounded-lg border border-neutral-200">
-                    <div className="text-2xl font-bold text-primary-600 mb-1">500</div>
-                    <div className="text-sm text-neutral-600">XP Kazanç</div>
-                </div>
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <GalaxyCard title="5" subtitle="Sayfa Hikaye" emoji="📖" />
+                <GalaxyCard title="AI" subtitle="Destekli" emoji="🤖" />
+                <GalaxyCard title="500" subtitle="XP Kazanç" emoji="💎" />
             </div>
         </div>
     );

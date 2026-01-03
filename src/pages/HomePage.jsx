@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Sparkles, Cloud, ArrowRight, Loader2, AlertCircle, ShieldCheck, Heart, Zap } from 'lucide-react';
 import TransformationCanvas from '../components/cocoon/TransformationCanvas';
+import GalaxyLoader from '../components/galaxy/GalaxyLoader';
 
 const HomePage = () => {
     const { signInWithGoogle, firebaseEnabled } = useAuth();
@@ -119,7 +120,7 @@ const HomePage = () => {
                         className="group relative flex items-center justify-center gap-4 px-10 py-5 bg-white text-black rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[300px]"
                     >
                         {isSigningIn ? (
-                            <Loader message="BAĞLANTI KURULUYOR..." />
+                            <GalaxyLoader message="BAĞLANTI KURULUYOR..." />
                         ) : (
                             <>
                                 <svg width="24" height="24" viewBox="0 0 24 24">

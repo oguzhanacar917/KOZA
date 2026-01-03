@@ -7,7 +7,7 @@ import { googleAnalytics } from './utils/googleAnalytics';
 // New Architecture Components
 import MainLayout from './components/layout/MainLayout';
 import AppRouter from './router/AppRouter';
-import Loader from './components/Loader';
+import GalaxyLoader from './components/galaxy/GalaxyLoader';
 
 const App = () => {
     const { currentView, activeTab } = useApp();
@@ -23,7 +23,7 @@ const App = () => {
     if (authLoading) {
         return (
             <div className="min-h-screen bg-white flex items-center justify-center">
-                <Loader message="METAMORFOZ BAŞLIYOR..." />
+                <GalaxyLoader message="METAMORFOZ BAŞLIYOR..." />
             </div>
         );
     }
