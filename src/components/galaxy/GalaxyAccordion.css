@@ -1,0 +1,61 @@
+/* GalaxyAccordion.css - Collapse */
+.galaxy-accordion {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.galaxy-accordion-item {
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.galaxy-accordion-item.open {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(147, 51, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(147, 51, 234, 0.08);
+}
+
+.galaxy-accordion-header {
+    width: 100%;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #404040;
+    transition: color 0.3s ease;
+}
+
+.galaxy-accordion-header:hover {
+    color: #9333ea;
+}
+
+.galaxy-accordion-icon {
+    transition: transform 0.3s ease;
+    color: #9333ea;
+}
+
+.galaxy-accordion-item.open .galaxy-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.galaxy-accordion-content {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.galaxy-accordion-content-inner {
+    padding: 20px;
+    padding-top: 0;
+    color: #525252;
+    line-height: 1.6;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

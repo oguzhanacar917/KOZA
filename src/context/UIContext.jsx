@@ -4,7 +4,7 @@ const UIContext = createContext(null);
 
 export const UIProvider = ({ children }) => {
     const [currentView, setCurrentView] = useState(null);
-    const [activeTab, setActiveTab] = useState('create');
+    const [activeTab, setActiveTab] = useState('lab'); // Default to lab for showcase
     const [notification, setNotification] = useState(null);
     const [toasts, setToasts] = useState([]);
     const [showOnboarding, setShowOnboarding] = useState(

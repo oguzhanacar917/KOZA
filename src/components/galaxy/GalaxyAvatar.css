@@ -1,0 +1,104 @@
+/* GalaxyAvatar.css - Glow Ring Avatar */
+.galaxy-avatar-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.galaxy-avatar {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9333ea;
+    font-weight: 700;
+}
+
+.galaxy-avatar.small {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+}
+
+.galaxy-avatar.medium {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+}
+
+.galaxy-avatar.large {
+    width: 80px;
+    height: 80px;
+    font-size: 24px;
+}
+
+.galaxy-avatar.xlarge {
+    width: 120px;
+    height: 120px;
+    font-size: 36px;
+}
+
+.galaxy-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galaxy-avatar-glow {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #c084fc, #9333ea, #3b82f6);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+}
+
+.galaxy-avatar-container:hover .galaxy-avatar-glow {
+    opacity: 0.6;
+}
+
+.galaxy-avatar-container:hover .galaxy-avatar {
+    transform: scale(1.05);
+    border-color: white;
+}
+
+.galaxy-avatar-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    border: 2px solid white;
+    z-index: 2;
+}
+
+.galaxy-avatar-status.online {
+    background: #10B981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.galaxy-avatar-status.busy {
+    background: #EF4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.galaxy-avatar-status.away {
+    background: #F59E0B;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.galaxy-avatar-status.offline {
+    background: #9CA3AF;
+}

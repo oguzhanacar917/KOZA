@@ -1,0 +1,35 @@
+/* GalaxyBreadcrumb.css - Path */
+.galaxy-breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #737373;
+}
+
+.galaxy-breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.galaxy-breadcrumb-link {
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+.galaxy-breadcrumb-link:hover {
+    color: #9333ea;
+    text-decoration: underline;
+}
+
+.galaxy-breadcrumb-item.active .galaxy-breadcrumb-link {
+    color: #171717;
+    font-weight: 700;
+    cursor: default;
+    text-decoration: none;
+}
+
+.galaxy-breadcrumb-separator {
+    margin: 0 8px;
+    color: #a3a3a3;
+}

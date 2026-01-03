@@ -1,0 +1,93 @@
+/* GalaxyFileUploader.css - Drag & Drop Zone */
+.galaxy-uploader {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed rgba(147, 51, 234, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.galaxy-uploader:hover {
+    border-color: rgba(147, 51, 234, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.15);
+}
+
+.galaxy-uploader.drag-active {
+    border-color: #9333ea;
+    background: rgba(147, 51, 234, 0.05);
+    border-style: solid;
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px -10px rgba(147, 51, 234, 0.25);
+}
+
+.galaxy-uploader-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9333ea;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.galaxy-uploader:hover .galaxy-uploader-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.galaxy-uploader.drag-active .galaxy-uploader-icon {
+    transform: scale(1.2);
+    animation: bounce 1s infinite;
+}
+
+.galaxy-uploader-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #404040;
+    margin-bottom: 4px;
+}
+
+.galaxy-uploader-subtext {
+    font-size: 13px;
+    color: #737373;
+}
+
+.galaxy-file-preview {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}

@@ -1,0 +1,42 @@
+/* GalaxyTable.css - Glass Rows */
+.galaxy-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.galaxy-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.galaxy-table th {
+    text-align: left;
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #737373;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.galaxy-table td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: #404040;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    transition: background 0.2s ease;
+}
+
+.galaxy-table tr:last-child td {
+    border-bottom: none;
+}
+
+.galaxy-table tr:hover td {
+    background: rgba(255, 255, 255, 0.4);
+}

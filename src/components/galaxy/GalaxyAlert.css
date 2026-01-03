@@ -1,0 +1,71 @@
+/* GalaxyAlert.css - Status Indicator */
+.galaxy-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+    animation: galaxyFadeIn 0.3s ease-out;
+}
+
+.galaxy-alert.info {
+    background: rgba(59, 130, 246, 0.05);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.galaxy-alert.success {
+    background: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.galaxy-alert.warning {
+    background: rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.galaxy-alert.error {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.galaxy-alert-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.galaxy-alert.info .galaxy-alert-icon {
+    color: #3B82F6;
+}
+
+.galaxy-alert.success .galaxy-alert-icon {
+    color: #10B981;
+}
+
+.galaxy-alert.warning .galaxy-alert-icon {
+    color: #F59E0B;
+}
+
+.galaxy-alert.error .galaxy-alert-icon {
+    color: #EF4444;
+}
+
+.galaxy-alert-content {
+    flex: 1;
+}
+
+.galaxy-alert-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: #171717;
+}
+
+.galaxy-alert-message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #525252;
+}

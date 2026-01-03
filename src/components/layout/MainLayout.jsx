@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import Onboarding from '../Onboarding';
-import Toast from '../Toast';
+import GalaxyToastContainer from '../galaxy/GalaxyToastContainer';
 import Header from './Header';
 import BottomNav from './BottomNav';
 import { Bell } from 'lucide-react';
@@ -41,17 +41,8 @@ const MainLayout = ({ children }) => {
                 </div>
             )}
 
-            {/* Toast Notifications */}
-            <div className="fixed top-20 right-4 z-50 space-y-2">
-                {toasts.map(toast => (
-                    <Toast
-                        key={toast.id}
-                        type={toast.type}
-                        title={toast.title}
-                        message={toast.message}
-                    />
-                ))}
-            </div>
+            {/* Galaxy Toast Notifications */}
+            <GalaxyToastContainer />
         </div>
     );
 };

@@ -1,0 +1,31 @@
+/* GalaxyLink.css - Hover Effect */
+.galaxy-link {
+    color: #525252;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.galaxy-link:hover {
+    color: #9333ea;
+}
+
+.galaxy-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #9333ea;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.galaxy-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}

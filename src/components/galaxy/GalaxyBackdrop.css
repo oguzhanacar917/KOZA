@@ -1,0 +1,19 @@
+/* GalaxyBackdrop.css - Blur Overlay */
+.galaxy-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.galaxy-backdrop.open {
+    opacity: 1;
+}
+
+.galaxy-backdrop.invisible {
+    background: transparent;
+    backdrop-filter: none;
+}

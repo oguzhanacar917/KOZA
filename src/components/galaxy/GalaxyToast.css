@@ -1,0 +1,163 @@
+/* GalaxyToast.css - Floating Glass Notification */
+.galaxy-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    /* Let clicks pass through gaps */
+}
+
+.galaxy-toast {
+    position: relative;
+    pointer-events: auto;
+    width: 320px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    overflow: hidden;
+    animation: galaxyToastIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: bottom center;
+}
+
+.galaxy-toast.exit {
+    animation: galaxyToastOut 0.3s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.galaxy-toast::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #9333ea;
+    opacity: 0.8;
+}
+
+.galaxy-toast.success::before {
+    background: #10B981;
+}
+
+.galaxy-toast.error::before {
+    background: #EF4444;
+}
+
+.galaxy-toast.warning::before {
+    background: #F59E0B;
+}
+
+.galaxy-toast.info::before {
+    background: #3B82F6;
+}
+
+.galaxy-toast-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    color: #9333ea;
+}
+
+.galaxy-toast.success .galaxy-toast-icon {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.galaxy-toast.error .galaxy-toast-icon {
+    color: #EF4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.galaxy-toast.warning .galaxy-toast-icon {
+    color: #F59E0B;
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.galaxy-toast.info .galaxy-toast-icon {
+    color: #3B82F6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.galaxy-toast-content {
+    flex: 1;
+}
+
+.galaxy-toast-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #171717;
+    margin-bottom: 2px;
+}
+
+.galaxy-toast-message {
+    font-size: 13px;
+    color: #525252;
+    line-height: 1.4;
+}
+
+.galaxy-toast-close {
+    padding: 4px;
+    border-radius: 50%;
+    color: #a3a3a3;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.galaxy-toast-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #171717;
+}
+
+@keyframes galaxyToastIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes galaxyToastOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+@media (max-width: 640px) {
+    .galaxy-toast-container {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        align-items: center;
+    }
+
+    .galaxy-toast {
+        width: 100%;
+        max-width: 400px;
+    }
+}

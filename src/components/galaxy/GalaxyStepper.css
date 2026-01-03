@@ -1,0 +1,82 @@
+/* GalaxyStepper.css - Progress Steps */
+.galaxy-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+.galaxy-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.galaxy-step::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+
+.galaxy-step.last::after {
+    display: none;
+}
+
+.galaxy-step-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #a3a3a3;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-bottom: 8px;
+}
+
+.galaxy-step.active .galaxy-step-icon {
+    border-color: #9333ea;
+    color: #9333ea;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1);
+    transform: scale(1.1);
+}
+
+.galaxy-step.completed .galaxy-step-icon {
+    background: #9333ea;
+    border-color: #9333ea;
+    color: white;
+}
+
+.galaxy-step.completed::after {
+    background: #9333ea;
+}
+
+.galaxy-step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a3a3a3;
+    transition: color 0.3s ease;
+}
+
+.galaxy-step.active .galaxy-step-label {
+    color: #9333ea;
+}
+
+.galaxy-step.completed .galaxy-step-label {
+    color: #171717;
+}

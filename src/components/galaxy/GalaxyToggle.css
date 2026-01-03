@@ -1,0 +1,97 @@
+/* GalaxyToggle.css - Liquid Glass Switch */
+.galaxy-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.galaxy-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.galaxy-toggle-track {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 34px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.galaxy-toggle-thumb {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    bottom: 3px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 10;
+}
+
+.galaxy-toggle-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 34px;
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.4) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.galaxy-toggle:hover .galaxy-toggle-track {
+    border-color: rgba(147, 51, 234, 0.4);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.02), 0 0 15px rgba(147, 51, 234, 0.1);
+}
+
+.galaxy-toggle input:checked+.galaxy-toggle-track {
+    background: rgba(147, 51, 234, 0.85);
+    border-color: rgba(147, 51, 234, 1);
+    box-shadow: 0 5px 15px rgba(147, 51, 234, 0.3);
+}
+
+.galaxy-toggle input:checked+.galaxy-toggle-track .galaxy-toggle-thumb {
+    transform: translateX(28px);
+    background: #fff;
+    box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.galaxy-toggle input:checked+.galaxy-toggle-track .galaxy-toggle-glow {
+    opacity: 1;
+}
+
+.galaxy-toggle-thumb::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(147, 51, 234, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.galaxy-toggle:active .galaxy-toggle-thumb::after {
+    transform: translate(-50%, -50%) scale(1.5);
+}
