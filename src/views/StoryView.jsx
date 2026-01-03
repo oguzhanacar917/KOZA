@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, BookOpen, Check } from 'lucide-react';
 import TransformationCanvas from '../components/cocoon/TransformationCanvas';
+import GalaxyButton from '../components/galaxy/GalaxyButton';
+import GalaxyProgress from '../components/galaxy/GalaxyProgress';
+import GalaxyToast from '../components/galaxy/GalaxyToast';
 
 const StoryView = ({ story, onClose }) => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -25,6 +28,7 @@ const StoryView = ({ story, onClose }) => {
     }
 
     const currentPageData = pages[currentPage];
+    const progressValue = ((currentPage + 1) / totalPages) * 100;
 
     return (
         <div className="min-h-screen bg-neutral-950 text-white relative overflow-hidden" style={{
@@ -34,54 +38,64 @@ const StoryView = ({ story, onClose }) => {
             <TransformationCanvas color={themeColor} intensity={0.5} />
 
             {/* Header */}
-            <div className="fixed top-0 left-0 right-0 bg-neutral-950/40 backdrop-blur-md border-b border-white/5 z-50">
+            <div className="fixed top-0 left-0 right-0 bg-neutral-950/40 backdrop-blur-md border-b border-white/5 z-50 transition-all duration-300">
                 <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                        className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/70 hover:text-white"
                     >
-                        <X size={20} />
+                        <X size={24} />
                     </button>
-                    <div className="text-sm font-medium tracking-widest text-neutral-400">
-                        SAYFA {currentPage + 1} / {totalPages}
+
+                    <div className="flex flex-col items-center">
+                        <div className="text-xs font-medium tracking-widest text-neutral-400 mb-1">
+                            SAYFA {currentPage + 1} / {totalPages}
+                        </div>
+                        <div className="w-32">
+                            <GalaxyProgress value={progressValue} size="small" />
+                        </div>
                     </div>
+
+                    <div className="w-10"></div> {/* Spacer for center alignment */}
                 </div>
             </div>
 
             {/* Story Content */}
-            <div className="pt-16 min-h-screen flex items-center justify-center px-4 py-12 relative z-10">
+            <div className="pt-24 min-h-screen flex items-center justify-center px-4 py-12 relative z-10">
                 <div className="max-w-2xl w-full">
                     <div className="animate-fade-in transition-all duration-700">
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-balance text-center" style={{ color: themeColor }}>
+                        <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-balance text-center drop-shadow-lg" style={{ color: themeColor }}>
                             {currentPageData.title}
                         </h2>
-                        <div className="prose prose-invert prose-xl max-w-none">
-                            <p className="text-neutral-200 leading-relaxed text-balance text-center font-serif italic text-lg opacity-90">
-                                {currentPageData.content}
-                            </p>
+
+                        <div className="bg-neutral-900/40 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl">
+                            <div className="prose prose-invert prose-xl max-w-none">
+                                <p className="text-neutral-100 leading-relaxed text-balance text-center font-serif text-lg opacity-90 first-letter:text-5xl first-letter:font-serif first-letter:mr-1 first-letter:float-left first-letter:text-white">
+                                    {currentPageData.content}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     {/* Navigation */}
-                    <div className="mt-16 flex items-center justify-between">
+                    <div className="mt-12 flex items-center justify-between pointer-events-auto">
                         <button
                             onClick={prevPage}
                             disabled={currentPage === 0}
-                            className="p-3 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-20 disabled:cursor-not-allowed transition-all border border-white/10"
+                            className="p-4 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-white/10 text-white hover:scale-110 active:scale-95"
                         >
-                            <ChevronLeft size={24} />
+                            <ChevronLeft size={28} />
                         </button>
 
-                        <div className="flex gap-3">
+                        <div className="flex gap-2">
                             {pages.map((_, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setCurrentPage(i)}
                                     className={`h-1.5 rounded-full transition-all duration-500 ${i === currentPage
-                                        ? 'w-10'
-                                        : 'w-2 opacity-30 hover:opacity-50'
+                                        ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]'
+                                        : 'w-1.5 bg-white/20 hover:bg-white/40'
                                         }`}
-                                    style={{ backgroundColor: i === currentPage ? themeColor : 'white' }}
                                 />
                             ))}
                         </div>
@@ -89,21 +103,21 @@ const StoryView = ({ story, onClose }) => {
                         <button
                             onClick={nextPage}
                             disabled={currentPage === totalPages - 1}
-                            className="p-3 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-20 disabled:cursor-not-allowed transition-all border border-white/10"
+                            className="p-4 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-white/10 text-white hover:scale-110 active:scale-95"
                         >
-                            <ChevronRight size={24} />
+                            <ChevronRight size={28} />
                         </button>
                     </div>
 
                     {currentPage === totalPages - 1 && (
-                        <div className="mt-12 text-center">
-                            <button
+                        <div className="mt-12 text-center animate-fade-in-up">
+                            <GalaxyButton
                                 onClick={onClose}
-                                className="px-10 py-4 rounded-full font-bold transition-all transform hover:scale-105 shadow-2xl"
-                                style={{ backgroundColor: themeColor }}
+                                className="!py-4 !px-12 !text-lg !rounded-full shadow-[0_0_30px_rgba(147,51,234,0.3)] hover:shadow-[0_0_50px_rgba(147,51,234,0.5)]"
+                                icon={Check}
                             >
                                 Metamorfozu Tamamla
-                            </button>
+                            </GalaxyButton>
                         </div>
                     )}
                 </div>

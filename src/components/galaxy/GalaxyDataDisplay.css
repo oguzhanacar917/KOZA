@@ -1,0 +1,171 @@
+/* Stats */
+.galaxy-stat-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+}
+
+.galaxy-stat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 120px;
+}
+
+.galaxy-stat-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.galaxy-stat-number {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(135deg, #1f2937, #4b5563);
+}
+
+.galaxy-stat-number.gradient {
+    background-image: linear-gradient(135deg, #9333ea, #3b82f6);
+}
+
+.galaxy-stat-help-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Tags */
+.galaxy-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    /* Pill */
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+/* Tag Sizes */
+.galaxy-tag.sm {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    height: 1.5rem;
+}
+
+.galaxy-tag.md {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    height: 2rem;
+}
+
+.galaxy-tag.lg {
+    font-size: 1rem;
+    padding: 0.375rem 1rem;
+    height: 2.5rem;
+}
+
+/* Tag Variants */
+.galaxy-tag.solid {
+    background-color: #9333ea;
+    color: white;
+}
+
+.galaxy-tag.subtle {
+    background-color: rgba(147, 51, 234, 0.1);
+    color: #7e22ce;
+}
+
+.galaxy-tag.outline {
+    background-color: transparent;
+    border-color: rgba(147, 51, 234, 0.3);
+    color: #7e22ce;
+}
+
+.galaxy-tag-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.375rem;
+    opacity: 0.6;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: opacity 0.2s;
+}
+
+.galaxy-tag-close-btn:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+.galaxy-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.galaxy-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+.galaxy-thead {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.galaxy-th {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.galaxy-td {
+    padding: 1rem 1.5rem;
+    color: #e5e5e5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.galaxy-tr:last-child .galaxy-td {
+    border-bottom: none;
+}
+
+.galaxy-tr:hover .galaxy-td {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Dark mode overrides (simplified, assuming global dark mode applied via class or media) */
+@media (prefers-color-scheme: dark) {
+    .galaxy-stat-number {
+        background-image: linear-gradient(135deg, #f3f4f6, #d1d5db);
+    }
+
+    .galaxy-stat-number.gradient {
+        background-image: linear-gradient(135deg, #c084fc, #60a5fa);
+    }
+
+    .galaxy-stat-label,
+    .galaxy-stat-help-text {
+        color: #9ca3af;
+    }
+}

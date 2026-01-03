@@ -1,0 +1,43 @@
+.galaxy-heading {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.galaxy-text {
+    margin: 0;
+}
+
+.galaxy-gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #9333ea, #3b82f6);
+}
+
+.galaxy-code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.875rem;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #d1d5db;
+}
+
+.galaxy-kbd {
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.galaxy-blockquote {
+    border-left: 4px solid #9333ea;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #a3a3a3;
+}

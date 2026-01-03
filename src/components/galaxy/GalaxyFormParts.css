@@ -1,0 +1,129 @@
+.galaxy-form-control {
+    width: 100%;
+    position: relative;
+}
+
+.galaxy-form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #4b5563;
+    transition: color 0.2s;
+}
+
+.galaxy-form-label[data-invalid="true"] {
+    color: #ef4444;
+}
+
+.galaxy-form-helper-text {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    line-height: 1.25rem;
+}
+
+.galaxy-form-error-message {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #ef4444;
+}
+
+/* Input Group */
+.galaxy-input-group {
+    display: flex;
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+}
+
+.galaxy-input-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 2;
+    color: #9ca3af;
+    width: 2.5rem;
+    /* Match standard input padding */
+    pointer-events: none;
+}
+
+.galaxy-input-element.left {
+    left: 0;
+}
+
+.galaxy-input-element.right {
+    right: 0;
+}
+
+/* Pin Input */
+.galaxy-pin-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.galaxy-pin-input-field {
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.galaxy-pin-input-field:focus {
+    outline: none;
+    border-color: #9333ea;
+    box-shadow: 0 0 0 1px #9333ea;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Number Input */
+.galaxy-number-input-stepper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.galaxy-number-input-stepper>button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 0.6rem;
+    transition: background 0.1s;
+}
+
+.galaxy-number-input-stepper>button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .galaxy-form-label {
+        color: #e5e5e5;
+    }
+
+    .galaxy-form-helper-text {
+        color: #a3a3a3;
+    }
+}

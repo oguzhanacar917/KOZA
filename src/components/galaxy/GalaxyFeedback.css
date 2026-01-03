@@ -1,0 +1,132 @@
+/* Alerts */
+.galaxy-alert {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    border-left-width: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    /* Default subtle glass */
+}
+
+/* Alert Status Variants */
+.galaxy-alert[data-status="info"] {
+    background: rgba(59, 130, 246, 0.1);
+    border-left-color: #3b82f6;
+}
+
+.galaxy-alert[data-status="warning"] {
+    background: rgba(245, 158, 11, 0.1);
+    border-left-color: #f59e0b;
+}
+
+.galaxy-alert[data-status="success"] {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+}
+
+.galaxy-alert[data-status="error"] {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+}
+
+.galaxy-alert-icon {
+    flex-shrink: 0;
+    margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.galaxy-alert-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.galaxy-alert-title {
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 0.25rem;
+}
+
+.galaxy-alert-description {
+    line-height: 1.5;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+/* Skeletons */
+.galaxy-skeleton {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.05) 25%,
+            rgba(255, 255, 255, 0.1) 37%,
+            rgba(255, 255, 255, 0.05) 63%);
+    background-size: 400% 100%;
+    animation: galaxy-skeleton-loading 1.4s ease infinite;
+    border-radius: 0.25rem;
+}
+
+@keyframes galaxy-skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.galaxy-skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.125rem;
+}
+
+.galaxy-skeleton-circle {
+    border-radius: 50%;
+}
+
+/* Circular Progress */
+.galaxy-circular-progress {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.galaxy-circular-progress-svg {
+    transform: rotate(-90deg);
+}
+
+.galaxy-circular-progress-track {
+    stroke: rgba(255, 255, 255, 0.1);
+}
+
+.galaxy-circular-progress-indicator {
+    stroke: #9333ea;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s ease;
+}
+
+.galaxy-circular-progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Empty State */
+.galaxy-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
