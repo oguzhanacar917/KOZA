@@ -1,95 +1,128 @@
+/* Cosmic Pulse Button */
 .uiverse-button {
     position: relative;
-    padding: 12px 24px;
-    border-radius: 12px;
-    border: none;
+    padding: 12px 32px;
+    border-radius: 9999px;
+    /* Pill shape for modern feel */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #171717;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: transparent;
+    color: #ffffff;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     outline: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
+/* Cosmic Background */
 .uiverse-button::before {
     content: '';
     position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+    z-index: -2;
+    transition: all 0.4s ease;
+}
+
+/* Neon Glow Border Effect */
+.uiverse-button::after {
+    content: '';
+    position: absolute;
     inset: -2px;
-    background: linear-gradient(135deg, #9333ea 0%, #a855f7 50%, #d8b4fe 100%);
-    background-size: 200% 200%;
-    animation: gradientMove 3s linear infinite;
+    background: linear-gradient(45deg, #ff00cc, #333399, #00d4ff);
     z-index: -1;
-    border-radius: 14px;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-.uiverse-button:hover::before {
-    opacity: 1;
-}
-
+/* Hover State */
 .uiverse-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 0 30px rgba(147, 51, 234, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
+.uiverse-button:hover::after {
+    opacity: 0.7;
+    animation: galaxy-rotate 3s linear infinite;
+}
+
+/* Button Content */
+.button-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(to right, #ffffff, #e0e0e0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Text gradient */
+    transition: all 0.3s ease;
+}
+
+.uiverse-button:hover .button-content {
+    background: #ffffff;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+    color: #ffffff;
+}
+
+/* Active State */
 .uiverse-button:active {
-    transform: translateY(0);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
 }
 
+/* Secondary Variant (Ghost/Glass) */
 .uiverse-button.secondary {
-    background: rgba(255, 255, 255, 0.3);
-    color: #525252;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
 }
 
 .uiverse-button.secondary::before {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    animation: none;
-}
-
-.uiverse-button.ghost {
     background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #525252;
 }
 
-.uiverse-button.ghost::before {
+.uiverse-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.uiverse-button.secondary::after {
     display: none;
 }
 
-.button-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
+/* Disabled State */
 .uiverse-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
+    filter: grayscale(100%);
+}
+
+@keyframes galaxy-rotate {
+    0% {
+        filter: blur(10px) hue-rotate(0deg);
+    }
+
+    100% {
+        filter: blur(10px) hue-rotate(360deg);
+    }
 }

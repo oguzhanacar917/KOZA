@@ -12,6 +12,7 @@ import { registerSW } from 'virtual:pwa-register';
 registerSW({ immediate: true });
 
 // Initialize Google Analytics
+// Initialize Google Analytics
 googleAnalytics.initialize();
 
 createRoot(document.getElementById('root')).render(

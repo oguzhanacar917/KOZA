@@ -1,14 +1,14 @@
 import React from 'react';
 import './UiverseInput.css';
 
-const UiverseInput = ({ label, type = 'text', value, onChange, placeholder, className = '', ...props }) => {
+const UiverseInput = ({ label, type = 'text', value, onChange, placeholder = " ", className = '', ...props }) => {
     return (
         <div className={`uiverse-input-container ${className}`}>
             <input
                 type={type}
                 value={value}
                 onChange={onChange}
-                placeholder={placeholder}
+                placeholder={placeholder} // Needs a placeholder for :placeholder-shown to work
                 className="uiverse-input"
                 {...props}
             />

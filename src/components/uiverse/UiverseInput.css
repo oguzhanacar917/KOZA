@@ -1,58 +1,84 @@
+/* Holographic Field Input */
 .uiverse-input-container {
     position: relative;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    /* More space for the float effect */
 }
 
 .uiverse-input {
     width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 12px;
-    color: #171717;
-    font-size: 15px;
+    padding: 12px 0;
+    /* Remove side padding for minimal look */
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 16px;
+    font-family: inherit;
     transition: all 0.3s ease;
     outline: none;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0;
+    /* Flat bottom border only */
+}
+
+/* Placeholder */
+.uiverse-input::placeholder {
+    color: transparent;
+    /* Hide placeholder to use floating label primarily */
 }
 
 .uiverse-input:focus {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: #9333ea;
-    box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.8);
 }
 
+/* Floating Label */
 .uiverse-label {
     position: absolute;
-    left: 12px;
-    top: -10px;
-    background: #f8fafd;
-    padding: 0 8px;
-    font-size: 12px;
-    color: #a855f7;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    left: 0;
+    top: 12px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.4);
     pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
+/* Activate state for label (when input has value or is focused) */
+.uiverse-input:focus~.uiverse-label,
+.uiverse-input:not(:placeholder-shown)~.uiverse-label {
+    top: -12px;
+    font-size: 11px;
+    color: #d8b4fe;
+    /* Light purple */
+    text-shadow: 0 0 5px rgba(216, 180, 254, 0.5);
+    letter-spacing: 0.1em;
+}
+
+/* Holographic Glow Line */
 .input-glow {
     position: absolute;
     bottom: 0;
-    left: 12px;
-    right: 12px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #9333ea, #d8b4fe, transparent);
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, #ff00cc, #333399, #00d4ff);
     transform: scaleX(0);
-    transition: transform 0.5s ease;
-    opacity: 0.5;
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .uiverse-input:focus~.input-glow {
     transform: scaleX(1);
 }
 
-.uiverse-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+/* Error State (Optional, logic handled in usage usually) */
+.uiverse-input-container.error .input-glow {
+    background: #ef4444;
+}
+
+.uiverse-input-container.error .uiverse-label {
+    color: #ef4444;
 }

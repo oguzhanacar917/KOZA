@@ -104,3 +104,16 @@ export const GalaxyTbody = ({ children, ...props }) => <tbody className="galaxy-
 export const GalaxyTr = ({ children, ...props }) => <tr className="galaxy-tr" {...props}>{children}</tr>;
 export const GalaxyTh = ({ children, ...props }) => <th className="galaxy-th" {...props}>{children}</th>;
 export const GalaxyTd = ({ children, ...props }) => <td className="galaxy-td" {...props}>{children}</td>;
+
+// --- Empty State ---
+
+export const GalaxyEmptyState = ({ icon: Icon, title, description, children, className = '', ...props }) => {
+    return (
+        <div className={`galaxy-empty-state ${className}`} {...props}>
+            {Icon && <Icon size={48} className="galaxy-empty-state-icon" />}
+            {title && <h3 className="galaxy-empty-state-title">{title}</h3>}
+            {description && <p className="galaxy-empty-state-description">{description}</p>}
+            {children && <div className="mt-4">{children}</div>}
+        </div>
+    );
+};
