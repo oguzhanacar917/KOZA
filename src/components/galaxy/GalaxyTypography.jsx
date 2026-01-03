@@ -77,3 +77,26 @@ export const GalaxyLabel = forwardRef(({ children, className = '', required, ...
         </label>
     );
 });
+
+export const GalaxyList = forwardRef(({ as = 'ul', spacing = 2, styleType = 'none', children, className = '', ...props }, ref) => {
+    const Component = as;
+    return (
+        <Component
+            ref={ref}
+            className={`galaxy-list ${className}`}
+            style={{ listStyleType: styleType, display: 'flex', flexDirection: 'column', gap: `${spacing * 0.25}rem` }}
+            {...props}
+        >
+            {children}
+        </Component>
+    );
+});
+
+export const GalaxyListItem = forwardRef(({ children, className = '', ...props }, ref) => {
+    return (
+        <li ref={ref} className={`galaxy-list-item ${className}`} {...props}>
+            {children}
+        </li>
+    );
+});
+

@@ -136,3 +136,104 @@ export const GalaxyNumberInputStepper = ({ onIncrement, onDecrement }) => {
         </div>
     );
 };
+
+// --- Basic Form Elements ---
+
+export const GalaxyInput = forwardRef(({ size = 'md', variant = 'outline', isInvalid, className = '', ...props }, ref) => {
+    // Sizes: xs, sm, md, lg
+    // Variants: outline, filled, flushed, unstyled
+    const sizeMap = { xs: 'h-6 text-xs', sm: 'h-8 text-sm', md: 'h-10 text-base', lg: 'h-12 text-lg' };
+
+    return (
+        <input
+            ref={ref}
+            className={`w-full bg-white/5 border border-white/10 rounded-lg px-4 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 disabled:opacity-50 disabled:cursor-not-allowed ${sizeMap[size]} ${isInvalid ? 'border-red-500 focus:ring-red-500' : ''} ${className}`}
+            {...props}
+        />
+    );
+});
+
+export const GalaxyTextarea = forwardRef(({ size = 'md', variant = 'outline', isInvalid, className = '', ...props }, ref) => {
+    return (
+        <textarea
+            ref={ref}
+            className={`w-full bg-white/5 border border-white/10 rounded-lg p-3 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-neutral-900 dark:text-white placeholder-neutral-500 disabled:opacity-50 disabled:cursor-not-allowed ${isInvalid ? 'border-red-500 focus:ring-red-500' : ''} ${className}`}
+            {...props}
+        />
+    );
+});
+
+export const GalaxySelect = forwardRef(({ size = 'md', variant = 'outline', isInvalid, children, className = '', ...props }, ref) => {
+    const sizeMap = { xs: 'h-6 text-xs', sm: 'h-8 text-sm', md: 'h-10 text-base', lg: 'h-12 text-lg' };
+    return (
+        <div className="relative">
+            <select
+                ref={ref}
+                className={`w-full appearance-none bg-white/5 border border-white/10 rounded-lg px-4 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-neutral-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed ${sizeMap[size]} ${isInvalid ? 'border-red-500 focus:ring-red-500' : ''} ${className}`}
+                {...props}
+            >
+                {children}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-neutral-500">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+        </div>
+    );
+});
+
+export const GalaxyButton = forwardRef(({
+    variant = 'primary',
+    size = 'md',
+    isLoading,
+    isDisabled,
+    leftIcon,
+    rightIcon,
+    children,
+    className = '',
+    onClick,
+    ...props
+}, ref) => {
+    const variants = {
+        primary: 'bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white shadow-lg shadow-primary-500/30 border-none',
+        secondary: 'bg-white/10 hover:bg-white/20 text-white border border-white/10 backdrop-blur-sm',
+        outline: 'bg-transparent border border-primary-500 text-primary-500 hover:bg-primary-500/10',
+        ghost: 'bg-transparent hover:bg-white/10 text-neutral-700 dark:text-white',
+        link: 'bg-transparent text-primary-500 hover:underline p-0 h-auto'
+    };
+
+    const sizes = {
+        xs: 'h-6 px-2 text-xs',
+        sm: 'h-8 px-3 text-sm',
+        md: 'h-10 px-4 text-base',
+        lg: 'h-12 px-6 text-lg'
+    };
+
+    const disabledStyles = 'opacity-60 cursor-not-allowed pointer-events-none';
+
+    return (
+        <button
+            ref={ref}
+            className={`
+                inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 active:scale-95
+                ${variants[variant]}
+                ${sizes[size]}
+                ${(isDisabled || isLoading) ? disabledStyles : ''}
+                ${className}
+            `}
+            disabled={isDisabled || isLoading}
+            onClick={onClick}
+            {...props}
+        >
+            {isLoading && (
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            )}
+            {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
+            {children}
+            {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+        </button>
+    );
+});
+
