@@ -31,24 +31,24 @@ const StoryView = ({ story, onClose }) => {
     const progressValue = ((currentPage + 1) / totalPages) * 100;
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-white relative overflow-hidden" style={{
-            backgroundImage: `radial-gradient(circle at 50% 50%, ${themeColor}11 0%, transparent 80%)`
+        <div className="min-h-screen bg-white text-neutral-900 relative overflow-hidden" style={{
+            backgroundImage: `radial-gradient(circle at 50% 50%, ${themeColor}08 0%, transparent 80%)`
         }}>
             {/* Background Particles */}
             <TransformationCanvas color={themeColor} intensity={0.5} />
 
             {/* Header */}
-            <div className="fixed top-0 left-0 right-0 bg-neutral-950/40 backdrop-blur-md border-b border-white/5 z-50 transition-all duration-300">
+            <div className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-neutral-200 z-50 transition-all duration-300">
                 <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/70 hover:text-white"
+                        className="p-2 hover:bg-neutral-100 rounded-full transition-colors text-neutral-500 hover:text-neutral-900"
                     >
                         <X size={24} />
                     </button>
 
                     <div className="flex flex-col items-center">
-                        <div className="text-xs font-medium tracking-widest text-neutral-400 mb-1">
+                        <div className="text-[10px] font-bold tracking-widest text-neutral-500 mb-1 uppercase">
                             SAYFA {currentPage + 1} / {totalPages}
                         </div>
                         <div className="w-32">
@@ -68,9 +68,9 @@ const StoryView = ({ story, onClose }) => {
                             {currentPageData.title}
                         </h2>
 
-                        <div className="bg-neutral-900/40 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl">
-                            <div className="prose prose-invert prose-xl max-w-none">
-                                <p className="text-neutral-100 leading-relaxed text-balance text-center font-serif text-lg opacity-90 first-letter:text-5xl first-letter:font-serif first-letter:mr-1 first-letter:float-left first-letter:text-white">
+                        <div className="bg-white/60 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-neutral-200 shadow-xl">
+                            <div className="prose prose-slate prose-xl max-w-none">
+                                <p className="text-neutral-900 leading-relaxed text-balance text-center font-serif text-lg first-letter:text-5xl first-letter:font-serif first-letter:mr-2 first-letter:float-left first-letter:text-primary-600">
                                     {currentPageData.content}
                                 </p>
                             </div>
@@ -82,7 +82,7 @@ const StoryView = ({ story, onClose }) => {
                         <button
                             onClick={prevPage}
                             disabled={currentPage === 0}
-                            className="p-4 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-white/10 text-white hover:scale-110 active:scale-95"
+                            className="p-4 bg-white hover:bg-neutral-50 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-neutral-200 text-neutral-900 hover:scale-110 active:scale-95 shadow-sm"
                         >
                             <ChevronLeft size={28} />
                         </button>
@@ -93,8 +93,8 @@ const StoryView = ({ story, onClose }) => {
                                     key={i}
                                     onClick={() => setCurrentPage(i)}
                                     className={`h-1.5 rounded-full transition-all duration-500 ${i === currentPage
-                                        ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]'
-                                        : 'w-1.5 bg-white/20 hover:bg-white/40'
+                                        ? 'w-8 bg-neutral-900 shadow-sm'
+                                        : 'w-1.5 bg-neutral-200 hover:bg-neutral-300'
                                         }`}
                                 />
                             ))}
@@ -103,7 +103,7 @@ const StoryView = ({ story, onClose }) => {
                         <button
                             onClick={nextPage}
                             disabled={currentPage === totalPages - 1}
-                            className="p-4 bg-white/5 hover:bg-white/10 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-white/10 text-white hover:scale-110 active:scale-95"
+                            className="p-4 bg-white hover:bg-neutral-50 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-neutral-200 text-neutral-900 hover:scale-110 active:scale-95 shadow-sm"
                         >
                             <ChevronRight size={28} />
                         </button>

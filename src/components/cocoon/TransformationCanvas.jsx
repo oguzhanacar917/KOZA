@@ -52,22 +52,22 @@ const TransformationCanvas = ({ color = '#9333EA', intensity = 1, active = true 
                 ctx.closePath();
 
                 // Prismatic flash based on rotation
-                // Prismatic flash based on rotation - DEEPER COLORS for Light Mode
+                // Prismatic flash - Rich Jewel Tones for Light Mode
                 const hue = (this.rotation * 50) % 360;
-                // Use darker/richer HSLA for visibility on white
-                ctx.fillStyle = `hsla(${hue}, 85%, 60%, ${this.opacity})`;
+                // use lower lightness for better visibility on white (45%-55%)
+                ctx.fillStyle = `hsla(${hue}, 85%, 50%, ${this.opacity})`;
                 ctx.fill();
 
                 // Edge highlight - Darker for definition
-                ctx.strokeStyle = `rgba(147, 51, 234, ${this.opacity})`;
+                ctx.strokeStyle = `rgba(107, 33, 168, ${this.opacity})`; // Darker Purple
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
 
                 ctx.restore();
 
-                // Bloom
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = color;
+                // Bloom - Reduced for light mode or removed (canvas shadowBlur is expensive)
+                // ctx.shadowBlur = 10;
+                // ctx.shadowColor = color;
             }
         }
 
@@ -109,7 +109,7 @@ const TransformationCanvas = ({ color = '#9333EA', intensity = 1, active = true 
         <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full pointer-events-none z-0"
-            style={{ mixBlendMode: 'screen' }}
+            style={{ mixBlendMode: 'normal' }} // Changed from screen to normal for visibility on white
         />
     );
 };

@@ -42,7 +42,7 @@ const Onboarding = ({ onComplete }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl max-w-md w-full p-8 animate-fade-in">
                 <div className={`w-16 h-16 ${colorMap[currentStep.color]} rounded-2xl flex items-center justify-center text-white mb-6 mx-auto`}>
                     <Icon size={32} />

@@ -83,7 +83,7 @@ const ProfileTab = () => {
 
                             {ozToNextStage > 0 && (
                                 <>
-                                    <GalaxyDivider orientation="vertical" className="h-10 border-neutral-700" />
+                                    <GalaxyDivider orientation="vertical" className="h-10 border-neutral-200" />
                                     <GalaxyStat className="items-center">
                                         <GalaxyStatLabel>Sonraki Aşamaya</GalaxyStatLabel>
                                         <GalaxyStatNumber className="!text-xl !text-neutral-700">{ozToNextStage} ÖZ</GalaxyStatNumber>
@@ -106,7 +106,7 @@ const ProfileTab = () => {
                     </GalaxyFlex>
 
                     {/* Custom Linear Progress (using div for now as GalaxyProgressCircle is circular) */}
-                    <div className="h-3 bg-white/40 rounded-full overflow-hidden mb-8 border border-white/60 shadow-inner">
+                    <div className="h-3 bg-neutral-100 rounded-full overflow-hidden mb-8 border border-neutral-200 shadow-inner">
                         <div
                             className="h-full bg-gradient-to-r from-primary-500 to-purple-600 transition-all duration-500 shadow-[0_0_10px_rgba(147,51,234,0.2)]"
                             style={{ width: `${progressPercent}%` }}
@@ -114,19 +114,19 @@ const ProfileTab = () => {
                     </div>
 
                     <GalaxyStatGroup>
-                        <GalaxyStat className="p-4 bg-white/40 rounded-xl border border-white/60 text-center">
+                        <GalaxyStat className="p-4 bg-neutral-50 rounded-xl border border-neutral-200 text-center">
                             <GalaxyStatNumber className="!text-2xl text-neutral-900">{stats.storiesCreated}</GalaxyStatNumber>
                             <GalaxyStatLabel>Hikaye</GalaxyStatLabel>
                         </GalaxyStat>
-                        <GalaxyStat className="p-4 bg-white/40 rounded-xl border border-white/60 text-center">
+                        <GalaxyStat className="p-4 bg-neutral-50 rounded-xl border border-neutral-200 text-center">
                             <GalaxyStatNumber className="!text-2xl text-neutral-900">{stats.gamesCreated}</GalaxyStatNumber>
                             <GalaxyStatLabel>Oyun</GalaxyStatLabel>
                         </GalaxyStat>
-                        <GalaxyStat className="p-4 bg-white/40 rounded-xl border border-white/60 text-center">
+                        <GalaxyStat className="p-4 bg-neutral-50 rounded-xl border border-neutral-200 text-center">
                             <GalaxyStatNumber className="!text-2xl text-neutral-900">{stats.totalXP}</GalaxyStatNumber>
                             <GalaxyStatLabel>Toplam ÖZ</GalaxyStatLabel>
                         </GalaxyStat>
-                        <GalaxyStat className="p-4 bg-white/40 rounded-xl border border-white/60 text-center">
+                        <GalaxyStat className="p-4 bg-neutral-50 rounded-xl border border-neutral-200 text-center">
                             <GalaxyStatNumber className="!text-2xl text-neutral-900">{stats.dailyStreak}</GalaxyStatNumber>
                             <GalaxyStatLabel>Gün Serisi</GalaxyStatLabel>
                         </GalaxyStat>
@@ -165,7 +165,7 @@ const ProfileTab = () => {
                                     return (
                                         <GalaxyBox
                                             key={achievement.id}
-                                            className="p-4 rounded-xl border border-white/10 bg-neutral-100 relative overflow-hidden"
+                                            className="p-4 rounded-xl border border-neutral-200 bg-neutral-100 relative overflow-hidden"
                                         >
                                             <div className="absolute inset-y-0 left-0 bg-primary-500 opacity-10" style={{ width: `${progress}%` }} />
                                             <div className="relative">
@@ -202,12 +202,12 @@ const ProfileTab = () => {
                             {savedStories.map(story => (
                                 <GalaxyListItem
                                     key={story.id}
-                                    className="p-4 rounded-xl bg-neutral-100 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer group"
+                                    className="p-4 rounded-xl bg-neutral-50 border border-neutral-200 hover:bg-neutral-100 transition-colors cursor-pointer group"
                                     onClick={() => setCurrentView({ type: story.type, data: story })}
                                 >
                                     <GalaxyFlex justify="space-between" align="center">
                                         <GalaxyFlex align="center" gap={4}>
-                                            <div className="p-2 rounded-lg bg-white/10 text-primary-400">
+                                            <div className="p-2 rounded-lg bg-neutral-100 text-primary-600">
                                                 {story.type === 'story' ? <BookOpen size={20} /> : <Gamepad2 size={20} />}
                                             </div>
                                             <div>

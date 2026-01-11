@@ -15,7 +15,7 @@ const Header = () => {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 bg-white/20 backdrop-blur-3xl border-b border-white/80 z-40 shadow-sm">
+        <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-40 shadow-sm">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                 <button
                     onClick={() => {

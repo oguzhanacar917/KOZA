@@ -22,8 +22,8 @@ const HomePage = () => {
 
     const renderLanding = () => (
         <div className="flex flex-col items-center text-center animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 text-primary-200 rounded-full text-sm font-medium mb-10 shadow-2xl">
-                <Sparkles size={16} className="text-primary-400" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 backdrop-blur-xl border border-neutral-200 text-primary-700 rounded-full text-sm font-medium mb-10 shadow-sm">
+                <Sparkles size={16} className="text-primary-600" />
                 <span>Hoş Geldiniz: Metamorfozun Başlangıcı</span>
             </div>
 
@@ -34,14 +34,14 @@ const HomePage = () => {
                 </span>
             </h1>
 
-            <p className="text-xl text-neutral-400 mb-12 max-w-2xl leading-relaxed font-serif italic">
+            <p className="text-xl text-neutral-600 mb-12 max-w-2xl leading-relaxed font-serif italic">
                 Zorluklar seni hapsetmez, seni inşa eder. <br />
                 KOZA ile metamorfoz yolculuğuna ilk adımı at.
             </p>
 
             <button
                 onClick={() => setStep('get-started')}
-                className="group relative flex items-center gap-4 px-12 py-6 bg-white text-black rounded-2xl font-bold text-2xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] active:scale-95"
+                className="group relative flex items-center gap-4 px-12 py-6 bg-neutral-900 text-white rounded-2xl font-bold text-2xl hover:scale-105 transition-all shadow-xl active:scale-95"
             >
                 KEŞFETMEYE BAŞLA
                 <ArrowRight className="group-hover:translate-x-2 transition-transform" size={28} />
@@ -54,26 +54,26 @@ const HomePage = () => {
             <h2 className="text-4xl font-bold mb-12 text-center">Neden Dönüşmelisin?</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-5xl">
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div className="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center mb-6 text-primary-400">
+                <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 backdrop-blur-md">
+                    <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center mb-6 text-primary-600">
                         <Zap size={24} />
                     </div>
                     <h3 className="text-xl font-bold mb-3">AI Kanatlar</h3>
-                    <p className="text-neutral-400 text-sm">Zorluklarını mitsel hikayelere dönüştüren gelişmiş AI rehberliği.</p>
+                    <p className="text-neutral-600 text-sm">Zorluklarını mitsel hikayelere dönüştüren gelişmiş AI rehberliği.</p>
                 </div>
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6 text-purple-400">
+                <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 backdrop-blur-md">
+                    <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6 text-purple-600">
                         <Heart size={24} />
                     </div>
                     <h3 className="text-xl font-bold mb-3">Öz Birikimi</h3>
-                    <p className="text-neutral-400 text-sm">Her deneyimden 'Öz' kazanarak içsel kozanı büyüt ve kanatlan.</p>
+                    <p className="text-neutral-600 text-sm">Her deneyimden 'Öz' kazanarak içsel kozanı büyüt ve kanatlan.</p>
                 </div>
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
+                <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 backdrop-blur-md">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
                         <ShieldCheck size={24} />
                     </div>
                     <h3 className="text-xl font-bold mb-3">Evrensel Senkron</h3>
-                    <p className="text-neutral-400 text-sm">Tüm gelişimini güvenli bulut alanıyla her an yanında taşı.</p>
+                    <p className="text-neutral-600 text-sm">Tüm gelişimini güvenli bulut alanıyla her an yanında taşı.</p>
                 </div>
             </div>
 
@@ -108,7 +108,7 @@ const HomePage = () => {
             {firebaseEnabled ? (
                 <div className="space-y-6 flex flex-col items-center">
                     {error && (
-                        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-400 mb-6 backdrop-blur-md">
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-600 mb-6">
                             <AlertCircle size={20} />
                             <span className="text-sm font-medium">{error}</span>
                         </div>
@@ -117,7 +117,7 @@ const HomePage = () => {
                     <button
                         onClick={handleSignIn}
                         disabled={isSigningIn}
-                        className="group relative flex items-center justify-center gap-4 px-10 py-5 bg-white text-black rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[300px]"
+                        className="group relative flex items-center justify-center gap-4 px-10 py-5 bg-neutral-900 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[300px]"
                     >
                         {isSigningIn ? (
                             <GalaxyLoader message="BAĞLANTI KURULUYOR..." />
@@ -134,7 +134,7 @@ const HomePage = () => {
                         )}
                     </button>
 
-                    <div className="flex items-center gap-2 text-neutral-500 text-xs opacity-60">
+                    <div className="flex items-center gap-2 text-neutral-500 text-xs">
                         <Cloud size={14} />
                         <span>Verileriniz güvenli bulut alanıyla otomatik olarak korunacak</span>
                     </div>
@@ -158,16 +158,16 @@ const HomePage = () => {
     );
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-white relative overflow-hidden font-sans">
+        <div className="min-h-screen bg-white text-neutral-900 relative overflow-hidden font-sans">
             {/* Immersive Background */}
-            <TransformationCanvas color="#9333EA" intensity={0.8} />
-            <div className="absolute inset-0 bg-radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 80%) pointer-events-none" />
+            <TransformationCanvas color="#9333EA" intensity={0.4} />
+            <div className="absolute inset-0 bg-radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.05) 0%, transparent 80%) pointer-events-none" />
 
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 bg-neutral-950/20 backdrop-blur-md border-b border-white/5 z-50">
+            <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-50">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-primary-500/20">
+                    <div className="flex items-center gap-3 text-neutral-900">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-purple-700 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-primary-500/20">
                             K
                         </div>
                         <span className="text-xl font-bold tracking-tighter italic">KOZA</span>
@@ -185,26 +185,26 @@ const HomePage = () => {
             {/* Features Spotlight */}
             <section className="relative z-10 py-32 px-6">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all group">
-                        <div className="w-14 h-14 bg-primary-500/20 rounded-2xl flex items-center justify-center mb-6 text-primary-400 group-hover:scale-110 transition-transform">
+                    <div className="p-10 rounded-[2.5rem] bg-neutral-50 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
+                        <div className="w-14 h-14 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 text-primary-600 group-hover:scale-110 transition-transform">
                             <Zap size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4">Anlık Dönüşüm</h3>
-                        <p className="text-neutral-400 leading-relaxed">Zorba deneyimlerini Gemini AI ile saniyeler içinde mitsel kanatlara dönüştürün.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Anlık Dönüşüm</h3>
+                        <p className="text-neutral-600 leading-relaxed">Zorba deneyimlerini Gemini AI ile saniyeler içinde mitsel kanatlara dönüştürün.</p>
                     </div>
-                    <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all group">
-                        <div className="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
+                    <div className="p-10 rounded-[2.5rem] bg-neutral-50 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
+                        <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform">
                             <Heart size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4">Empati Odaklı</h3>
-                        <p className="text-neutral-400 leading-relaxed">Kendinizi suçlamak yerine, içsel kozanızın koruyucu gücünü keşfedin.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Empati Odaklı</h3>
+                        <p className="text-neutral-600 leading-relaxed">Kendinizi suçlamak yerine, içsel kozanızın koruyucu gücünü keşfedin.</p>
                     </div>
-                    <div className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all group">
-                        <div className="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">
+                    <div className="p-10 rounded-[2.5rem] bg-neutral-50 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
+                        <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
                             <ShieldCheck size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4">Güvenilir Alan</h3>
-                        <p className="text-neutral-400 leading-relaxed">Firebase şifrelemesi ile verileriniz sadece sizinle ve iyileşme yolculuğunuzla kalır.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Güvenilir Alan</h3>
+                        <p className="text-neutral-600 leading-relaxed">Firebase şifrelemesi ile verileriniz sadece sizinle ve iyileşme yolculuğunuzla kalır.</p>
                     </div>
                 </div>
             </section>

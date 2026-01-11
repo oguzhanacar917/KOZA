@@ -87,7 +87,7 @@ const LearnTab = () => {
                                 Akademiyi Başlat
                             </GalaxyButton>
                         </GalaxyBox>
-                        <GalaxyBox className="w-full md:w-80 h-auto bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center justify-center shadow-lg group cursor-pointer hover:border-primary-500/50 transition-all overflow-hidden relative">
+                        <GalaxyBox className="w-full md:w-80 h-auto bg-neutral-100 rounded-2xl border border-neutral-200 flex items-center justify-center shadow-lg group cursor-pointer hover:border-primary-500/50 transition-all overflow-hidden relative">
                             <GalaxyAspectRatio ratio={16 / 9}>
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary-600/10 to-purple-600/10 group-hover:opacity-100 opacity-60 transition-opacity" />
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -111,9 +111,9 @@ const LearnTab = () => {
                                         align="center"
                                         justify="center"
                                         className={`w-12 h-12 rounded-2xl border ${module.color === 'primary' ? 'bg-primary-500/10 border-primary-500/20 text-primary-600' :
-                                                module.color === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-600' :
-                                                    module.color === 'warning' ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' :
-                                                        'bg-red-500/10 border-red-500/20 text-red-600'
+                                            module.color === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-600' :
+                                                module.color === 'warning' ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' :
+                                                    'bg-red-500/10 border-red-500/20 text-red-600'
                                             }`}
                                     >
                                         <Icon size={24} />
@@ -123,7 +123,7 @@ const LearnTab = () => {
                                     </GalaxyTag>
                                 </GalaxyFlex>
 
-                                <GalaxyHeading as="h3" size="lg" className="text-neutral-800 dark:text-white mb-2">
+                                <GalaxyHeading as="h3" size="lg" className="text-neutral-900 mb-2">
                                     {module.title}
                                 </GalaxyHeading>
                                 <GalaxyText size="sm" className="text-neutral-500 leading-relaxed mb-6 flex-1">

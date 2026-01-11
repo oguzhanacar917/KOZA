@@ -45,8 +45,7 @@
 
 /* Focus: Visible Ring */
 .galaxy-checkbox input:focus-visible~.galaxy-checkbox-mark {
-    ring: 2px solid #9333ea;
-    ring-offset: 2px;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #9333ea;
 }
 
 /* Checked: PURPLE AUTHORITY */

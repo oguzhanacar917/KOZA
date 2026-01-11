@@ -1,63 +1,43 @@
-/* Cosmic Pulse Button */
+/* Sleek Modern Button */
 .uiverse-button {
     position: relative;
     padding: 12px 32px;
     border-radius: 9999px;
-    /* Pill shape for modern feel */
-    border: 1px solid rgba(15, 23, 42, 0.2);
-    /* Slate border */
+    border: 1px solid rgba(226, 232, 240, 1);
+    /* Neutral-200 */
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: #0f172a;
+    /* Slate 900 */
     color: #ffffff;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     outline: none;
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     z-index: 1;
 }
 
-/* Cosmic Background */
-.uiverse-button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
-    z-index: -2;
-    transition: all 0.4s ease;
-}
-
-/* Neon Glow Border Effect */
-.uiverse-button::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, #ff00cc, #333399, #00d4ff);
-    z-index: -1;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-/* Hover State */
+/* Hover State - Minimal Lift & Shadow */
 .uiverse-button:hover {
-    transform: translateY(-2px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow:
-        0 0 30px rgba(147, 51, 234, 0.4),
-        0 10px 20px rgba(88, 28, 135, 0.5);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* Shadow-lg */
+    background: #1e293b;
+    /* Slate 800 - slightly lighter */
+    border-color: #cbd5e1;
+    /* Neutral 300 */
 }
 
-.uiverse-button:hover::after {
-    opacity: 0.7;
-    animation: galaxy-rotate 3s linear infinite;
+/* Active State */
+.uiverse-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* Button Content */
@@ -67,46 +47,29 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(to right, #ffffff, #e0e0e0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    /* Text gradient */
-    transition: all 0.3s ease;
-}
-
-.uiverse-button:hover .button-content {
-    background: #ffffff;
-    background-clip: unset;
-    -webkit-background-clip: unset;
     color: #ffffff;
 }
 
-/* Active State */
-.uiverse-button:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
-}
-
-/* Secondary Variant (Ghost/Glass) */
+/* Secondary Variant (Ghost/Outline) */
 .uiverse-button.secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    /* Neutral 300 */
+    color: #0f172a;
+    /* Slate 900 */
     box-shadow: none;
 }
 
-.uiverse-button.secondary::before {
-    background: transparent;
+.uiverse-button.secondary .button-content {
+    color: #0f172a;
 }
 
 .uiverse-button.secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.uiverse-button.secondary::after {
-    display: none;
+    background: #f8fafc;
+    /* Neutral 50 */
+    border-color: #94a3b8;
+    /* Neutral 400 */
+    color: #0f172a;
 }
 
 /* Disabled State */
@@ -115,15 +78,6 @@
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
-    filter: grayscale(100%);
-}
-
-@keyframes galaxy-rotate {
-    0% {
-        filter: blur(10px) hue-rotate(0deg);
-    }
-
-    100% {
-        filter: blur(10px) hue-rotate(360deg);
-    }
+    background: #94a3b8;
+    border-color: transparent;
 }

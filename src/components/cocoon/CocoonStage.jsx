@@ -105,24 +105,25 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
                 {renderStage()}
             </div>
 
-            {/* Glassmorphism Navigation Card */}
+            {/* Glassmorphism Navigation Card - White Theme */}
             <div className="absolute bottom-6 left-6 right-6 p-6 rounded-3xl overflow-hidden animate-fade-in" style={{
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'rgba(255, 255, 255, 0.8)',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(226, 232, 240, 1)', // Slate 200
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                 zIndex: 10
             }}>
                 <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-xl text-white tracking-tight">{stageInfo?.title}</h3>
+                    <h3 className="font-bold text-xl text-neutral-900 tracking-tight">{stageInfo?.title}</h3>
                     <div className="flex flex-col items-end">
-                        <span className="text-[10px] text-white/50 uppercase tracking-widest mb-1">Metamorfosis</span>
-                        <span className="text-sm font-mono text-primary-400">
+                        <span className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1">Metamorfosis</span>
+                        <span className="text-sm font-mono text-primary-600">
                             {Math.round(progress)}%
                         </span>
                     </div>
                 </div>
 
-                <p className="text-sm text-white/60 mb-5 leading-relaxed font-light">
+                <p className="text-sm text-neutral-600 mb-5 leading-relaxed font-light">
                     {stageInfo?.text}
                 </p>
 
@@ -135,9 +136,9 @@ const CocoonStage = ({ totalOz, onStageChange }) => {
                             style={{
                                 background: (i / 12) * 100 < progress
                                     ? `linear-gradient(to bottom, ${themeColor}, ${themeColor}dd)`
-                                    : 'rgba(255, 255, 255, 0.05)',
+                                    : 'rgba(15, 23, 42, 0.1)', // Darker track for visibility
                                 boxShadow: (i / 12) * 100 < progress
-                                    ? `0 0 10px ${themeColor}44`
+                                    ? `0 0 5px ${themeColor}44`
                                     : 'none'
                             }}
                         />
