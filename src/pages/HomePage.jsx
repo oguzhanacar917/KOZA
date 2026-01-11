@@ -79,7 +79,7 @@ const HomePage = () => {
 
             <button
                 onClick={() => setStep('sign-in')}
-                className="group flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl active:scale-95"
+                className="group flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-primary-600 to-purple-600 text-neutral-900 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl active:scale-95"
             >
                 HAZIRIM, DEVAM ET
                 <ArrowRight size={24} />
@@ -87,7 +87,7 @@ const HomePage = () => {
 
             <button
                 onClick={() => setStep('landing')}
-                className="mt-6 text-neutral-500 hover:text-white transition-colors text-sm font-medium"
+                className="mt-6 text-neutral-500 hover:text-neutral-900 transition-colors text-sm font-medium"
             >
                 GERİ DÖN
             </button>
@@ -141,7 +141,7 @@ const HomePage = () => {
 
                     <button
                         onClick={() => setStep('get-started')}
-                        className="mt-4 text-neutral-500 hover:text-white transition-colors text-sm font-medium"
+                        className="mt-4 text-neutral-500 hover:text-neutral-900 transition-colors text-sm font-medium"
                     >
                         GERİ GİT
                     </button>

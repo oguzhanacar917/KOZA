@@ -1,8 +1,8 @@
-/* Liquid Crystal Card */
+/* Liquid Crystal Card - White Edition */
 .uiverse-card {
     position: relative;
-    background: rgba(15, 12, 41, 0.6);
-    /* Very dark base */
+    background: rgba(255, 255, 255, 0.7);
+    /* White glass base */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
@@ -10,8 +10,9 @@
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(88, 28, 135, 0.1);
+    /* Very soft purple shadow */
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* Prismatic Border / Glow */
@@ -23,15 +24,18 @@
     padding: 2px;
     /* Border width */
     background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.1),
+            rgba(147, 51, 234, 0.2),
             rgba(255, 255, 255, 0) 40%,
             rgba(255, 255, 255, 0) 60%,
-            rgba(255, 255, 255, 0.1));
+            rgba(147, 51, 234, 0.2));
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
     pointer-events: none;
     transition: all 0.5s ease;
 }
@@ -57,10 +61,10 @@
 .uiverse-card:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 50px rgba(147, 51, 234, 0.2);
+        0 20px 40px rgba(88, 28, 135, 0.15),
+        0 0 50px rgba(147, 51, 234, 0.1);
     /* Purple atmosphere */
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(147, 51, 234, 0.3);
 }
 
 .uiverse-card:hover .card-shine {
@@ -76,7 +80,8 @@
 .card-content {
     position: relative;
     z-index: 2;
-    color: #ffffff;
+    color: #1e1b4b;
+    /* Dark Deep Blue Text */
 }
 
 /* Interactive Ripple (Optional, if we had JS for mouse tracking, but using simple pseudo for now) */

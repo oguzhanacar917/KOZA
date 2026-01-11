@@ -1,29 +1,22 @@
 import React from 'react';
-import './GalaxyCard.css';
+import UiverseCard from '../uiverse/UiverseCard';
 
-const GalaxyCard = ({ children, className = '', title, subtitle, emoji, gradient }) => {
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-    };
+const GalaxyCard = ({ children, className = '', title, subtitle, emoji, onClick, gradient }) => {
+    // Map existing props to a layout inside UiverseCard
+    // UiverseCard already has a "liquid crystal" background, so we don't need 'galaxy-card-dots' unless we want to keep them.
+    // The user requested "redesign using uiverse.io", so we should infer using the NEW style mostly.
 
     return (
-        <div
-            className={`galaxy-card ${className}`}
-            onMouseMove={handleMouseMove}
-        >
-            <div className={`galaxy-card-dots pink-dots ${gradient ? 'opacity-100' : ''}`} />
-
-            {emoji && (
-                <div className="galaxy-card-emoji">
-                    {emoji}
+        <UiverseCard className={className} onClick={onClick}>
+            {(title || subtitle || emoji) && (
+                <div className="flex flex-col items-center mb-4 text-center">
+                    {emoji && <div className="text-4xl mb-2">{emoji}</div>}
+                    {title && <h3 className="text-xl font-bold text-neutral-900 mb-1">{title}</h3>}
+                    {subtitle && <p className="text-sm text-neutral-500 opacity-80">{subtitle}</p>}
                 </div>
-                <div className="galaxy-card-dots pink-dots"></div>
-            </div>
-        </div >
+            )}
+            {children}
+        </UiverseCard>
     );
 };
 
