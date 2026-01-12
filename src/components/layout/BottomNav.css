@@ -1,3 +1,5 @@
+@reference "../../index.css";
+
 .fixed.bottom-6 {
     @apply w-auto transition-liquid;
 }

@@ -1,0 +1,72 @@
+@theme {
+    --font-sans: "Inter", system-ui, sans-serif;
+
+    /* Primary - Apple Blue / Ice & Ink */
+    --color-primary-50: #f5faff;
+    --color-primary-100: #e0f2ff;
+    --color-primary-200: #bde5ff;
+    --color-primary-300: #7accff;
+    --color-primary-400: #33b1ff;
+    --color-primary-500: #007aff;
+    --color-primary-600: #0061cc;
+    --color-primary-700: #004a99;
+    --color-primary-800: #003366;
+    --color-primary-900: #001f40;
+
+    /* Neutral - Deep Graphite */
+    --color-neutral-50: #f5f5f7;
+    --color-neutral-100: #e8e8ed;
+    --color-neutral-200: #d2d2d7;
+    --color-neutral-300: #86868b;
+    --color-neutral-400: #6e6e73;
+    --color-neutral-500: #424245;
+    --color-neutral-600: #323234;
+    --color-neutral-700: #1d1d1f;
+    --color-neutral-800: #121213;
+    --color-neutral-900: #000000;
+
+    --color-success: #34c759;
+    --color-warning: #ff9500;
+    --color-error: #ff3b30;
+
+    /* Liquid Shadows */
+    --shadow-liquid: 0 8px 32px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-liquid-deep: 0 20px 48px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    --shadow-liquid-glow: 0 0 40px rgba(0, 122, 255, 0.15);
+
+    --shadow-premium: var(--shadow-liquid);
+    --shadow-premium-lg: var(--shadow-liquid-deep);
+}
+
+@utility liquid-glass {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-liquid);
+}
+
+@utility liquid-glass-dark {
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility transition-liquid {
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@utility morph-shape {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morph-slow 8s ease-in-out infinite;
+}
+
+@utility text-shimmer {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-500) 50%, var(--color-neutral-900) 100%);
+    background-size: 200% auto;
+    animation: text-shimmer 4s linear infinite;
+}

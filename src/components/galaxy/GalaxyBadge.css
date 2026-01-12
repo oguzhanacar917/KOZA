@@ -1,3 +1,5 @@
+@reference "../../index.css";
+
 /* GalaxyBadge.css - Liquid Pill */
 .galaxy-badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-liquid;
