@@ -1,0 +1,122 @@
+@reference "../../index.css";
+
+.galaxy-indicator-container {
+    @apply flex flex-col items-center justify-center gap-3 size-fit;
+}
+
+.galaxy-indicator {
+    @apply relative flex items-center justify-center;
+}
+
+.galaxy-indicator-md {
+    @apply w-12 h-12;
+}
+
+.galaxy-indicator-sm {
+    @apply w-8 h-8;
+}
+
+.galaxy-indicator-lg {
+    @apply w-20 h-20;
+}
+
+/* Liquid Type */
+.galaxy-indicator-liquid-wrapper {
+    @apply relative w-full h-full filter blur-[4px] contrast-[1.5];
+    animation: rotate 4s linear infinite;
+}
+
+.galaxy-indicator-blob {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full;
+    background: var(--color-primary-500);
+    opacity: 0.8;
+}
+
+.galaxy-indicator-md .galaxy-indicator-blob {
+    @apply w-6 h-6;
+}
+
+.galaxy-indicator-sm .galaxy-indicator-blob {
+    @apply w-4 h-4;
+}
+
+.galaxy-indicator-lg .galaxy-indicator-blob {
+    @apply w-10 h-10;
+}
+
+.blob-1 {
+    animation: blob-1-move 2.5s ease-in-out infinite;
+    background: var(--color-primary-600);
+}
+
+.blob-2 {
+    animation: blob-2-move 2.5s ease-in-out infinite;
+    background: var(--color-primary-400);
+    animation-delay: -0.8s;
+}
+
+.blob-3 {
+    animation: blob-3-move 2.5s ease-in-out infinite;
+    background: var(--color-primary-300);
+    animation-delay: -1.6s;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blob-1-move {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(0%, -100%) scale(1.2);
+    }
+}
+
+@keyframes blob-2-move {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-100%, 0%) scale(0.8);
+    }
+}
+
+@keyframes blob-3-move {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(50%, 50%) scale(1.1);
+    }
+}
+
+/* Ring Type */
+.galaxy-indicator-ring {
+    @apply w-full h-full rounded-full border-4 border-neutral-100 relative;
+}
+
+.ring-inner {
+    @apply absolute inset-[-4px] rounded-full border-4 border-transparent border-t-primary-500;
+    animation: rotate 1s cubic-bezier(0.53, 0.21, 0.29, 0.67) infinite;
+}
+
+.galaxy-indicator-label {
+    @apply text-sm font-semibold text-neutral-500 uppercase tracking-widest animate-pulse-subtle;
+}

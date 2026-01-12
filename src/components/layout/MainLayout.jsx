@@ -3,11 +3,36 @@ import { useApp } from '../../context/AppContext';
 import Onboarding from '../Onboarding';
 import GalaxyToastContainer from '../galaxy/GalaxyToastContainer';
 import Header from './Header';
-import BottomNav from './BottomNav';
-import { Bell } from 'lucide-react';
+import GalaxyBottomNav from '../galaxy/GalaxyBottomNav';
+import GalaxyFab from '../galaxy/GalaxyFab';
+import { Home, Users, Book, Search, User, Plus } from 'lucide-react';
 
 const MainLayout = ({ children }) => {
-    const { notification, toasts, showOnboarding, setShowOnboarding } = useApp();
+    const {
+        notification,
+        activeTab,
+        setActiveTab,
+        currentView,
+        addToast,
+        showOnboarding,
+        setShowOnboarding
+    } = useApp();
+
+    const navItems = [
+        { id: 'create', label: 'Keşfet', icon: <Home size={20} />, dot: true },
+        { id: 'community', label: 'Topluluk', icon: <Users size={20} /> },
+        { id: 'learn', label: 'Akademi', icon: <Book size={20} /> },
+        { id: 'search', label: 'Ara', icon: <Search size={20} /> },
+        { id: 'profile', label: 'Profil', icon: <User size={20} /> },
+    ];
+
+    const handleTabChange = (id) => {
+        if (id === 'search') {
+            addToast('info', 'Keşfet', 'Arama özelliği yakında sizlerle!');
+            return;
+        }
+        setActiveTab(id);
+    };
 
     return (
         <div className="min-h-screen text-neutral-900 pb-20 overflow-x-hidden selection:bg-primary-200 selection:text-primary-900">
@@ -30,7 +55,24 @@ const MainLayout = ({ children }) => {
             </main>
 
             {/* Bottom Navigation */}
-            <BottomNav />
+            {!currentView && (
+                <GalaxyBottomNav
+                    items={navItems}
+                    activeId={activeTab}
+                    onTabChange={handleTabChange}
+                />
+            )}
+
+            {/* Floating Action Button */}
+            {!currentView && (
+                <GalaxyFab
+                    icon={<Plus size={24} />}
+                    onClick={() => addToast('info', 'Aksiyon', 'Yeni gönderi özelliği yakında!')}
+                    label="Yeni"
+                    size="md"
+                    className="!bottom-24"
+                />
+            )}
 
             {/* Notification */}
             {notification && (

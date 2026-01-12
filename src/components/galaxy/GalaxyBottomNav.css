@@ -1,0 +1,92 @@
+@reference "../../index.css";
+
+.galaxy-bottom-nav-container {
+    @apply fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 w-full max-w-lg;
+    display: flex;
+    justify-content: center;
+}
+
+.galaxy-bottom-nav {
+    @apply relative flex items-center p-2 rounded-[32px] transition-liquid;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(28px) saturate(210%);
+    -webkit-backdrop-filter: blur(28px) saturate(210%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 12px 40px -8px rgba(0, 0, 0, 0.08),
+        0 4px 12px -4px rgba(0, 0, 0, 0.03),
+        inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.galaxy-bottom-nav-items {
+    @apply relative flex items-center gap-1 z-10;
+}
+
+.galaxy-bottom-nav-item {
+    @apply relative flex items-center justify-center gap-2 px-5 py-3 rounded-[24px] text-neutral-500 font-medium transition-liquid overflow-hidden border-none bg-transparent cursor-pointer;
+    min-width: 64px;
+}
+
+.galaxy-bottom-nav-item.active {
+    @apply text-neutral-900;
+}
+
+.galaxy-bottom-nav-item:hover:not(.active) {
+    @apply text-neutral-700 bg-white/20;
+}
+
+.galaxy-bottom-nav-item:active {
+    @apply scale-95;
+}
+
+.galaxy-bottom-nav-icon {
+    @apply flex items-center justify-center transition-liquid;
+    font-size: 20px;
+}
+
+.galaxy-bottom-nav-item.active .galaxy-bottom-nav-icon {
+    @apply scale-110;
+}
+
+.galaxy-bottom-nav-label {
+    @apply text-[11px] font-bold uppercase tracking-wider transition-liquid opacity-0 max-w-0 overflow-hidden whitespace-nowrap;
+}
+
+.galaxy-bottom-nav-item.active .galaxy-bottom-nav-label {
+    @apply opacity-100 max-w-[120px] ml-1;
+}
+
+.galaxy-bottom-nav-indicator {
+    @apply absolute h-[calc(100%-16px)] bg-white rounded-[24px] transition-liquid pointer-events-none opacity-0;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 1px 4px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    top: 8px;
+    z-index: 0;
+}
+
+.galaxy-bottom-nav-dot {
+    @apply absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary-500 rounded-full;
+    box-shadow: 0 0 8px var(--color-primary-400);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .galaxy-bottom-nav-container {
+        @apply bottom-4 px-4;
+    }
+
+    .galaxy-bottom-nav-item {
+        @apply px-4 py-3;
+        min-width: 56px;
+    }
+
+    .galaxy-bottom-nav-label {
+        @apply hidden;
+    }
+
+    .galaxy-bottom-nav-item.active .galaxy-bottom-nav-label {
+        @apply hidden;
+    }
+}
