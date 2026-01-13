@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import Onboarding from '../Onboarding';
 import GalaxyToastContainer from '../galaxy/GalaxyToastContainer';

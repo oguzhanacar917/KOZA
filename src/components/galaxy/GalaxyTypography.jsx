@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import './GalaxyTypography.css';
 
-const createTypography = (Tag, baseClass) => forwardRef(({ size = 'md', gradient, isTruncated, className = '', ...props }, ref) => (
+const createTypography = (DefaultTag, baseClass) => forwardRef(({ as: Tag = DefaultTag, size = 'md', gradient, isTruncated, className = '', ...props }, ref) => (
     <Tag
         ref={ref}
         className={`${baseClass} size-${size} ${gradient ? 'galaxy-gradient-text' : ''} ${isTruncated ? 'truncate' : ''} ${className}`}
