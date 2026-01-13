@@ -34,6 +34,7 @@ export const UIProvider = ({ children }) => {
         setNotification, // Exposed for legacy, but triggerNotification is preferred
         triggerNotification,
         toasts,
+        setToasts,
         addToast,
         showOnboarding,
         setShowOnboarding

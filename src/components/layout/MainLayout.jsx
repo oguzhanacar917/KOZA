@@ -5,7 +5,7 @@ import GalaxyToastContainer from '../galaxy/GalaxyToastContainer';
 import Header from './Header';
 import GalaxyBottomNav from '../galaxy/GalaxyBottomNav';
 import GalaxyFab from '../galaxy/GalaxyFab';
-import { Home, Users, Book, Search, User, Plus } from 'lucide-react';
+import { Home, Users, Book, Search, User, Plus, Bell } from 'lucide-react';
 import MorphCursor from '../optics/MorphCursor';
 import LiquidOptics from '../optics/LiquidOptics';
 import LiquidHUD from '../optics/LiquidHUD';
@@ -27,6 +27,7 @@ const MainLayout = ({ children }) => {
     const lastMousePos = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
+        let timer;
         const handleMouseMove = (e) => {
             const dx = e.clientX - lastMousePos.current.x;
             const dy = e.clientY - lastMousePos.current.y;
@@ -35,11 +36,14 @@ const MainLayout = ({ children }) => {
             lastMousePos.current = { x: e.clientX, y: e.clientY };
 
             // Decelerate velocity
-            const timer = setTimeout(() => setVelocity(0), 100);
-            return () => clearTimeout(timer);
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => setVelocity(0), 100);
         };
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (timer) clearTimeout(timer);
+        };
     }, []);
 
     const navItems = [

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './UiverseButton.css';
 
 const UiverseButton = ({ children, onClick, variant = 'primary', className = '', type = 'button', disabled = false }) => {

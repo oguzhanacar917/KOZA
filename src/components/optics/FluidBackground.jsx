@@ -39,10 +39,6 @@ const FluidBackground = () => {
             }
 
             draw() {
-                ctx.beginPath();
-                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
-                gradient.addColorStop(0, this.color.replace('#', 'rgba(') + ',' + this.alpha + ')'); // This is a bit hacky for color/alpha
-
                 // Better color handling:
                 const rgb = this.color === '#bde5ff' ? '189, 229, 255' : '224, 242, 255';
                 const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
@@ -50,6 +46,7 @@ const FluidBackground = () => {
                 grad.addColorStop(1, `rgba(${rgb}, 0)`);
 
                 ctx.fillStyle = grad;
+                ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fill();
             }
