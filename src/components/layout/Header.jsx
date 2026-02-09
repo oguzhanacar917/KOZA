@@ -15,19 +15,8 @@ const Header = () => {
     };
 
     return (
-        <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl liquid-glass rounded-2xl z-40 px-6 h-16 flex items-center justify-between border-white/20 transition-liquid hover:border-white/40">
-            <button
-                onClick={() => {
-                    setCurrentView(null);
-                    setActiveTab('create');
-                }}
-                className="flex items-center gap-3 font-bold text-xl text-neutral-900 transition-liquid group"
-            >
-                <div className="w-10 h-10 bg-neutral-900 rounded-xl flex items-center justify-center text-white font-black shadow-lg transition-liquid group-hover:scale-110 group-active:scale-95 morph-shape">
-                    K
-                </div>
-                <span className="tracking-tighter italic text-shimmer">KOZA</span>
-            </button>
+        <header className="absolute top-0 right-0 w-full h-16 flex items-center justify-end px-6 z-40">
+
 
             <div className="flex items-center gap-3">
                 {/* Cloud Sync Status */}
@@ -65,13 +54,7 @@ const Header = () => {
                                 <UserIcon size={18} />
                             </div>
                         )}
-                        <button
-                            onClick={handleSignOut}
-                            className="p-2 text-neutral-400 hover:text-red-500 hover:bg-red-50/50 rounded-xl transition-liquid active:scale-90"
-                            title="Çıkış Yap"
-                        >
-                            <LogOut size={20} />
-                        </button>
+
                     </div>
                 )}
             </div>
