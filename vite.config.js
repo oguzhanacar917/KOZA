@@ -9,7 +9,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
-        name: 'KOZA: Metamorfoz Sistemi',
+        name: 'KOZA',
         short_name: 'KOZA',
         description: 'Zorluklarını hikaye ve oyunlara dönüştürerek kanatlan. Kişisel gelişim ve metamorfoz rehberin.',
         theme_color: '#9333ea',

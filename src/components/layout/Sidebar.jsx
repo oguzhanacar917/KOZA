@@ -2,7 +2,7 @@ import React from 'react';
 import { Home, Users, Book, User, LogOut } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
-import ValoButton from '../ui/ValoButton';
+
 
 const Sidebar = () => {
     const { activeTab, setActiveTab, currentView, setCurrentView } = useApp();
@@ -35,27 +35,30 @@ const Sidebar = () => {
             {/* Navigation Items */}
             <nav className="flex-1 py-6 px-3 space-y-4 overflow-y-auto">
                 {navItems.map((item) => (
-                    <ValoButton
+                    <button
                         key={item.id}
                         onClick={() => handleTabChange(item.id)}
-                        isActive={activeTab === item.id && !currentView}
-                        icon={item.icon}
-                        className="w-full"
+                        className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all font-medium text-sm
+                            ${activeTab === item.id && !currentView
+                                ? 'bg-neutral-900 text-white shadow-md'
+                                : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900'
+                            }`}
                     >
-                        {item.label}
-                    </ValoButton>
+                        {item.icon}
+                        <span>{item.label}</span>
+                    </button>
                 ))}
             </nav>
 
             {/* Bottom/Footer Area */}
             <div className="p-4 border-t border-neutral-100">
-                <ValoButton
+                <button
                     onClick={() => signOut()}
-                    icon={<LogOut size={20} />}
-                    className="w-full"
+                    className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-neutral-500 hover:bg-red-50 hover:text-red-600 transition-colors text-sm font-medium"
                 >
-                    Çıkış Yap
-                </ValoButton>
+                    <LogOut size={20} />
+                    <span>Çıkış Yap</span>
+                </button>
             </div>
         </aside>
     );
