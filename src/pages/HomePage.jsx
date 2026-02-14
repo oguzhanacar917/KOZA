@@ -72,8 +72,8 @@ const HomePage = () => {
                     <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600">
                         <ShieldCheck size={24} />
                     </div>
-                    <h3 className="text-xl font-bold mb-3">Evrensel Senkron</h3>
-                    <p className="text-neutral-600 text-sm">Tüm gelişimini güvenli bulut alanıyla her an yanında taşı.</p>
+                    <h3 className="text-xl font-bold mb-3">Çoklu Cihaz Senkronizasyonu</h3>
+                    <p className="text-neutral-600 text-sm">Uygulamayı birden fazla cihazda verilerini kaybetmeden kullan..</p>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ const HomePage = () => {
                 onClick={() => setStep('sign-in')}
                 className="group flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-primary-600 to-purple-600 text-neutral-900 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl active:scale-95"
             >
-                HAZIRIM, DEVAM ET
+                HAZIRIM, DEVAM E
                 <ArrowRight size={24} />
             </button>
 
@@ -100,9 +100,9 @@ const HomePage = () => {
                 <ShieldCheck size={40} />
             </div>
 
-            <h2 className="text-4xl font-bold mb-4">Kimliğini Doğrula</h2>
+            <h2 className="text-4xl font-bold mb-4">Giriş Yap</h2>
             <p className="text-neutral-400 mb-10 max-w-md">
-                Dönüşüm yolculuğunu güvenle başlatmak ve verilerini senkronize etmek için hesabına bağlan.
+                Uygulamayı kullanmak için giriş yap
             </p>
 
             {firebaseEnabled ? (
@@ -129,14 +129,14 @@ const HomePage = () => {
                                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                 </svg>
-                                GOOGLE İLE BAŞLA
+                                GOOGLE GİRİŞİ
                             </>
                         )}
                     </button>
 
                     <div className="flex items-center gap-2 text-neutral-500 text-xs">
                         <Cloud size={14} />
-                        <span>Verileriniz güvenli bulut alanıyla otomatik olarak korunacak</span>
+                        <span>Verileriniz bu uygulamaya başka bir cihazda giriş yaptığınızda da eşitlenecek</span>
                     </div>
 
                     <button
@@ -150,7 +150,7 @@ const HomePage = () => {
                 <div className="p-8 bg-amber-500/10 border border-amber-500/20 rounded-3xl max-w-md mx-auto backdrop-blur-md">
                     <AlertCircle size={32} className="mx-auto mb-4 text-amber-500" />
                     <p className="text-amber-200 font-medium text-sm">
-                        Sistem şu an yapılandırma bekliyor. Lütfen teknik destekle iletişime geçin.
+                        Sistem şu an yapılandırması eksik veya yanlış.
                     </p>
                 </div>
             )}
@@ -214,9 +214,9 @@ const HomePage = () => {
                 <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6">
                     <div className="flex items-center gap-2 opacity-30">
                         <div className="w-6 h-6 bg-white rounded-md flex items-center justify-center text-black font-bold text-[10px]">K</div>
-                        <span className="text-xs font-bold tracking-widest uppercase">KOZA Theory</span>
+                        <span className="text-xs font-bold tracking-widest uppercase">KOZA</span>
                     </div>
-                    <p className="text-neutral-600 text-xs">© 2024 KOZA METAMORPHOSIS ENGINE. TRANSFORM YOUR TRAUMA.</p>
+                    <p className="text-neutral-600 text-xs">© 2026 KOZA </p>
                 </div>
             </footer>
         </div>
