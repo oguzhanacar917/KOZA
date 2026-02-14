@@ -24,26 +24,26 @@ const HomePage = () => {
         <div className="flex flex-col items-center text-center animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 backdrop-blur-xl border border-neutral-200 text-primary-700 rounded-full text-sm font-medium mb-10 shadow-sm">
                 <Sparkles size={16} className="text-primary-600" />
-                <span>Hoş Geldiniz: Metamorfozun Başlangıcı</span>
+                <span>KOZA.AI'a hoş geldin!</span>
             </div>
 
             <h1 className="text-6xl sm:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
-                DENEYİMLERİNİ <br />
+                ZORBALIĞA <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400">
-                    GÜCE DÖNÜŞTÜR
+                    KARŞI ÇIK!
                 </span>
             </h1>
 
             <p className="text-xl text-neutral-600 mb-12 max-w-2xl leading-relaxed font-serif italic">
-                Zorluklar seni hapsetmez, seni inşa eder. <br />
-                KOZA ile metamorfoz yolculuğuna ilk adımı at.
+                Yaşadığın zorluklar seni güçlendirmek için birer fırsat, <br />
+                KOZA ile zorbalığa karşı çıkmak için ilk adımını at.
             </p>
 
             <button
                 onClick={() => setStep('get-started')}
                 className="group relative flex items-center gap-4 px-12 py-6 bg-neutral-900 text-white rounded-2xl font-bold text-2xl hover:scale-105 transition-all shadow-xl active:scale-95"
             >
-                KEŞFETMEYE BAŞLA
+                Yolculuğuna Başla
                 <ArrowRight className="group-hover:translate-x-2 transition-transform" size={28} />
             </button>
         </div>
@@ -51,15 +51,15 @@ const HomePage = () => {
 
     const renderGetStarted = () => (
         <div className="flex flex-col items-center animate-slide-up">
-            <h2 className="text-4xl font-bold mb-12 text-center">Neden Dönüşmelisin?</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">KOZA.AI ÖZELLİKLERİ?</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 w-full max-w-5xl">
                 <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 backdrop-blur-md">
                     <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center mb-6 text-primary-600">
                         <Zap size={24} />
                     </div>
-                    <h3 className="text-xl font-bold mb-3">AI Kanatlar</h3>
-                    <p className="text-neutral-600 text-sm">Zorluklarını mitsel hikayelere dönüştüren gelişmiş AI rehberliği.</p>
+                    <h3 className="text-xl font-bold mb-3">Hikayeler</h3>
+                    <p className="text-neutral-600 text-sm">Yaşadığın olumsuzlukları moral verici hikayelere çevirerek seni güçlendiren yapay zeka</p>
                 </div>
                 <div className="p-8 rounded-3xl bg-neutral-50 border border-neutral-200 backdrop-blur-md">
                     <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6 text-purple-600">
@@ -89,7 +89,7 @@ const HomePage = () => {
                 onClick={() => setStep('landing')}
                 className="mt-6 text-neutral-500 hover:text-neutral-900 transition-colors text-sm font-medium"
             >
-                GERİ DÖN
+                GERİ GİT
             </button>
         </div>
     );
@@ -120,7 +120,7 @@ const HomePage = () => {
                         className="group relative flex items-center justify-center gap-4 px-10 py-5 bg-neutral-900 text-white rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-w-[300px]"
                     >
                         {isSigningIn ? (
-                            <GalaxyLoader message="BAĞLANTI KURULUYOR..." />
+                            <GalaxyLoader message="Giriş Yapılyor" />
                         ) : (
                             <>
                                 <svg width="24" height="24" viewBox="0 0 24 24">
@@ -150,7 +150,7 @@ const HomePage = () => {
                 <div className="p-8 bg-amber-500/10 border border-amber-500/20 rounded-3xl max-w-md mx-auto backdrop-blur-md">
                     <AlertCircle size={32} className="mx-auto mb-4 text-amber-500" />
                     <p className="text-amber-200 font-medium text-sm">
-                        Sistem şu an yapılandırması eksik veya yanlış.
+                        Sistem yapılandırması eksik veya yanlış.
                     </p>
                 </div>
             )}
@@ -189,22 +189,22 @@ const HomePage = () => {
                         <div className="w-14 h-14 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 text-primary-600 group-hover:scale-110 transition-transform">
                             <Zap size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Anlık Dönüşüm</h3>
-                        <p className="text-neutral-600 leading-relaxed">Zorba deneyimlerini Gemini AI ile saniyeler içinde mitsel kanatlara dönüştürün.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Yapay Zeka Entegrasyonu</h3>
+                        <p className="text-neutral-600 leading-relaxed">Yapay zeka entegrasyonu sayesinde birebir kendiniz için üretilmiş hikayeleri okuyun.</p>
                     </div>
-                    <div className="p-10 rounded-[2.5rem] bg-neutral-50 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
+                    <div className="p-10 rounded-[2.5rem] bg-neutral-5x0 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
                         <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform">
                             <Heart size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Empati Odaklı</h3>
-                        <p className="text-neutral-600 leading-relaxed">Kendinizi suçlamak yerine, içsel kozanızın koruyucu gücünü keşfedin.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Akademi ve Eğitim Modülleri</h3>
+                        <p className="text-neutral-600 leading-relaxed">Akademi ve Eğitim Modülleri sayesinde zorbalığa karşı koymak için ipuçları ve eğitimler alın.</p>
                     </div>
                     <div className="p-10 rounded-[2.5rem] bg-neutral-50 border border-neutral-200 hover:bg-neutral-100/50 transition-all group shadow-sm">
                         <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
                             <ShieldCheck size={28} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Güvenilir Alan</h3>
-                        <p className="text-neutral-600 leading-relaxed">Firebase şifrelemesi ile verileriniz sadece sizinle ve iyileşme yolculuğunuzla kalır.</p>
+                        <h3 className="text-2xl font-bold mb-4 text-neutral-900">Güvenebileceğiniz Bir Alan</h3>
+                        <p className="text-neutral-600 leading-relaxed">Tek yönlü senkronizasyonu ve gelişmiş bulut şifrelemesi sayesinde verileriniz sadece sizde kalır.</p>
                     </div>
                 </div>
             </section>
