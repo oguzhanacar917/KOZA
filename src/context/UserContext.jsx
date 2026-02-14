@@ -46,6 +46,8 @@ export const UserProvider = ({ children }) => {
     // Track daily streak
     useEffect(() => {
         const today = new Date().toDateString();
+        // Safety check: if user is null (cleared storage but not context), skip
+        if (!user) return;
         const lastVisit = user.lastVisit;
 
         if (lastVisit !== today) {

@@ -34,6 +34,18 @@ class ErrorBoundary extends React.Component {
                             Sayfayı Yenile
                         </button>
                     </div>
+                    {this.state.error && (
+                        <div className="mt-8 max-w-2xl mx-auto p-4 bg-red-50 rounded-lg border border-red-100 text-left overflow-auto">
+                            <p className="font-mono text-sm text-red-700 whitespace-pre-wrap">
+                                {this.state.error.toString()}
+                            </p>
+                            {this.state.errorInfo && (
+                                <pre className="mt-2 font-mono text-xs text-red-600 whitespace-pre-wrap">
+                                    {this.state.errorInfo.componentStack}
+                                </pre>
+                            )}
+                        </div>
+                    )}
                 </div>
             );
         }

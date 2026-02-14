@@ -1,41 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
 import {
-    getAuth,
     signInWithPopup,
     GoogleAuthProvider,
     signOut as firebaseSignOut,
     onAuthStateChanged
 } from 'firebase/auth';
-import { FIREBASE_CONFIG } from '../config';
 import { googleAnalytics } from '../utils/googleAnalytics';
 import { initializeFirestore } from '../services/firestoreService';
+import { app, auth, db } from '../services/firebase';
 
 const AuthContext = createContext(null);
 
 // Initialize Firebase
-let app = null;
-let auth = null;
-let provider = null;
-let firestore = null;
-
-const initializeFirebase = () => {
-    if (!FIREBASE_CONFIG.apiKey) {
-        console.warn('Firebase not configured. Authentication will be disabled.');
-        return false;
-    }
-
-    try {
-        app = initializeApp(FIREBASE_CONFIG);
-        auth = getAuth(app);
-        provider = new GoogleAuthProvider();
-        firestore = initializeFirestore(app);
-        return true;
-    } catch (error) {
-        console.error('Firebase initialization failed:', error);
-        return false;
-    }
-};
+const provider = new GoogleAuthProvider();
+initializeFirestore(app);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -43,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     const [firebaseEnabled, setFirebaseEnabled] = useState(false);
 
     useEffect(() => {
-        const enabled = initializeFirebase();
+        const enabled = !!app;
         setFirebaseEnabled(enabled);
 
         if (!enabled) {
@@ -115,7 +93,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         firebaseEnabled,
-        firestoreEnabled: !!firestore,
+        firestoreEnabled: !!db,
         signInWithGoogle,
         signOut
     };

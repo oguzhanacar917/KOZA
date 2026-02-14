@@ -24,15 +24,11 @@ const MainLayout = ({ children }) => {
         { id: 'create', label: 'Keşfet', icon: <Home size={20} />, dot: true },
         { id: 'community', label: 'Topluluk', icon: <Users size={20} /> },
         { id: 'learn', label: 'Akademi', icon: <Book size={20} /> },
-        { id: 'search', label: 'Ara', icon: <Search size={20} /> },
+
         { id: 'profile', label: 'Profil', icon: <User size={20} /> },
     ];
 
     const handleTabChange = (id) => {
-        if (id === 'search') {
-            addToast('info', 'Keşfet', 'Arama özelliği yakında sizlerle!');
-            return;
-        }
         setActiveTab(id);
     };
 
