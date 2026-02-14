@@ -9,6 +9,15 @@ const MessageBox = ({ value, onChange, onSend, placeholder, disabled, onFileSele
         }
     };
 
+    const textareaRef = React.useRef(null);
+
+    React.useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+        }
+    }, [value]);
+
     return (
         <div className={`messageBox ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
             <div className="fileUploadWrapper">
@@ -45,16 +54,16 @@ const MessageBox = ({ value, onChange, onSend, placeholder, disabled, onFileSele
                     onChange={(e) => onFileSelect && onFileSelect(e.target.files[0])}
                 />
             </div>
-            <input
+            <textarea
+                ref={textareaRef}
                 required=""
                 placeholder={placeholder || "Deneyimini buraya yaz..."}
-                type="text"
                 id="messageInput"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 onKeyDown={handleKeyDown}
                 disabled={disabled}
-                autoComplete="off"
+                rows={1}
             />
             <button
                 id="sendButton"

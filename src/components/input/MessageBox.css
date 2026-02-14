@@ -1,8 +1,9 @@
 .messageBox {
     width: 100%;
-    height: 54px;
+    min-height: 54px;
+    max-height: 150px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(25px);
@@ -24,11 +25,31 @@
 
 .fileUploadWrapper {
     width: fit-content;
-    height: 100%;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 12px;
+}
+
+/* ... */
+
+#sendButton {
+    width: 32px;
+    height: 32px;
+    background-color: #9333ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    color: white;
+    margin-left: 12px;
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+    margin-bottom: 11px;
+    /* Align with bottom of textarea */
 }
 
 .fileUploadWrapper label {
@@ -56,13 +77,17 @@
 
 #messageInput {
     flex: 1;
-    height: 100%;
+    height: auto;
+    max-height: 120px;
     background-color: transparent;
     outline: none;
     border: none;
     color: #171717;
     font-size: 15px;
     font-weight: 500;
+    resize: none;
+    padding: 15px 0;
+    line-height: 1.5;
 }
 
 #messageInput::placeholder {

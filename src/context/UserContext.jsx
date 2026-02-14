@@ -101,10 +101,41 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         if (!authUser || !firestoreEnabled || !cloudSynced) return;
         const unsubscribe = firestoreService.subscribeToProfile(authUser.uid, (data) => {
-            setUser(prev => ({ ...prev, ...data }));
+            // Only update if data is different to avoid loops/flickers
+            setUser(prev => {
+                if (JSON.stringify(prev) !== JSON.stringify({ ...prev, ...data })) {
+                    return { ...prev, ...data };
+                }
+                return prev;
+            });
         });
         return () => unsubscribe();
-    }, [authUser, firestoreEnabled, cloudSynced]);
+    }, [authUser, firestoreEnabled, cloudSynced, setUser]);
+
+    // Debounced Sync to Firestore
+    useEffect(() => {
+        if (!authUser || !firestoreEnabled || !cloudSynced) return;
+
+        const syncTimer = setTimeout(() => {
+            firestoreService.updateUserProfile(authUser.uid, {
+                xp: user.xp,
+                level: user.level,
+                nextLevelXp: user.nextLevelXp,
+                totalXP: user.totalXP,
+                storiesCreated: user.storiesCreated,
+                gamesCreated: user.gamesCreated,
+                storiesRead: user.storiesRead,
+                gamesPlayed: user.gamesPlayed,
+                dailyStreak: user.dailyStreak,
+                lastVisit: user.lastVisit,
+                title: user.title,
+                achievements: user.achievements,
+                badges: user.badges
+            }).catch(e => console.error("Background sync error:", e));
+        }, 2000); // 2 second debounce
+
+        return () => clearTimeout(syncTimer);
+    }, [user, authUser, firestoreEnabled, cloudSynced]);
 
     const awardXP = useCallback((amount, reason) => {
         analytics.track('xp_awarded', { amount, reason });
@@ -153,18 +184,9 @@ export const UserProvider = ({ children }) => {
             return updatedUser;
         });
 
-        // Sync trigger
-        if (authUser && firestoreEnabled && cloudSynced) {
-            // Debounce logic would be better, but keeping it simple
-            setTimeout(() => {
-                firestoreService.updateUserProfile(authUser.uid, {
-                    xp: user.xp + amount, // Note: this might be stale if strict mode double invokes, ideally use ref or trust the effect sync
-                    totalXP: user.totalXP + amount
-                }).catch(e => console.error(e));
-            }, 100);
-        }
+        // Removed direct firestore call here. The useEffect above handles it.
 
-    }, [authUser, firestoreEnabled, cloudSynced, user]);
+    }, [setUser]);
 
     const value = {
         user,

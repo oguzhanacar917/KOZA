@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { generateStorybook, generateGame } from '../services/geminiService';
+import { generateStorybook, generateGame, generateContentName } from '../services/geminiService';
 import { validateStoryInput } from '../utils/validation';
 import { Sparkles, BookOpen, Gamepad2, AlertCircle, Zap, Star, GamepadIcon, HeadphonesIcon } from 'lucide-react';
 
-// Galaxy Components
-import GalaxyButton from '../components/galaxy/GalaxyButton';
-import GalaxyCard from '../components/galaxy/GalaxyCard';
-import GalaxyLoader from '../components/galaxy/GalaxyLoader'; // Using the existing specialized loader for now, could switch to GalaxySpinner + GalaxyBackdrop
-import GalaxyTextarea from '../components/galaxy/GalaxyTextarea';
+import GalaxyContainer from '../components/galaxy/GalaxyContainer';
 import GalaxyTabs from '../components/galaxy/GalaxyTabs';
+import GalaxyTextarea from '../components/galaxy/GalaxyTextarea';
+import GalaxyButton from '../components/galaxy/GalaxyButton';
 import GalaxyAlert from '../components/galaxy/GalaxyAlert';
+import GalaxyLoader from '../components/galaxy/GalaxyLoader';
+import GalaxyCard from '../components/galaxy/GalaxyCard';
 import GalaxyGrid from '../components/galaxy/GalaxyGrid';
 import GalaxyStat from '../components/galaxy/GalaxyStat';
-import GalaxyContainer from '../components/galaxy/GalaxyContainer';
 
 const CreateTab = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory, setAnalysisResult, analysisResult, addToast } = useApp();
@@ -32,23 +31,30 @@ const CreateTab = () => {
         }
 
         setIsProcessing(true);
-        setStage(creationMode === 'story' ? 'Hikayeniz oluşturuluyor....' : 'Oyun tasarlanıyor...');
+        setStage('Metamorfoz başlıyor...');
 
         try {
-            const result = creationMode === 'story'
-                ? await generateStorybook(validation.sanitized)
-                : await generateGame(validation.sanitized);
+            // Parallel generation for speed
+            setStage('İçerik ve Başlık oluşturuluyor...');
+            const [result, generatedTitle] = await Promise.all([
+                creationMode === 'story' ? generateStorybook(validation.sanitized) : generateGame(validation.sanitized),
+                generateContentName(validation.sanitized)
+            ]);
 
             const data = {
                 type: creationMode,
-                title: creationMode === 'story' ? (result[0]?.title || 'Dönüşüm Hikayesi') : (result.title || 'Dönüşüm Oyunu'),
+                title: generatedTitle || (creationMode === 'story' ? 'Dönüşüm Hikayesi' : 'Dönüşüm Oyunu'),
                 content: validation.sanitized,
-                [creationMode === 'story' ? 'pages' : 'levels']: creationMode === 'story' ? result : result.levels
+                pages: creationMode === 'story' ? result.pages : undefined,
+                levels: creationMode === 'game' ? result.levels : undefined,
+                themeColor: result.themeColor,
+                visualMood: result.visualMood,
+                createdAt: new Date().toISOString()
             };
 
             setAnalysisResult({
                 type: creationMode,
-                category: creationMode === 'story' ? 'Dönüşüm Hikayesi' : 'Dönüşüm Oyunu',
+                category: data.title, // Use title as category/headline in card
                 data
             });
 
@@ -170,7 +176,7 @@ const CreateTab = () => {
 
             <div className="mt-20">
                 <GalaxyGrid cols={3}>
-                    <GalaxyStat  icon={BookOpen} label="Oluşturulan Hikayeler" value={5}  />
+                    <GalaxyStat icon={BookOpen} label="Oluşturulan Hikayeler" value={5} />
                     <GalaxyStat icon={GamepadIcon} label="Oluşturulan Oyunlar" value={5} />
                     <GalaxyStat icon={HeadphonesIcon} label="Oluşturulan Sesli Kitaplar" value={5} />
                 </GalaxyGrid>

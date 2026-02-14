@@ -1,8 +1,19 @@
 import { API_CONFIG } from '../config';
 
-const GEMINI_API_KEY = API_CONFIG.GEMINI_API_KEY;
-const GEMINI_MODEL = 'gemini-2.0-flash-exp';
+// Configuration
+const USE_OPENROUTER = !!import.meta.env.VITE_OPENROUTER_API_KEY;
+const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || API_CONFIG.GEMINI_API_KEY;
 
+// Models
+const MODEL_GOOGLE = 'gemini-2.0-flash-exp';
+const MODEL_OPENROUTER = 'google/gemini-2.0-flash-lite-preview-02-05:free'; // Free model as requested
+const MODEL = USE_OPENROUTER ? MODEL_OPENROUTER : MODEL_GOOGLE;
+
+const BASE_URL = USE_OPENROUTER
+  ? 'https://openrouter.ai/api/v1/chat/completions'
+  : `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
+
+// Prompts
 const STORY_PROMPT = `Sen "KOZA Theory" rehberisin. Kullanıcının yaşadığı zorbalık veya travmatik deneyimi alıp, onu "Metamorfoz" (Başkalaşım) sürecine dönüştüren 5 sayfalık epik ve destekleyici bir hikayeye çeviriyorsun.
 
 KOZA Felsefesi:
@@ -56,6 +67,16 @@ Kurallar:
 
 JSON dışında hiçbir şey yazma.`;
 
+const NAME_PROMPT = `Sen yaratıcı bir isimlendirme uzmanısın. Verilen hikaye veya oyun içeriğine ve bağlamına göre, "KOZA" evrenine uygun, metaforik, kısa ve etkileyici bir başlık oluştur.
+
+Kurallar:
+1. Sadece başlığı döndür (tırnak işaretleri olmadan).
+2. Maksimum 3-5 kelime.
+3. Türkçe olsun.
+4. Örnekler: "Küllerinden Doğan Anka", "Sessizliğin Yankısı", "Mavi Kanatlı Cesaret".
+
+Bağlam/İçerik: `;
+
 // Simple in-memory cache
 const cache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -107,9 +128,34 @@ const callGemini = async (prompt, userInput, retries = 3) => {
 
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-        {
+      let response;
+
+      if (USE_OPENROUTER) {
+        response = await fetch(BASE_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`,
+            'HTTP-Referer': 'https://koza-app.vercel.app', // Optional but recommended
+            'X-Title': 'KOZA App'
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            messages: [
+              {
+                role: 'user',
+                content: `${prompt}\n\nKullanıcının deneyimi: ${userInput}`
+              }
+            ],
+            temperature: 0.8,
+            max_tokens: 8192,
+            response_format: { type: "json_object" }
+          })
+        });
+      } else {
+        // Google Direct Fallback
+        // ... (same as before)
+        response = await fetch(BASE_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -123,8 +169,8 @@ const callGemini = async (prompt, userInput, retries = 3) => {
               responseMimeType: 'application/json'
             }
           })
-        }
-      );
+        });
+      }
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -132,12 +178,17 @@ const callGemini = async (prompt, userInput, retries = 3) => {
       }
 
       const data = await response.json();
+      let content = "";
 
-      if (!data.candidates || !data.candidates[0]) {
-        throw new Error('Invalid API response structure');
+      if (USE_OPENROUTER) {
+        content = data.choices[0].message.content;
+      } else {
+        if (!data.candidates || !data.candidates[0]) {
+          throw new Error('Invalid API response structure');
+        }
+        content = data.candidates[0].content.parts[0].text;
       }
 
-      const content = data.candidates[0].content.parts[0].text;
       const parsed = JSON.parse(cleanJSON(content));
 
       // Cache successful response
@@ -175,6 +226,24 @@ export const generateGame = async (userStory) => {
     throw new Error('Lütfen en az 10 karakter uzunluğunda bir deneyim girin');
   }
   return callGemini(GAME_PROMPT, userStory);
+};
+
+export const generateContentName = async (contentContext) => {
+  try {
+    // We use a simpler call structure for naming (text response, strict JSON not forced via prompt, but we handle string)
+    // Re-using callGemini might force JSON which is fine if we wrapped the prompt to ask for JSON.
+    // Let's create a specialized lightweight call or just use callGemini with a JSON wrapper in prompt.
+
+    // Revised NAME_PROMPT above now asks for just text, but callGemini expects JSON.
+    // Let's adjust NAME_PROMPT to return JSON: {"title": "The Title"}
+
+    const jsonPrompt = NAME_PROMPT + `\n\nYanıtı şu JSON formatında ver: { "title": "Oluşturulan Başlık" }`;
+    const result = await callGemini(jsonPrompt, contentContext);
+    return result.title;
+  } catch (e) {
+    console.error("Naming failed", e);
+    return "Dönüşüm Hikayesi"; // Fallback
+  }
 };
 
 // Clear old cache entries periodically

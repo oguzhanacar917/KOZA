@@ -3,8 +3,8 @@ import { useApp } from '../context/AppContext';
 import { Heart, Eye, BookOpen, Gamepad2, Search, User } from 'lucide-react';
 
 // New Atomic Imports
+import PageContainer from '../components/galaxy/GalaxyContainer';
 import {
-    GalaxyContainer,
     GalaxyStack,
     GalaxyBox,
     GalaxyGrid,
@@ -49,7 +49,7 @@ const CommunityTab = () => {
     });
 
     return (
-        <GalaxyContainer className="py-12 px-6">
+        <PageContainer className="py-12 px-6">
             <GalaxyStack spacing={12}>
                 {/* Header Section */}
                 <header className="max-w-3xl animate-slide-up">
@@ -146,7 +146,7 @@ const CommunityTab = () => {
                     </GalaxyGrid>
                 )}
             </GalaxyStack>
-        </GalaxyContainer>
+        </PageContainer>
     );
 };
 

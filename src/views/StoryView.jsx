@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, X, BookOpen, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, X, BookOpen, Check, Headphones, PauseCircle, PlayCircle } from 'lucide-react';
 import TransformationCanvas from '../components/cocoon/TransformationCanvas';
 import GalaxyButton from '../components/galaxy/GalaxyButton';
 import GalaxyProgress from '../components/galaxy/GalaxyProgress';
 import GalaxyToast from '../components/galaxy/GalaxyToast';
+import useAudioStory from '../hooks/useAudioStory';
 
 const StoryView = ({ story, onClose }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const pages = story.pages || [];
     const totalPages = pages.length;
     const themeColor = story.themeColor || '#9333EA';
+
+    const currentPageData = pages[currentPage];
+
+    // Audio Hook
+    const { toggle, isSpeaking, isPaused, stop, speak, supported } = useAudioStory(currentPageData?.content);
+
+    // Stop audio when changing pages or closing
+    useEffect(() => {
+        stop();
+        // Optional: Auto-play on page turn? Let's keep it manual for now.
+    }, [currentPage, stop]);
+
+    useEffect(() => {
+        return () => stop();
+    }, [stop]);
 
     const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages - 1));
     const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 0));
@@ -27,7 +43,6 @@ const StoryView = ({ story, onClose }) => {
         );
     }
 
-    const currentPageData = pages[currentPage];
     const progressValue = ((currentPage + 1) / totalPages) * 100;
 
     return (
@@ -56,7 +71,21 @@ const StoryView = ({ story, onClose }) => {
                         </div>
                     </div>
 
-                    <div className="w-10"></div> {/* Spacer for center alignment */}
+                    {/* Audio Controls */}
+                    {supported ? (
+                        <button
+                            onClick={toggle}
+                            className={`p-2 rounded-full transition-all duration-300 ${isSpeaking
+                                    ? 'bg-primary-100 text-primary-600 animate-pulse'
+                                    : 'hover:bg-neutral-100 text-neutral-500 hover:text-primary-600'
+                                }`}
+                            title={isSpeaking ? "Duraklat" : "Sesli Oku"}
+                        >
+                            {isSpeaking ? <PauseCircle size={24} /> : <Headphones size={24} />}
+                        </button>
+                    ) : (
+                        <div className="w-10"></div>
+                    )}
                 </div>
             </div>
 
@@ -68,7 +97,7 @@ const StoryView = ({ story, onClose }) => {
                             {currentPageData.title}
                         </h2>
 
-                        <div className="bg-white/60 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-neutral-200 shadow-xl">
+                        <div className={`bg-white/60 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-neutral-200 shadow-xl transition-all duration-500 ${isSpeaking ? 'ring-2 ring-primary-400 ring-offset-4' : ''}`}>
                             <div className="prose prose-slate prose-xl max-w-none">
                                 <p className="text-neutral-900 leading-relaxed text-balance text-center font-serif text-lg first-letter:text-5xl first-letter:font-serif first-letter:mr-2 first-letter:float-left first-letter:text-primary-600">
                                     {currentPageData.content}

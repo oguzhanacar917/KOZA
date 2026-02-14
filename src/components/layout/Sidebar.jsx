@@ -3,6 +3,7 @@ import { Plus, BookOpen, Gamepad2, LogOut, Trash2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { useStory } from '../../context/StoryContext';
+import Logo from '../ui/Logo';
 
 const Sidebar = () => {
     const { setCurrentView, setActiveTab } = useApp();
@@ -29,12 +30,7 @@ const Sidebar = () => {
         <aside className="w-64 h-screen bg-white border-r border-neutral-200 flex flex-col flex-shrink-0">
             {/* Logo Area */}
             <div className="h-20 flex items-center px-6 border-b border-neutral-100">
-                <div className="flex items-center gap-3 text-neutral-900">
-                    <div className="w-10 h-10 bg-neutral-900 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
-                        K
-                    </div>
-                    <span className="text-xl font-bold tracking-tighter italic">KOZA</span>
-                </div>
+                <Logo size="lg" />
             </div>
 
 

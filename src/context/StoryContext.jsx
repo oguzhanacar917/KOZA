@@ -8,46 +8,12 @@ import { analytics } from '../utils/analytics';
 const StoryContext = createContext(null);
 
 const COMMUNITY_WORKS = [
-    {
-        id: 1,
-        title: "Sessiz Çığlığın Dönüşümü",
-        author: "Elif Demir",
-        type: "story",
-        category: "Akran Zorbalığı",
-        views: "1.2k",
-        likes: 450,
-        preview: "Okul koridorlarındaki sessiz mücadelenin, güçlü bir dayanışma hikâyesine dönüşümü."
-    },
-    {
-        id: 2,
-        title: "Siber Kalkan: İlk Seviye",
-        author: "Can Yılmaz",
-        type: "game",
-        category: "Siber Zorbalık",
-        views: "3.5k",
-        likes: 890,
-        preview: "Dijital dünyadaki kalkanını oluştur ve topluluğu siber zorbalara karşı koru."
-    },
-    {
-        id: 3,
-        title: "Mavi Ekranın Ardındaki Güç",
-        author: "Umut Can Belgin",
-        type: "story",
-        category: "Siber Zorbalık",
-        views: "980",
-        likes: 310,
-        preview: "Dışlanmanın, empati yoluyla nasıl iyileştirici bir güce dönüştüğünün günlüğü."
-    },
-    {
-        id: 4,
-        title: "Empati Labirenti",
-        author: "Selin Yıldız",
-        type: "game",
-        category: "Duygusal Zeka",
-        views: "2.1k",
-        likes: 560,
-        preview: "Doğru seçimleri yap, labirentten çık ve arkadaşlık bağlarını yeniden inşa et."
-    }
+    // TODO: Connect to 'community' collection in Firestore
+    // {
+    //     id: 1,
+    //     title: "Sessiz Çığlığın Dönüşümü",
+    //     ...
+    // }
 ];
 
 export const StoryProvider = ({ children }) => {
@@ -79,10 +45,15 @@ export const StoryProvider = ({ children }) => {
 
         // Subscribe
         const unsubscribe = firestoreService.subscribeToStories(authUser.uid, (data) => {
-            setSavedStories(data);
+            setSavedStories(prev => {
+                if (JSON.stringify(prev) !== JSON.stringify(data)) {
+                    return data;
+                }
+                return prev;
+            });
         });
         return () => unsubscribe();
-    }, [authUser, firestoreEnabled]);
+    }, [authUser, firestoreEnabled, setSavedStories]);
 
     const saveStory = useCallback(async (story) => {
         const newStory = {
