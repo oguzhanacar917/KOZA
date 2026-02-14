@@ -1,12 +1,8 @@
 import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, orderBy, onSnapshot, serverTimestamp, writeBatch } from 'firebase/firestore';
+import { db } from './firebase';
 
-let db = null;
-
-export const initializeFirestore = (app) => {
-    if (!app) return null;
-    db = getFirestore(app);
-    return db;
-};
+// Remove the initialize function as we now import db directly
+// export const initializeFirestore = (app) => { ... } is no longer needed
 
 // ==================== USER PROFILE ====================
 

@@ -6,14 +6,14 @@ import {
     onAuthStateChanged
 } from 'firebase/auth';
 import { googleAnalytics } from '../utils/googleAnalytics';
-import { initializeFirestore } from '../services/firestoreService';
+// import { initializeFirestore } from '../services/firestoreService'; // Removed
 import { app, auth, db } from '../services/firebase';
 
 const AuthContext = createContext(null);
 
 // Initialize Firebase
 const provider = new GoogleAuthProvider();
-initializeFirestore(app);
+// initializeFirestore(app); // Removed
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
