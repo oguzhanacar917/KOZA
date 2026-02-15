@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, X, BookOpen, Check, Headphones, PauseCircle, PlayCircle } from 'lucide-react';
+import {
+    ChevronLeft,
+    ChevronRight,
+    X,
+    Book,
+    RotateCcw,
+    RotateCw,
+    Maximize2,
+    Printer,
+    Share2,
+    Volume2,
+    ChevronDown,
+    Check,
+    VolumeX
+} from 'lucide-react';
 import TransformationCanvas from '../components/cocoon/TransformationCanvas';
 import GalaxyButton from '../components/galaxy/GalaxyButton';
-import GalaxyProgress from '../components/galaxy/GalaxyProgress';
-import GalaxyToast from '../components/galaxy/GalaxyToast';
 import useAudioStory from '../hooks/useAudioStory';
 
 const StoryView = ({ story, onClose }) => {
@@ -11,6 +23,7 @@ const StoryView = ({ story, onClose }) => {
     const pages = story.pages || [];
     const totalPages = pages.length;
     const themeColor = story.themeColor || '#9333EA';
+    const author = "KOZA GEZGİNİ"; // Default author if not in story meta
 
     const currentPageData = pages[currentPage];
 
@@ -20,7 +33,6 @@ const StoryView = ({ story, onClose }) => {
     // Stop audio when changing pages or closing
     useEffect(() => {
         stop();
-        // Optional: Auto-play on page turn? Let's keep it manual for now.
     }, [currentPage, stop]);
 
     useEffect(() => {
@@ -32,124 +44,172 @@ const StoryView = ({ story, onClose }) => {
 
     if (!pages.length) {
         return (
-            <div className="max-w-4xl mx-auto px-4 py-12">
-                <button onClick={onClose} className="mb-4 text-neutral-600 hover:text-neutral-900">
-                    ← Geri
-                </button>
-                <div className="bg-white rounded-2xl border border-neutral-200 p-12 text-center">
-                    <p className="text-neutral-600">Hikaye yüklenemedi</p>
+            <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-8">
+                <div className="bg-white rounded-2xl border border-neutral-200 p-12 text-center shadow-xl">
+                    <p className="text-neutral-600 mb-6 font-medium">Hikaye yüklenemedi</p>
+                    <button onClick={onClose} className="text-primary-600 hover:text-primary-700 font-bold">
+                        ← Geri Dön
+                    </button>
                 </div>
             </div>
         );
     }
 
-    const progressValue = ((currentPage + 1) / totalPages) * 100;
-
     return (
-        <div className="min-h-screen bg-white/10 text-neutral-900 relative overflow-hidden" style={{
-            backgroundImage: `radial-gradient(circle at 50% 50%, ${themeColor}08 0%, transparent 80%)`
-        }}>
-            {/* Background Particles */}
-            <TransformationCanvas color={themeColor} intensity={0.5} />
-
-            {/* Header */}
-            <div className="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-xl border-b border-white/10 z-50 transition-all duration-300">
-                <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-                    <button
-                        onClick={onClose}
-                        className="p-2 hover:bg-neutral-100 rounded-full transition-colors text-neutral-500 hover:text-neutral-900"
-                    >
-                        <X size={24} />
-                    </button>
-
-                    <div className="flex flex-col items-center">
-                        <div className="text-[10px] font-bold tracking-widest text-neutral-500 mb-1 uppercase">
-                            SAYFA {currentPage + 1} / {totalPages}
-                        </div>
-                        <div className="w-32">
-                            <GalaxyProgress value={progressValue} size="small" />
-                        </div>
-                    </div>
-
-                    {/* Audio Controls */}
-                    {supported ? (
-                        <button
-                            onClick={toggle}
-                            className={`p-2 rounded-full transition-all duration-300 ${isSpeaking
-                                ? 'bg-primary-100 text-primary-600 animate-pulse'
-                                : 'hover:bg-neutral-100 text-neutral-500 hover:text-primary-600'
-                                }`}
-                            title={isSpeaking ? "Duraklat" : "Sesli Oku"}
-                        >
-                            {isSpeaking ? <PauseCircle size={24} /> : <Headphones size={24} />}
-                        </button>
-                    ) : (
-                        <div className="w-10"></div>
-                    )}
-                </div>
+        <div className="min-h-screen bg-[#f3f4f6] text-neutral-900 relative overflow-hidden flex flex-col font-sans">
+            {/* Immersive Site Background showing through in margins */}
+            <div className="fixed inset-0 pointer-events-none opacity-20">
+                <TransformationCanvas color={themeColor} intensity={0.3} />
             </div>
 
-            {/* Story Content */}
-            <div className="pt-24 min-h-screen flex items-center justify-center px-4 py-12 relative z-10">
-                <div className="max-w-2xl w-full">
-                    <div className="animate-fade-in transition-all duration-700">
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-8 text-balance text-center drop-shadow-lg" style={{ color: themeColor }}>
-                            {currentPageData.title}
-                        </h2>
+            {/* Premium Header */}
+            <header className="h-16 bg-white border-b border-neutral-200 px-6 flex items-center justify-between z-50 shadow-sm shrink-0">
+                <div className="flex items-center gap-4">
+                    <Book size={20} className="text-neutral-400" />
+                    <h1 className="font-bold text-neutral-800 text-sm tracking-tight truncate max-w-[200px]">
+                        {story.title}
+                    </h1>
+                    <div className="flex items-center gap-1 ml-4 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
+                        <RotateCcw size={16} className="text-neutral-400" />
+                    </div>
+                    <div className="flex items-center gap-1 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
+                        <RotateCw size={16} className="text-neutral-400" />
+                    </div>
+                </div>
 
-                        <div className={`bg-white/10 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 shadow-xl transition-all duration-500 ${isSpeaking ? 'ring-2 ring-primary-400 ring-offset-4' : ''}`}>
-                            <div className="prose prose-slate prose-xl max-w-none">
-                                <p className="text-neutral-900 leading-relaxed text-balance text-center font-serif text-lg first-letter:text-5xl first-letter:font-serif first-letter:mr-2 first-letter:float-left first-letter:text-primary-600">
-                                    {currentPageData.content}
-                                </p>
+                {/* Page Navigation Center */}
+                <div className="flex items-center gap-6">
+                    <button
+                        onClick={prevPage}
+                        disabled={currentPage === 0}
+                        className="p-2 hover:bg-neutral-50 rounded-lg disabled:opacity-20 transition-all text-neutral-600"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+                    <div className="text-xs font-bold tracking-widest text-neutral-500 tabular-nums">
+                        {currentPage + 1} / {totalPages}
+                    </div>
+                    <button
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages - 1}
+                        className="p-2 hover:bg-neutral-50 rounded-lg disabled:opacity-20 transition-all text-neutral-600"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 px-2 border-r border-neutral-200">
+                        <button className="p-2 hover:bg-neutral-50 rounded-lg text-neutral-400 hover:text-neutral-600">
+                            <Maximize2 size={18} />
+                        </button>
+                        <button className="p-2 hover:bg-neutral-50 rounded-lg text-neutral-400 hover:text-neutral-600">
+                            <Printer size={18} />
+                        </button>
+                        <button className="p-2 hover:bg-neutral-50 rounded-lg text-neutral-400 hover:text-neutral-600">
+                            <Share2 size={18} />
+                        </button>
+                    </div>
+
+                    <div className="flex items-center gap-1 ml-1">
+                        <button
+                            onClick={toggle}
+                            className={`flex items-center gap-2 px-4 py-1.5 rounded-full transition-all text-sm font-bold ${isSpeaking
+                                    ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/20'
+                                    : 'bg-primary-100 text-primary-600 hover:bg-primary-200'
+                                }`}
+                        >
+                            {isSpeaking ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                            <span>Dinle</span>
+                        </button>
+                        <button className="p-2 hover:bg-neutral-50 rounded-lg text-neutral-400">
+                            <ChevronDown size={18} />
+                        </button>
+                        <button
+                            onClick={onClose}
+                            className="p-2 hover:bg-red-50 hover:text-red-500 rounded-lg text-neutral-400 ml-2 transition-colors"
+                        >
+                            <X size={20} />
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            {/* Main Content Area */}
+            <main className="flex-1 flex items-center justify-center p-6 sm:p-12 relative z-10 overflow-auto">
+                <div className="w-full max-w-6xl aspect-[1.4/1] bg-white rounded-3xl book-depth flex relative overflow-hidden group">
+                    {/* Spine Fold */}
+                    <div className="book-spine" />
+
+                    {/* Left Page: Illustration Area */}
+                    <div className="flex-1 bg-neutral-100 relative overflow-hidden flex items-center justify-center">
+                        {/* Placeholder for Story Illustration with spotlight effect */}
+                        <div className="absolute inset-0 opacity-20" style={{ background: themeColor }} />
+                        <div className="w-full h-full relative z-10 p-12 flex flex-col items-center justify-center">
+                            <div className="w-64 h-64 rounded-full mix-blend-overlay blur-3xl opacity-50 absolute top-0 left-1/2 -translate-x-1/2" style={{ background: themeColor }} />
+
+                            {/* The actual image or illustration placeholder */}
+                            <div className="w-full h-full rounded-2xl border-4 border-white/50 shadow-2xl flex items-center justify-center bg-white/5 border-dashed overflow-hidden relative">
+                                <div className="absolute inset-0 flex items-center justify-center transform rotate-12 scale-150 opacity-10">
+                                    <Book size={200} />
+                                </div>
+                                <div className="relative z-10 text-center px-8">
+                                    <div className="w-16 h-1 w-full max-w-xs mx-auto mb-4 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50" />
+                                    <h4 className="text-xl font-bold opacity-30 italic text-neutral-400">
+                                        {currentPageData.title}
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Navigation */}
-                    <div className="mt-12 flex items-center justify-between pointer-events-auto">
-                        <button
-                            onClick={prevPage}
-                            disabled={currentPage === 0}
-                            className="p-4 bg-white hover:bg-neutral-50 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-neutral-200 text-neutral-900 hover:scale-110 active:scale-95 shadow-sm"
-                        >
-                            <ChevronLeft size={28} />
-                        </button>
-
-                        <div className="flex gap-2">
-                            {pages.map((_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setCurrentPage(i)}
-                                    className={`h-1.5 rounded-full transition-all duration-500 ${i === currentPage
-                                        ? 'w-8 bg-neutral-900 shadow-sm'
-                                        : 'w-1.5 bg-neutral-200 hover:bg-neutral-300'
-                                        }`}
-                                />
-                            ))}
+                    {/* Right Page: Text Content */}
+                    <div className="flex-1 paper-texture p-12 sm:p-20 flex flex-col relative">
+                        {/* Author Tag */}
+                        <div className="absolute top-10 right-12 text-[10px] sm:text-xs font-black tracking-[0.2em] text-neutral-400 uppercase">
+                            {author}
                         </div>
 
-                        <button
-                            onClick={nextPage}
-                            disabled={currentPage === totalPages - 1}
-                            className="p-4 bg-white hover:bg-neutral-50 rounded-full disabled:opacity-0 disabled:cursor-default transition-all border border-neutral-200 text-neutral-900 hover:scale-110 active:scale-95 shadow-sm"
-                        >
-                            <ChevronRight size={28} />
-                        </button>
+                        {/* Content Container */}
+                        <div className="flex-1 flex flex-col justify-center animate-fade-in py-12">
+                            <div className="prose prose-slate prose-lg sm:prose-xl max-w-none">
+                                <p className="text-neutral-800 leading-loose font-serif text-lg sm:text-xl md:text-2xl selection:bg-primary-100">
+                                    {currentPageData.content}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Page Number */}
+                        <div className="absolute bottom-10 right-12 text-sm font-bold text-neutral-300 tabular-nums">
+                            {currentPage + 1}
+                        </div>
                     </div>
 
+                    {/* Metamorphosis Completion (Last Page Overlay) */}
                     {currentPage === totalPages - 1 && (
-                        <div className="mt-12 text-center animate-fade-in-up">
-                            <GalaxyButton
-                                onClick={onClose}
-                                className="!py-4 !px-12 !text-lg !rounded-full shadow-[0_0_30px_rgba(147,51,234,0.3)] hover:shadow-[0_0_50px_rgba(147,51,234,0.5)]"
-                                icon={Check}
-                            >
-                                Metamorfozu Tamamla
-                            </GalaxyButton>
+                        <div className="absolute inset-0 z-40 bg-white/60 backdrop-blur-md flex items-center justify-center animate-fade-in">
+                            <div className="text-center p-8 bg-white rounded-3xl shadow-2xl border border-neutral-100 scale-110">
+                                <h3 className="text-2xl font-bold mb-4 text-primary-600">Harika Bir Yolculuktu!</h3>
+                                <p className="text-neutral-600 mb-8 max-w-xs mx-auto font-medium">Bu hikaye metamorfozunu tamamladı. Yeni hikayeler seni bekliyor.</p>
+                                <GalaxyButton
+                                    onClick={onClose}
+                                    className="!py-4 !px-12 !text-lg !rounded-full shadow-xl"
+                                    icon={Check}
+                                >
+                                    Bitir ve Dön
+                                </GalaxyButton>
+                            </div>
                         </div>
                     )}
                 </div>
+            </main>
+
+            {/* Subtle Progress Trace at the very bottom */}
+            <div className="h-1 bg-neutral-200 w-full shrink-0">
+                <div
+                    className="h-full bg-primary-500 transition-all duration-700 ease-out"
+                    style={{ width: `${((currentPage + 1) / totalPages) * 100}%` }}
+                />
             </div>
         </div>
     );
