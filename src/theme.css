@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700;900&family=Inter:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap');
+
 @utility biometric-breathing {
     animation: biometric-breathing 5s ease-in-out infinite;
 }
@@ -20,6 +22,31 @@
 
 @theme {
     --font-sans: "Inter", system-ui, sans-serif;
+    --font-serif: "Fraunces", serif;
+    --font-heading: "Outfit", sans-serif;
+
+    /* Futuristic Dark Palette */
+    --color-dark-950: #05070a;
+    --color-dark-900: #0a0f18;
+    --color-dark-800: #141b2d;
+
+    /* Neon Accents */
+    --color-neon-purple: #d946ef;
+    --color-neon-blue: #3b82f6;
+    --color-neon-cyan: #06b6d4;
+
+    /* Sage Green Palette */
+    --color-sage-50: #f4f6f3;
+    --color-sage-100: #e7ece5;
+    --color-sage-200: #d1dbcf;
+    --color-sage-300: #b0c2ac;
+    --color-sage-400: #8da382;
+    --color-sage-500: #718468;
+    --color-sage-600: #586851;
+    --color-sage-700: #465341;
+    --color-sage-800: #3a4436;
+    --color-sage-900: #313a2e;
+    --color-sage-950: #1a1f18;
 
     /* Primary - Vibrant Violet / Electric Indigo */
     --color-primary-50: #f5f3ff;
@@ -224,4 +251,36 @@
 
 @utility animate-fade-in-right {
     animation: fade-in-right 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@utility font-serif {
+    font-family: var(--font-serif);
+}
+
+@utility text-sage {
+    color: var(--color-sage-500);
+}
+
+@utility font-heading {
+    font-family: var(--font-heading);
+}
+
+@utility text-gradient-purple-blue {
+    background: linear-gradient(to right, #d946ef, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@utility shadow-glow-purple {
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
+}
+
+@utility bg-glass-dark {
+    background: rgba(10, 15, 24, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility bg-sage {
+    background-color: var(--color-sage-500);
 }
