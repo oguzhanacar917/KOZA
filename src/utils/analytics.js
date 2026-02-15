@@ -57,7 +57,7 @@ class Analytics {
                     .reduce((sum, e) => sum + (e.amount || 0), 0),
                 lastActivity: events.length > 0 ? events[events.length - 1].timestamp : null
             };
-        } catch (e) {
+        } catch {
             return null;
         }
     }

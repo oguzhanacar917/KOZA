@@ -7,7 +7,7 @@ import GalaxyProgress from '../components/galaxy/GalaxyProgress';
 import GalaxyStat from '../components/galaxy/GalaxyStat';
 
 const GameView = ({ game, onClose }) => {
-    const { awardXP, user, setUser } = useApp();
+    const { awardXP, setUser } = useApp();
     const [currentLevel, setCurrentLevel] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [showFeedback, setShowFeedback] = useState(false);

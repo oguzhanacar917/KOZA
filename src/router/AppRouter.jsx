@@ -9,14 +9,14 @@ const LearnTab = lazy(() => import('../tabs/LearnTab'));
 const StoryView = lazy(() => import('../views/StoryView'));
 const GameView = lazy(() => import('../views/GameView'));
 
+const FallbackLoader = () => (
+    <div className="flex items-center justify-center p-20 animate-fade-in">
+        <GalaxySpinner size="large" />
+    </div>
+);
+
 const AppRouter = () => {
     const { currentView, setCurrentView, activeTab } = useApp();
-
-    const FallbackLoader = () => (
-        <div className="flex items-center justify-center p-20 animate-fade-in">
-            <GalaxySpinner size="large" />
-        </div>
-    );
 
     // 1. Full Screen Views (Story / Game)
     if (currentView?.type === 'story') {
@@ -36,7 +36,7 @@ const AppRouter = () => {
     }
 
     // 2. Tab Navigation
-    const TabContent = () => {
+    const renderTabContent = () => {
         switch (activeTab) {
             case 'create': return <CreateTab />;
             case 'community': return <CommunityTab />;
@@ -48,7 +48,7 @@ const AppRouter = () => {
     return (
         <div key={activeTab + (currentView?.type || 'none')} className="animate-liquid">
             <Suspense fallback={<FallbackLoader />}>
-                <TabContent />
+                {renderTabContent()}
             </Suspense>
         </div>
     );

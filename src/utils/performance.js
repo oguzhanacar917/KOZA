@@ -42,7 +42,7 @@ class PerformanceMonitor {
                     });
                     observer.observe({ entryTypes: ['longtask'] });
                     this.observers.push(observer);
-                } catch (e) {
+                } catch {
                     console.warn('Long task monitoring not supported');
                 }
             }

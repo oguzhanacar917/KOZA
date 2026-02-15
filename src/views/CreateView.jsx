@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { generateStorybook } from '../services/geminiService';
+import { NarrativeDomain } from '../domain/narrativeDomain';
+import { SAFETY_DISCLAIMER } from '../utils/safety';
 import { Sparkles, BookOpen } from 'lucide-react';
 import GalaxyLoader from '../components/galaxy/GalaxyLoader';
 import GalaxyCard from '../components/galaxy/GalaxyCard';
@@ -14,23 +15,20 @@ const CreateView = () => {
         if (!activeStory.trim() || isProcessing) return;
 
         setIsProcessing(true);
-        setStage('Hikaye oluşturuluyor...');
+        setStage('Metamorfoz başlıyor...');
 
         try {
-            const result = await generateStorybook(activeStory);
+            const result = await NarrativeDomain.processNarrativeRequest(activeStory, 'story');
 
-            const story = {
-                type: 'story',
-                title: result.pages?.[0]?.title || 'Dönüşüm Hikayesi',
-                content: activeStory,
-                pages: result.pages || [],
-                themeColor: result.themeColor || '#9333EA',
-                visualMood: result.visualMood || 'Magical Shimmer'
-            };
+            if (result.isSafetyTriggered) {
+                // In this view we'll just log or show a simple alert for now
+                alert(result.message);
+                return;
+            }
 
-            saveStory(story);
+            saveStory(result.data);
             awardXP(500, 'Hikaye oluşturuldu');
-            setCurrentView({ type: 'story', data: story });
+            setCurrentView({ type: 'story', data: result.data });
             setActiveStory('');
         } catch (error) {
             console.error('Generation failed:', error);
@@ -71,6 +69,12 @@ const CreateView = () => {
                     <span className="text-primary-600 font-bold animate-pulse text-sm">{stage}</span>
                 </div>
             )}
+
+            <div className="mt-4 p-3 bg-neutral-50/50 rounded-lg border border-neutral-100 text-center">
+                <p className="text-[10px] text-neutral-400 font-medium">
+                    ⚠️ {SAFETY_DISCLAIMER}
+                </p>
+            </div>
 
             <button
                 onClick={handleGenerate}

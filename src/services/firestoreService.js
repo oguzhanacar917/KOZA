@@ -1,4 +1,4 @@
-import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, orderBy, onSnapshot, serverTimestamp, writeBatch } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, orderBy, onSnapshot, serverTimestamp, writeBatch } from 'firebase/firestore';
 import { db } from './firebase';
 
 // Remove the initialize function as we now import db directly

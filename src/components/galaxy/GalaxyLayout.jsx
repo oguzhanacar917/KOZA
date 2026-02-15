@@ -7,7 +7,6 @@ const createLayout = (className) => forwardRef(({ as: Tag = 'div', ...props }, r
 
 export const GalaxyBox = createLayout('galaxy-box');
 export const GalaxyCenter = createLayout('galaxy-center');
-export const GalaxyContainer = createLayout('galaxy-container');
 export const GalaxySpacer = () => <div className="galaxy-spacer" />;
 
 export const GalaxyFlex = forwardRef(({ direction = 'row', align, justify, wrap, gap, ...props }, ref) => (

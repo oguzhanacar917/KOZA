@@ -214,7 +214,7 @@ export const updateParticle = (particle, type, deltaTime, canvasWidth, canvasHei
             particle.opacity = particle.life;
             break;
 
-        case 'AURA':
+        case 'AURA': {
             particle.orbitAngle += config.orbitSpeed * deltaTime;
             particle.floatPhase += config.floatSpeed * deltaTime;
 
@@ -224,6 +224,7 @@ export const updateParticle = (particle, type, deltaTime, canvasWidth, canvasHei
             particle.y = centerY + Math.sin(particle.orbitAngle) * particle.orbitRadius +
                 Math.sin(particle.floatPhase) * config.floatAmplitude;
             break;
+        }
 
         case 'COSMIC':
             particle.twinklePhase += deltaTime * 0.003;

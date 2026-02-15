@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { generateStorybook, generateGame, generateContentName } from '../services/geminiService';
-import { validateStoryInput } from '../utils/validation';
+import { NarrativeDomain } from '../domain/narrativeDomain';
+import { SAFETY_DISCLAIMER } from '../utils/safety';
 import { Sparkles, BookOpen, Gamepad2, AlertCircle, Zap, Star, GamepadIcon, HeadphonesIcon } from 'lucide-react';
 
 import GalaxyContainer from '../components/galaxy/GalaxyContainer';
@@ -24,37 +24,23 @@ const CreateTab = () => {
         if (!activeStory.trim() || isProcessing) return;
         setError(null);
 
-        const validation = validateStoryInput(activeStory);
-        if (!validation.isValid) {
-            setError(validation.errors[0]);
-            return;
-        }
-
         setIsProcessing(true);
         setStage('Metamorfoz başlıyor...');
 
         try {
-            // Parallel generation for speed
-            setStage('İçerik ve Başlık oluşturuluyor...');
-            const [result, generatedTitle] = await Promise.all([
-                creationMode === 'story' ? generateStorybook(validation.sanitized) : generateGame(validation.sanitized),
-                generateContentName(validation.sanitized)
-            ]);
+            const result = await NarrativeDomain.processNarrativeRequest(activeStory, creationMode);
 
-            const data = {
-                type: creationMode,
-                title: generatedTitle || (creationMode === 'story' ? 'Dönüşüm Hikayesi' : 'Dönüşüm Oyunu'),
-                content: validation.sanitized,
-                pages: creationMode === 'story' ? result.pages : undefined,
-                levels: creationMode === 'game' ? result.levels : undefined,
-                themeColor: result.themeColor,
-                visualMood: result.visualMood,
-                createdAt: new Date().toISOString()
-            };
+            if (result.isSafetyTriggered) {
+                setError(result.message);
+                addToast('warning', 'Güvenlik Uyarısı', 'Girişin güvenlik filtrelerimize takıldı.');
+                return;
+            }
+
+            const { data } = result;
 
             setAnalysisResult({
                 type: creationMode,
-                category: data.title, // Use title as category/headline in card
+                category: data.title,
                 data
             });
 
@@ -142,6 +128,12 @@ const CreateTab = () => {
                                 <p className="text-primary-600 font-bold animate-pulse">{stage}</p>
                             </div>
                         )}
+
+                        <div className="mt-8 p-4 bg-neutral-50/50 rounded-xl border border-neutral-100/50 text-center">
+                            <p className="text-xs text-neutral-400 font-medium italic">
+                                🔔 {SAFETY_DISCLAIMER}
+                            </p>
+                        </div>
                     </div>
                 ) : (
                     <GalaxyCard

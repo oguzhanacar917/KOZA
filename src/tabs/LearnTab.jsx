@@ -3,8 +3,8 @@ import GalaxyButton from '../components/galaxy/GalaxyButton';
 import GalaxyCard from '../components/galaxy/GalaxyCard';
 
 // Atomic Imports
+import GalaxyContainer from '../components/galaxy/GalaxyContainer';
 import {
-    GalaxyContainer,
     GalaxyStack,
     GalaxyBox,
     GalaxyGrid,

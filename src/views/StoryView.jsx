@@ -15,7 +15,7 @@ const StoryView = ({ story, onClose }) => {
     const currentPageData = pages[currentPage];
 
     // Audio Hook
-    const { toggle, isSpeaking, isPaused, stop, speak, supported } = useAudioStory(currentPageData?.content);
+    const { toggle, isSpeaking, stop, supported } = useAudioStory(currentPageData?.content);
 
     // Stop audio when changing pages or closing
     useEffect(() => {
@@ -76,8 +76,8 @@ const StoryView = ({ story, onClose }) => {
                         <button
                             onClick={toggle}
                             className={`p-2 rounded-full transition-all duration-300 ${isSpeaking
-                                    ? 'bg-primary-100 text-primary-600 animate-pulse'
-                                    : 'hover:bg-neutral-100 text-neutral-500 hover:text-primary-600'
+                                ? 'bg-primary-100 text-primary-600 animate-pulse'
+                                : 'hover:bg-neutral-100 text-neutral-500 hover:text-primary-600'
                                 }`}
                             title={isSpeaking ? "Duraklat" : "Sesli Oku"}
                         >
