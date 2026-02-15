@@ -9,10 +9,10 @@ import GalaxyTabs from '../components/galaxy/GalaxyTabs';
 import GalaxyTextarea from '../components/galaxy/GalaxyTextarea';
 import GalaxyButton from '../components/galaxy/GalaxyButton';
 import GalaxyAlert from '../components/galaxy/GalaxyAlert';
-import GalaxyLoader from '../components/galaxy/GalaxyLoader';
 import GalaxyCard from '../components/galaxy/GalaxyCard';
 import GalaxyGrid from '../components/galaxy/GalaxyGrid';
 import GalaxyStat from '../components/galaxy/GalaxyStat';
+import KozaLoader from '../components/ui/KozaLoader';
 
 const CreateTab = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory, setAnalysisResult, analysisResult, addToast } = useApp();
@@ -124,8 +124,7 @@ const CreateTab = () => {
 
                         {isProcessing && (
                             <div className="mt-12 animate-fade-in flex flex-col items-center gap-4">
-                                <GalaxyLoader size="large" />
-                                <p className="text-primary-600 font-bold animate-pulse">{stage}</p>
+                                <KozaLoader size="large" message={stage} />
                             </div>
                         )}
 

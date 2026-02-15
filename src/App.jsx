@@ -7,7 +7,7 @@ import { googleAnalytics } from './utils/googleAnalytics';
 // New Architecture Components
 import MainLayout from './components/layout/MainLayout';
 import AppRouter from './router/AppRouter';
-import CocoonLoader from './components/ui/CocoonLoader';
+import KozaLoader from './components/ui/KozaLoader';
 
 const App = () => {
     const { currentView, activeTab } = useApp();
@@ -22,7 +22,7 @@ const App = () => {
     // Show loading state while checking auth
     if (authLoading) {
         return (
-            <CocoonLoader />
+            <KozaLoader fullScreen message="Yükleniyor..." />
         );
     }
 

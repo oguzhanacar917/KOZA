@@ -3,9 +3,7 @@ import { useApp } from '../context/AppContext';
 import { NarrativeDomain } from '../domain/narrativeDomain';
 import { SAFETY_DISCLAIMER } from '../utils/safety';
 import { Sparkles, BookOpen } from 'lucide-react';
-import GalaxyLoader from '../components/galaxy/GalaxyLoader';
-import GalaxyCard from '../components/galaxy/GalaxyCard';
-import MessageBox from '../components/input/MessageBox';
+import KozaLoader from '../components/ui/KozaLoader';
 
 const CreateView = () => {
     const { activeStory, setActiveStory, isProcessing, setIsProcessing, setCurrentView, awardXP, saveStory } = useApp();
@@ -65,8 +63,7 @@ const CreateView = () => {
 
             {isProcessing && (
                 <div className="mt-6 flex flex-col items-center gap-4">
-                    <GalaxyLoader size="medium" />
-                    <span className="text-primary-600 font-bold animate-pulse text-sm">{stage}</span>
+                    <KozaLoader size="medium" message={stage} />
                 </div>
             )}
 
