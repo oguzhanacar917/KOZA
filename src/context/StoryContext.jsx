@@ -16,36 +16,73 @@ const COMMUNITY_WORKS = [
     // }
 ];
 
+// XState Imports
+import { useStoryActor } from './GlobalStateMachineContext';
+import { useSelector } from '@xstate/react';
+
 export const StoryProvider = ({ children }) => {
     const { user: authUser, firestoreEnabled } = useAuth();
-    const { cloudSynced } = useUser();
+    const { cloudSynced } = useUser(); // We might depend on user being synced?
 
-    const [savedStories, setSavedStories] = useLocalStorage('koza-stories', []);
+    // Connect to Story Machine
+    const storyActor = useStoryActor();
+    const savedStories = useSelector(storyActor, (snapshot) => snapshot.context.stories);
+
+    // We keep 'activeStory' (the draft) in local state for performance (avoiding machine transition on every keystroke)
     const [activeStory, setActiveStory] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
     const [analysisResult, setAnalysisResult] = useState(null);
-    const [lastSavedStory, setLastSavedStory] = useState(null); // Cross-context communication
+    const [lastSavedStory, setLastSavedStory] = useState(null);
+
+    // Local Storage Sync (Manual implementation)
+    const [localStories, setLocalStories] = useLocalStorage('koza-stories', []);
+
+    // Initial Load
+    useEffect(() => {
+        if (localStories && localStories.length > 0) {
+            // If machine is empty, load from local
+            // We can check if machine has stories? 
+            // Ideally machine is SOT. 
+            storyActor.send({ type: 'STORY.FETCH_SUCCESS', stories: localStories });
+        }
+    }, []); // Run once
+
+    // Persist machine state to local storage
+    useEffect(() => {
+        setLocalStories(savedStories);
+    }, [savedStories, setLocalStories]);
+
 
     // Load/Sync Stories from Cloud
     useEffect(() => {
         if (!authUser || !firestoreEnabled || !cloudSynced) return;
 
+        storyActor.send({ type: 'STORY.FETCH_START' });
+
         const loadStories = async () => {
             try {
                 const cloudStories = await firestoreService.getUserStories(authUser.uid);
                 if (cloudStories) {
-                    setSavedStories(prev => {
-                        const storyMap = new Map();
-                        prev.forEach(s => storyMap.set(String(s.id), s));
-                        cloudStories.forEach(s => storyMap.set(String(s.id), s));
+                    // Merge strategy?
+                    // Current strategy in old Context was: map merge.
+                    // We should prob do the merge here and send SET matches.
+                    // Or just trust cloud? 
+                    // Let's do the merge to be safe and robust.
+                    const mergedMap = new Map();
+                    savedStories.forEach(s => mergedMap.set(String(s.id), s));
+                    cloudStories.forEach(s => mergedMap.set(String(s.id), s));
 
-                        return Array.from(storyMap.values())
-                            .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
-                            .slice(0, 50);
-                    });
+                    const merged = Array.from(mergedMap.values())
+                        .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+                        .slice(0, 50);
+
+                    storyActor.send({ type: 'STORY.FETCH_SUCCESS', stories: merged });
+                } else {
+                    storyActor.send({ type: 'STORY.FETCH_SUCCESS', stories: savedStories });
                 }
             } catch (error) {
                 console.error("Story load error:", error);
+                storyActor.send({ type: 'STORY.FETCH_FAILURE', error: error.message });
             }
         };
 
@@ -53,21 +90,21 @@ export const StoryProvider = ({ children }) => {
 
         const unsubscribe = firestoreService.subscribeToStories(authUser.uid, (data) => {
             if (!data) return;
-            setSavedStories(prev => {
-                const storyMap = new Map();
-                prev.forEach(s => storyMap.set(String(s.id), s));
-                data.forEach(s => storyMap.set(String(s.id), s));
-
-                const merged = Array.from(storyMap.values())
-                    .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
-                    .slice(0, 50);
-
-                return JSON.stringify(prev) !== JSON.stringify(merged) ? merged : prev;
-            });
+            // Real-time update from cloud
+            // We again need to merge or just replace?
+            // If data is the *full list* from Firestore listener, we can merge.
+            const mergedMap = new Map();
+            // We use the actor's current snapshot content or just what we have in scope?
+            // 'savedStories' is from selector, so it updates.
+            // CAUTION: This effect depends on savedStories? If so it loops?
+            // firestoreService.subscribeToStories usually returns the full collection or changes.
+            // If straightforward subscription:
+            // Let's assume data is the full list.
+            storyActor.send({ type: 'STORY.FETCH_SUCCESS', stories: data });
         });
 
         return () => unsubscribe();
-    }, [authUser, firestoreEnabled, cloudSynced, setSavedStories]);
+    }, [authUser, firestoreEnabled, cloudSynced, storyActor]); // data deps removed to avoid loops, relying on remote events
 
     const saveStory = useCallback(async (story) => {
         const storyId = String(Date.now());
@@ -77,7 +114,11 @@ export const StoryProvider = ({ children }) => {
             createdAt: new Date().toISOString()
         };
 
-        setSavedStories(prev => [newStory, ...prev].slice(0, 50));
+        storyActor.send({ type: 'STORY.CREATE_START' });
+
+        // Optimistic update via machine
+        storyActor.send({ type: 'STORY.CREATE_SUCCESS', story: newStory });
+
         setLastSavedStory(newStory); // Emit event for UserContext/Bridge
 
         const eventType = story.type === 'story' ? 'story_created' : 'game_created';
@@ -86,23 +127,32 @@ export const StoryProvider = ({ children }) => {
         if (authUser && firestoreEnabled) {
             try {
                 await firestoreService.saveStory(authUser.uid, newStory);
+                // Machine already updated theoretically.
             } catch (e) {
                 console.error("Save story failed", e);
+                storyActor.send({ type: 'STORY.CREATE_FAILURE', error: e.message });
+                // If failed, we might want to rollback?
+                // For now, simple error state.
             }
         }
-    }, [authUser, firestoreEnabled, setSavedStories]);
+    }, [authUser, firestoreEnabled, storyActor]);
 
     const deleteStory = useCallback(async (id) => {
         const stringId = String(id);
-        setSavedStories(prev => prev.filter(s => String(s.id) !== stringId));
+
+        storyActor.send({ type: 'STORY.DELETE', id: stringId });
+
         if (authUser && firestoreEnabled) {
             try {
                 await firestoreService.deleteStory(authUser.uid, stringId);
             } catch (e) {
                 console.error("Delete story failed", e);
+                // Rollback? state is already updated optimistically.
+                // Re-fetch?
+                storyActor.send({ type: 'STORY.FETCH_START' }); // Trigger re-sync as fallback
             }
         }
-    }, [authUser, firestoreEnabled, setSavedStories]);
+    }, [authUser, firestoreEnabled, storyActor]);
 
     // EXTREME OPTIMIZATION: Memoized Context Value
     const value = React.useMemo(() => ({

@@ -19,9 +19,19 @@ const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 const microsoftProvider = new OAuthProvider('microsoft.com');
 
+// XState Imports
+import { useAuthActor } from './GlobalStateMachineContext';
+import { useSelector } from '@xstate/react';
+
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // Connect to the Auth Machine
+    const authActor = useAuthActor();
+
+    // Selectors to get data from the machine
+    const user = useSelector(authActor, (snapshot) => snapshot.context.user);
+    const status = useSelector(authActor, (snapshot) => snapshot.value);
+    const loading = status === 'checking' || status === 'authenticating';
+
     const [firebaseEnabled, setFirebaseEnabled] = useState(false);
 
     useEffect(() => {
@@ -29,7 +39,8 @@ export const AuthProvider = ({ children }) => {
         setFirebaseEnabled(enabled);
 
         if (!enabled) {
-            setLoading(false);
+            // If Firebase is not enabled, we tell the machine we are done checking (with no user)
+            authActor.send({ type: 'AUTH.CHECK_COMPLETE', user: null });
             return;
         }
 
@@ -41,84 +52,153 @@ export const AuthProvider = ({ children }) => {
                     displayName: firebaseUser.displayName,
                     photoURL: firebaseUser.photoURL
                 };
-                setUser(userData);
+
+                // Send event to machine
+                authActor.send({ type: 'AUTH.CHECK_COMPLETE', user: userData });
+
                 googleAnalytics.setUserProperties({
                     user_id: firebaseUser.uid,
                     user_email: firebaseUser.email
                 });
             } else {
-                setUser(null);
+                authActor.send({ type: 'AUTH.CHECK_COMPLETE', user: null });
             }
-            setLoading(false);
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [authActor]);
 
     const signInWithGoogle = async () => {
         if (!firebaseEnabled) return { success: false, error: 'Authentication not configured' };
+
+        authActor.send({ type: 'AUTH.LOGIN_START' });
+
         try {
             const result = await signInWithPopup(auth, googleProvider);
+            const userData = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                photoURL: result.user.photoURL
+            };
+
+            authActor.send({ type: 'AUTH.LOGIN_SUCCESS', user: userData });
             googleAnalytics.trackEvent('user', 'sign_in', 'google');
             return { success: true, user: result.user };
         } catch (error) {
             console.error('Google sign in failed:', error);
+            authActor.send({ type: 'AUTH.LOGIN_FAILURE', error: error.message });
             return { success: false, error: error.message };
         }
     };
 
     const signInWithGithub = async () => {
         if (!firebaseEnabled) return { success: false, error: 'Authentication not configured' };
+
+        authActor.send({ type: 'AUTH.LOGIN_START' });
+
         try {
             const result = await signInWithPopup(auth, githubProvider);
+            const userData = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                photoURL: result.user.photoURL
+            };
+
+            authActor.send({ type: 'AUTH.LOGIN_SUCCESS', user: userData });
             googleAnalytics.trackEvent('user', 'sign_in', 'github');
             return { success: true, user: result.user };
         } catch (error) {
             console.error('Github sign in failed:', error);
+            authActor.send({ type: 'AUTH.LOGIN_FAILURE', error: error.message });
             return { success: false, error: error.message };
         }
     };
 
     const signInWithMicrosoft = async () => {
         if (!firebaseEnabled) return { success: false, error: 'Authentication not configured' };
+
+        authActor.send({ type: 'AUTH.LOGIN_START' });
+
         try {
             const result = await signInWithPopup(auth, microsoftProvider);
+            const userData = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                photoURL: result.user.photoURL
+            };
+
+            authActor.send({ type: 'AUTH.LOGIN_SUCCESS', user: userData });
             googleAnalytics.trackEvent('user', 'sign_in', 'microsoft');
             return { success: true, user: result.user };
         } catch (error) {
             console.error('Microsoft sign in failed:', error);
+            authActor.send({ type: 'AUTH.LOGIN_FAILURE', error: error.message });
             return { success: false, error: error.message };
         }
     };
 
     const registerWithEmail = async (email, password) => {
         if (!firebaseEnabled) return { success: false, error: 'Authentication not configured' };
+
+        authActor.send({ type: 'AUTH.LOGIN_START' });
+
         try {
             const result = await createUserWithEmailAndPassword(auth, email, password);
+            const userData = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                photoURL: result.user.photoURL
+            };
+
+            authActor.send({ type: 'AUTH.LOGIN_SUCCESS', user: userData });
             googleAnalytics.trackEvent('user', 'register', 'email');
             return { success: true, user: result.user };
         } catch (error) {
             console.error('Registration failed:', error);
+            authActor.send({ type: 'AUTH.LOGIN_FAILURE', error: error.message });
             return { success: false, error: error.message };
         }
     };
 
     const signInWithEmail = async (email, password) => {
         if (!firebaseEnabled) return { success: false, error: 'Authentication not configured' };
+
+        authActor.send({ type: 'AUTH.LOGIN_START' });
+
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
+            const userData = {
+                uid: result.user.uid,
+                email: result.user.email,
+                displayName: result.user.displayName,
+                photoURL: result.user.photoURL
+            };
+
+            authActor.send({ type: 'AUTH.LOGIN_SUCCESS', user: userData });
             googleAnalytics.trackEvent('user', 'sign_in', 'email');
             return { success: true, user: result.user };
         } catch (error) {
             console.error('Login failed:', error);
+            authActor.send({ type: 'AUTH.LOGIN_FAILURE', error: error.message });
             return { success: false, error: error.message };
         }
     };
 
     const signOut = async () => {
         if (!firebaseEnabled) return;
+
+        authActor.send({ type: 'AUTH.LOGOUT_START' });
+
         try {
             await firebaseSignOut(auth);
+            // The onAuthStateChanged listener will fire and handle the rest (AUTH.CHECK_COMPLETE -> user: null)
+            // But we can also be explicit if we want:
+            // authActor.send({ type: 'AUTH.CHECK_COMPLETE', user: null });
+
             googleAnalytics.trackEvent('user', 'sign_out', 'manual');
             return { success: true };
         } catch (error) {
