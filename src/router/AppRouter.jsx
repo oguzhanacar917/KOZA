@@ -5,7 +5,6 @@ import GalaxySpinner from '../components/galaxy/GalaxySpinner';
 // Lazy Load Components (Lightspeed Optimization)
 const CreateTab = lazy(() => import('../tabs/CreateTab'));
 const CommunityTab = lazy(() => import('../tabs/CommunityTab'));
-const LearnTab = lazy(() => import('../tabs/LearnTab'));
 const StoryView = lazy(() => import('../views/StoryView'));
 const GameView = lazy(() => import('../views/GameView'));
 const ProfileView = lazy(() => import('../views/ProfileView'));
@@ -47,8 +46,7 @@ const AppRouter = () => {
     // 2. Tab Navigation Content
     const TabMap = {
         'create': <CreateTab />,
-        'community': <CommunityTab />,
-        'learn': <LearnTab />
+        'community': <CommunityTab />
     };
 
     return (

@@ -11,6 +11,37 @@ export const UIProvider = ({ children }) => {
         !localStorage.getItem('koza-onboarding-complete')
     );
 
+    // Theme Management
+    const [theme, setTheme] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('koza-theme') || 'light';
+        }
+        return 'light';
+    });
+
+    const toggleTheme = useCallback(() => {
+        setTheme(prev => {
+            const newTheme = prev === 'light' ? 'dark' : 'light';
+            localStorage.setItem('koza-theme', newTheme);
+            if (newTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            return newTheme;
+        });
+    }, []);
+
+    // Initialize theme effect
+    React.useEffect(() => {
+        const storedTheme = localStorage.getItem('koza-theme') || 'light';
+        if (storedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, []);
+
     const addToast = useCallback((type, title, message) => {
         const id = Date.now();
         setToasts(prev => [...prev, { id, type, title, message }]);
@@ -37,7 +68,9 @@ export const UIProvider = ({ children }) => {
         setToasts,
         addToast,
         showOnboarding,
-        setShowOnboarding
+        setShowOnboarding,
+        theme,
+        toggleTheme
     };
 
     return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

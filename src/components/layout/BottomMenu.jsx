@@ -9,7 +9,6 @@ const BottomMenu = () => {
     const navItems = useMemo(() => [
         { id: 'create', label: 'Keşfet', icon: <Home size={20} /> },
         { id: 'community', label: 'Topluluk', icon: <Users size={20} /> },
-        { id: 'learn', label: 'Akademi', icon: <Book size={20} /> },
     ], []);
 
     const handleTabChange = useCallback((id) => {
