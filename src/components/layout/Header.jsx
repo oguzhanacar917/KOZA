@@ -3,7 +3,7 @@ import { useUI } from '../../context/UIContext';
 import { useAuth } from '../../context/AuthContext';
 import { useUser } from '../../context/UserContext';
 import React, { useState, useCallback, memo, useEffect } from 'react';
-import ThemeSwitch from '../ui/ThemeSwitch';
+
 
 const UserDropdown = memo(({ authUser, onSignOut }) => (
     <div
@@ -57,9 +57,7 @@ const Header = () => {
     return (
         <header className="absolute top-0 right-0 w-full h-16 flex items-center justify-end px-6 z-[100] bg-white/5 backdrop-blur-md border-b border-white/10">
             <div className="flex items-center gap-3">
-                <div className="mr-2">
-                    <ThemeSwitch />
-                </div>
+
                 {authUser && (
                     <div className={`items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase transition-all hidden sm:flex border border-neutral-200/50 ${isSyncing ? 'bg-primary-50 text-primary-600' :
                         cloudSynced ? 'bg-green-50 text-green-600' : 'bg-neutral-50 text-neutral-500'

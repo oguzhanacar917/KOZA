@@ -4,24 +4,24 @@ import { ArrowRight, Zap, Heart, Shield } from 'lucide-react';
 import TransformationCanvas from '../components/cocoon/TransformationCanvas';
 import KozaLoader from '../components/ui/KozaLoader';
 import LoginForm from '../components/auth/LoginForm';
-import ThemeSwitch from '../components/ui/ThemeSwitch';
+
 
 const FeatureCard = memo(({ icon: Icon, title, description, colorClass }) => (
-    <div className={`p-8 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-3xl border border-neutral-100 dark:border-neutral-800 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 will-change-transform ${colorClass}`}>
+    <div className={`p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-neutral-100 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 will-change-transform ${colorClass}`}>
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 
             ${colorClass.includes('secondary') ? 'bg-secondary-400/10 text-secondary-600' :
-                colorClass.includes('primary-900') ? 'bg-primary-900/5 text-primary-900 dark:text-primary-400 dark:bg-primary-400/10' :
-                    'bg-primary-500/10 text-primary-600 dark:text-primary-400'}`}>
+                colorClass.includes('primary-900') ? 'bg-primary-900/5 text-primary-900' :
+                    'bg-primary-500/10 text-primary-600'}`}>
             <Icon size={24} />
         </div>
-        <h3 className="text-xl font-bold mb-3 italic text-neutral-900 dark:text-white">{title}</h3>
-        <p className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-medium">{description}</p>
+        <h3 className="text-xl font-bold mb-3 italic">{title}</h3>
+        <p className="text-neutral-500 text-sm leading-relaxed font-medium">{description}</p>
     </div>
 ));
 
 const HeroSection = memo(({ onStart }) => (
     <div className="text-center mb-16 animate-fade-in-up flex flex-col items-center">
-        <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-neutral-900 dark:text-white italic">
+        <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-neutral-900 italic">
             <span className="block">Zorbalık Seni Yıkmamalı</span>
             <span className="bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 bg-clip-text text-transparent">Güçlendirmeli</span>
         </h1>
@@ -66,7 +66,7 @@ const HomePage = () => {
     ], []);
 
     return (
-        <div className="min-h-screen bg-[#FDFDFD] dark:bg-neutral-950 text-[#1A1A1A] dark:text-white font-sans selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden transition-colors duration-500">
+        <div className="min-h-screen bg-[#FDFDFD] text-[#1A1A1A] font-sans selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
             {/* Background Effects */}
             <div className="fixed inset-0 z-0 opacity-40 will-change-opacity pointer-events-none">
                 <TransformationCanvas color="#219EBC" intensity={0.08} active={!showLogin} />
@@ -88,9 +88,7 @@ const HomePage = () => {
             <div className="h-20" />
 
             <main className="relative z-10 pt-16 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center min-h-screen">
-                <div className="fixed top-4 right-4 z-50">
-                    <ThemeSwitch />
-                </div>
+
                 <HeroSection onStart={toggleLogin} />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-20 mt-16 w-full">
