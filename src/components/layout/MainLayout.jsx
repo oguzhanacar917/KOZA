@@ -67,6 +67,9 @@ const MainLayout = ({ children }) => {
                 <NotificationOverlay notification={notification} />
                 <GalaxyToastContainer />
 
+
+
+
                 {/* Hidden Admin Panel */}
                 {isAdmin && showAdminPanel && (
                     <AdminPanel onClose={() => setShowAdminPanel(false)} />

@@ -88,7 +88,7 @@ const HomePage = () => {
             <div className="h-20" />
 
             <main className="relative z-10 pt-16 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center min-h-screen">
-                <div className="absolute top-4 right-4 z-50">
+                <div className="fixed top-4 right-4 z-50">
                     <ThemeSwitch />
                 </div>
                 <HeroSection onStart={toggleLogin} />
