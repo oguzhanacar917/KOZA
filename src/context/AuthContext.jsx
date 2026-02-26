@@ -208,7 +208,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const ADMIN_EMAIL = 'oguzhanacar.bt@gmail.com';
+    const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || '';
 
     const value = React.useMemo(() => ({
         user,

@@ -6,8 +6,22 @@ import { GlobalStateMachineProvider } from '../context/GlobalStateMachineContext
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
 
 export const metadata = {
-    title: 'KOZA.AI',
-    description: 'KOZA.AI: Transform your challenges into stories and evolve.',
+    title: 'KOZA.AI – Transform Bullying Into Strength',
+    description: 'KOZA.AI helps you turn bullying or traumatic experiences into empowering AI-generated stories and interactive games.',
+    openGraph: {
+        title: 'KOZA.AI – Transform Bullying Into Strength',
+        description: 'Turn your challenges into empowering stories with AI.',
+        url: 'https://koza-app.vercel.app',
+        siteName: 'KOZA.AI',
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'KOZA.AI – Transform Bullying Into Strength',
+        description: 'Turn your challenges into empowering stories with AI.',
+    },
+    robots: { index: true, follow: true },
 };
 
 export const viewport = {

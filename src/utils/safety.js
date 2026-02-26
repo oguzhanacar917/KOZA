@@ -55,11 +55,22 @@ export const SAFETY_DISCLAIMER = "KOZA is an educational tool and does not repla
 export const getSafetyFilter = (text) => {
     if (!text || typeof text !== 'string') return '';
 
-    // Basic filter for toxic content (placeholder for more advanced NLP if needed)
-    // In a real app, this would use a more comprehensive list or an external API
-    const toxicPatterns = [/küfür1/gi, /küfür2/gi, /hakaret1/gi];
+    // Basic toxic word filter. These are common English slurs/profanity.
+    // For production-grade filtering, integrate an external NLP safety API
+    // such as Perspective API (https://perspectiveapi.com/) or AWS Comprehend.
+    const TOXIC_PATTERNS = [
+        /\bfuck(ing)?\b/gi,
+        /\bshit\b/gi,
+        /\bbitch\b/gi,
+        /\basthole\b/gi,
+        /\bcunt\b/gi,
+        /\bdick\b/gi,
+        /\bfaggot\b/gi,
+        /\bnigger\b/gi,
+        /\bwhore\b/gi,
+    ];
     let filtered = text;
-    toxicPatterns.forEach(pattern => {
+    TOXIC_PATTERNS.forEach(pattern => {
         filtered = filtered.replace(pattern, '***');
     });
 

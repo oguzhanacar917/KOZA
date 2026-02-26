@@ -9,19 +9,19 @@ import { checkAchievements } from '../utils/achievements';
 const UserContext = createContext(null);
 
 const DEFAULT_USER = {
-    xp: 850,
+    xp: 0,
     level: 1,
     nextLevelXp: 1000,
-    storiesRead: 3,
-    gamesPlayed: 1,
+    storiesRead: 0,
+    gamesPlayed: 0,
     storiesCreated: 0,
     gamesCreated: 0,
-    totalXP: 850,
+    totalXP: 0,
     dailyStreak: 0,
     lastVisit: null,
-    title: "Empathy Apprentice",
+    title: "Newcomer",
     badges: [
-        { id: 1, name: "First Step", unlocked: true },
+        { id: 1, name: "First Step", unlocked: false },
         { id: 2, name: "Storyteller", unlocked: false },
         { id: 3, name: "Transformation Specialist", unlocked: false },
     ],
@@ -93,7 +93,7 @@ export const UserProvider = ({ children }) => {
             if (diff > 0) {
                 // We don't have the 'reason' here easily unless we store it in machine context 
                 // or listen to the event. For now, generic reason or passed via a side-channel?
-                // Actually, we can just say "XP Kazanıldı".
+                // Actually, we can just say "XP Awarded".
                 setLastUserEvent({ type: 'xp', amount: diff, reason: "Achievement" });
             }
         }

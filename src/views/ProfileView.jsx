@@ -28,7 +28,7 @@ const ProfileHeader = memo(({ authUser, userTitle, imgError, onImgError, onClose
                 <h1 className="text-3xl font-bold tracking-tight text-neutral-900">
                     {authUser?.displayName || 'Traveler'}
                 </h1>
-                <p className="text-neutral-500 font-medium">{userTitle || 'Empathy Apprentice'}</p>
+                <p className="text-neutral-500 font-medium">{userTitle || 'Newcomer'}</p>
             </div>
         </div>
         <button

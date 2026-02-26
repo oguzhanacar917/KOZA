@@ -24,7 +24,7 @@ import MessageBox from '../components/input/MessageBox';
 import { useStory } from '../context/StoryContext';
 
 // Memoized Sub-Components
-const StoryHeader = memo(({ title, currentPage, totalPages, onPrev, onNext, onReset, onJump, onToggleFullscreen, onPrint, onShare, onMastodonShare, isMastodonSharing, onToggleAudio, isSpeaking, onClose }) => (
+const StoryHeader = memo(({ title, currentPage, totalPages, onPrev, onNext, onReset, onJump, onToggleFullscreen, onPrint, onShare, onToggleAudio, isSpeaking, onClose }) => (
     <header className="h-16 bg-white border-b border-neutral-200 px-6 flex items-center justify-between z-50 shadow-sm shrink-0">
         <div className="flex items-center gap-4">
             <Book size={20} className="text-neutral-400" />
@@ -145,25 +145,6 @@ const StoryView = ({ story, onClose }) => {
         } catch (err) { console.error('Share error:', err); }
     }, [story.title]);
 
-    const [isMastodonSharing, setIsMastodonSharing] = useState(false);
-    const handleMastodonShare = async () => {
-        setIsMastodonSharing(true);
-        try {
-            // Simulated API call to enqueue BullMQ publishing job
-            // await fetch('http://localhost:4000/api/mastodon/publish', {
-            //     method: 'POST',
-            //     body: JSON.stringify({ content: `Yeni hikayemi okuyun: ${story.title}\n\n#KOZA #Hikaye` })
-            // });
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            alert("Hikaye Mastodon gönderi kuyruğuna eklendi!");
-        } catch (error) {
-            console.error('Mastodon paylaşım hatası', error);
-            alert("Paylaşılamadı. Hesabınız bağlı mı?");
-        } finally {
-            setIsMastodonSharing(false);
-        }
-    };
-
     const handleRefine = async () => {
         if (!feedback.trim()) return;
         setRefinementStatus('loading');
@@ -201,7 +182,6 @@ const StoryView = ({ story, onClose }) => {
                 onPrev={prevPage} onNext={nextPage}
                 onReset={() => setCurrentPage(0)} onJump={() => setCurrentPage(totalPages - 1)}
                 onToggleFullscreen={toggleFullscreen} onPrint={handlePrint} onShare={handleShare}
-                onMastodonShare={handleMastodonShare} isMastodonSharing={isMastodonSharing}
                 onToggleAudio={toggle} isSpeaking={isSpeaking} onClose={onClose}
             />
 

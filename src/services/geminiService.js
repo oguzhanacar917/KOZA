@@ -186,7 +186,7 @@ const callGemini = async (prompt, userInput, retries = 3) => {
             },
             {
               role: 'user',
-              content: `${prompt}\n\nKullanıcının deneyimi: ${userInput}`
+              content: `${prompt}\n\nUser experience: ${userInput}`
             }
           ],
           temperature: 0.8,
@@ -229,14 +229,14 @@ const callGemini = async (prompt, userInput, retries = 3) => {
 
 export const generateStorybook = async (userStory) => {
   if (!userStory || userStory.trim().length < 10) {
-    throw new Error('Lütfen en az 10 karakter uzunluğunda bir hikaye girin');
+    throw new Error('Please enter at least 10 characters describing your experience');
   }
   return callGemini(STORY_PROMPT, userStory);
 };
 
 export const refineStorybook = async (existingStory, feedback) => {
   if (!feedback || feedback.trim().length < 5) {
-    throw new Error('Lütfen daha detaylı bir geri bildirim girin');
+    throw new Error('Please provide more detailed feedback (at least 5 characters)');
   }
   const prompt = REFINE_STORY_PROMPT
     .replace('{{EXISTING_STORY}}', JSON.stringify(existingStory))
@@ -247,7 +247,7 @@ export const refineStorybook = async (existingStory, feedback) => {
 
 export const generateGame = async (userStory) => {
   if (!userStory || userStory.trim().length < 10) {
-    throw new Error('Lütfen en az 10 karakter uzunluğunda bir deneyim girin');
+    throw new Error('Please enter at least 10 characters describing your experience');
   }
   return callGemini(GAME_PROMPT, userStory);
 };
@@ -261,21 +261,23 @@ export const generateContentName = async (contentContext) => {
     // Revised NAME_PROMPT above now asks for just text, but callGemini expects JSON.
     // Let's adjust NAME_PROMPT to return JSON: {"title": "The Title"}
 
-    const jsonPrompt = NAME_PROMPT + `\n\nYanıtı şu JSON formatında ver: { "title": "Oluşturulan Başlık" }`;
+    const jsonPrompt = NAME_PROMPT + `\n\nRespond in this JSON format only: { "title": "Generated Title" }`;
     const result = await callGemini(jsonPrompt, contentContext);
     return result.title;
   } catch {
     console.error("Naming failed");
-    return "Dönüşüm Hikayesi"; // Fallback
+    return "Transformation Story"; // Fallback
   }
 };
 
-// Clear old cache entries periodically
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of cache.entries()) {
-    if (now - value.timestamp > CACHE_DURATION) {
-      cache.delete(key);
+// Clear old cache entries periodically (browser-only, safe for SSR/Next.js)
+if (typeof window !== 'undefined') {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [key, value] of cache.entries()) {
+      if (now - value.timestamp > CACHE_DURATION) {
+        cache.delete(key);
+      }
     }
-  }
-}, CACHE_DURATION);
+  }, CACHE_DURATION);
+}

@@ -139,18 +139,25 @@ const GameView = ({ game, onClose }) => {
             setScore(prev => prev + 100);
             awardXP(50, 'Right decision');
         }
+    }, [awardXP]);
 
-        setTimeout(() => {
+    // Drive level progression in an effect so the timeout is properly cleaned up
+    // if the component unmounts before it fires (e.g. user closes the game mid-answer)
+    useEffect(() => {
+        if (!showFeedback) return;
+
+        const timer = setTimeout(() => {
             if (currentLevel < levels.length - 1) {
                 setCurrentLevel(prev => prev + 1);
                 setSelectedOption(null);
                 setShowFeedback(false);
             } else {
-                // EXTREME OPTIMIZATION: Finalize state
                 setUser(prev => ({ ...prev, gamesPlayed: prev.gamesPlayed + 1 }));
             }
         }, 2000);
-    }, [currentLevel, levels.length, awardXP, setUser]);
+
+        return () => clearTimeout(timer);
+    }, [showFeedback, currentLevel, levels.length, setUser]);
 
     const isCompleted = currentLevel === levels.length - 1 && showFeedback;
 

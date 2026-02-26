@@ -1,37 +1,60 @@
-import React, { memo, useCallback, useMemo } from 'react';
-import { Plus, BookOpen, Gamepad2, LogOut, Trash2 } from 'lucide-react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import { Plus, BookOpen, Gamepad2, LogOut, Trash2, AlertTriangle, X } from 'lucide-react';
 import { useUI } from '../../context/UIContext';
 import { useAuth } from '../../context/AuthContext';
 import { useStory } from '../../context/StoryContext';
 import Logo from '../ui/Logo';
 
-const SidebarItem = memo(({ story, onClick, onDelete }) => (
-    <div
-        onClick={() => onClick(story)}
-        className="group relative w-full text-left p-3 rounded-xl hover:bg-neutral-50 transition-all cursor-pointer border border-transparent hover:border-neutral-100 will-change-transform"
-    >
-        <div className="flex items-start gap-3">
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${story.type === 'story' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'}`}>
-                {story.type === 'story' ? <BookOpen size={16} /> : <Gamepad2 size={16} />}
-            </div>
-            <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-sm text-neutral-900 break-words leading-snug">
-                    {story.title || 'Untitled Transformation'}
-                </h4>
-                <p className="text-[10px] font-bold text-neutral-400 mt-0.5 uppercase tracking-widest">
-                    {new Date(story.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
-                </p>
-            </div>
-        </div>
-        <button
-            onClick={(e) => onDelete(e, story.id)}
-            className="absolute top-2 right-2 p-1.5 text-neutral-400 opacity-0 group-hover:opacity-100 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all z-10"
-            title="Delete"
+const SidebarItem = memo(({ story, onClick, onDelete }) => {
+    const [confirmOpen, setConfirmOpen] = useState(false);
+
+    return (
+        <div
+            className="group relative w-full text-left p-3 rounded-xl hover:bg-neutral-50 transition-all cursor-pointer border border-transparent hover:border-neutral-100 will-change-transform"
         >
-            <Trash2 size={14} />
-        </button>
-    </div>
-));
+            <div onClick={() => onClick(story)} className="flex items-start gap-3">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${story.type === 'story' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'}`}>
+                    {story.type === 'story' ? <BookOpen size={16} /> : <Gamepad2 size={16} />}
+                </div>
+                <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-sm text-neutral-900 break-words leading-snug">
+                        {story.title || 'Untitled Transformation'}
+                    </h4>
+                    <p className="text-[10px] font-bold text-neutral-400 mt-0.5 uppercase tracking-widest">
+                        {new Date(story.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
+                    </p>
+                </div>
+            </div>
+
+            {/* Inline delete confirmation — no window.confirm */}
+            {confirmOpen ? (
+                <div className="mt-2 flex items-center gap-2 bg-red-50 border border-red-100 rounded-lg p-2">
+                    <AlertTriangle size={12} className="text-red-500 shrink-0" />
+                    <span className="text-[10px] text-red-600 font-bold flex-1">Delete?</span>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); onDelete(e, story.id); setConfirmOpen(false); }}
+                        className="px-2 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-600"
+                        aria-label="Confirm delete"
+                    >Yes</button>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); setConfirmOpen(false); }}
+                        className="px-2 py-0.5 bg-neutral-200 text-neutral-600 rounded text-[10px] font-bold hover:bg-neutral-300"
+                        aria-label="Cancel delete"
+                    >No</button>
+                </div>
+            ) : (
+                <button
+                    onClick={(e) => { e.stopPropagation(); setConfirmOpen(true); }}
+                    className="absolute top-2 right-2 p-1.5 text-neutral-400 opacity-0 group-hover:opacity-100 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all z-10"
+                    aria-label="Delete story"
+                    title="Delete"
+                >
+                    <Trash2 size={14} />
+                </button>
+            )}
+        </div>
+    );
+});
 
 const Sidebar = () => {
     const { setCurrentView, setActiveTab } = useUI();
@@ -44,9 +67,7 @@ const Sidebar = () => {
 
     const handleDelete = useCallback((e, id) => {
         e.stopPropagation();
-        if (window.confirm('Are you sure you want to delete this story?')) {
-            deleteStory(id);
-        }
+        deleteStory(id);
     }, [deleteStory]);
 
     const storyItems = useMemo(() => (

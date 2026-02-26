@@ -99,7 +99,11 @@ export const StoryProvider = ({ children }) => {
     }, [authUser, firestoreEnabled, cloudSynced, storyActor]); // data deps removed to avoid loops, relying on remote events
 
     const saveStory = useCallback(async (story) => {
-        const storyId = String(Date.now());
+        // Use crypto.randomUUID() instead of Date.now() to prevent ID collisions
+        // when multiple stories are saved within the same millisecond
+        const storyId = typeof crypto !== 'undefined' && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
         const newStory = {
             id: storyId,
             ...story,

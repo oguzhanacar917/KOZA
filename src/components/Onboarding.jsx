@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Sparkles, Target, TrendingUp, Award } from 'lucide-react';
 
 const Onboarding = ({ onComplete }) => {
     const [step, setStep] = React.useState(0);
 
-    const steps = [
+    const steps = useMemo(() => [
         {
             icon: Sparkles,
             title: "Welcome to KOZA",
@@ -29,7 +29,7 @@ const Onboarding = ({ onComplete }) => {
             description: "Discover your own transformation and store your experiences safely.",
             color: "error"
         }
-    ];
+    ], []);
 
     const currentStep = steps[step];
     const Icon = currentStep.icon;

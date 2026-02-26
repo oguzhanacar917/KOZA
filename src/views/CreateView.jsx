@@ -21,24 +21,24 @@ const CreateView = () => {
         if (!activeStory.trim() || isProcessing) return;
 
         setIsProcessing(true);
-        setStage('Metamorfoz başlıyor...');
+        setStage('Metamorphosis beginning...');
 
         try {
             const result = await NarrativeDomain.processNarrativeRequest(activeStory, 'story');
 
             if (result.isSafetyTriggered) {
-                addToast('warning', 'Güvenlik', result.message);
+                addToast('warning', 'Safety', result.message);
                 return;
             }
 
             saveStory(result.data);
-            awardXP(500, 'Hikaye oluşturuldu');
+            awardXP(500, 'Story created');
             setCurrentView({ type: 'story', data: result.data });
             setActiveStory('');
-            addToast('success', 'Başarılı', 'Hikayeniz oluşturuldu!');
+            addToast('success', 'Success', 'Your story has been created!');
         } catch (error) {
             console.error('Generation failed:', error);
-            addToast('error', 'Hata', 'Oluşturma başarısız oldu.');
+            addToast('error', 'Error', 'Generation failed. Please try again.');
         } finally {
             setIsProcessing(false);
             setStage('');
@@ -56,7 +56,7 @@ const CreateView = () => {
                     Transform Experience
                 </h1>
                 <p className="text-neutral-500 font-medium text-lg text-balance">
-                    Yaşadığın zorluğu anlat, AI ile güçlendirici bir hikayeye dönüştür
+                    Share your experience, and AI will transform it into an empowering story
                 </p>
             </div>
 
@@ -64,7 +64,7 @@ const CreateView = () => {
                 <GalaxyTextarea
                     value={activeStory}
                     onChange={setActiveStory}
-                    placeholder="Başına gelen bir zorbalık olayını anlat..."
+                    placeholder="Describe a bullying experience you've been through..."
                     disabled={isProcessing}
                     minHeight="180px"
                 />
@@ -76,7 +76,7 @@ const CreateView = () => {
                         variant="magic"
                         icon={BookOpen}
                     >
-                        {isProcessing ? 'Oluşturuluyor...' : 'Hikaye Oluştur'}
+                        {isProcessing ? 'Generating...' : 'Create Story'}
                     </GalaxyButton>
                 </div>
             </div>
@@ -94,9 +94,9 @@ const CreateView = () => {
             </div>
 
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <GalaxyCard title="5" subtitle="Sayfa Hikaye" emoji="📖" />
-                <GalaxyCard title="AI" subtitle="Destekli" emoji="🤖" />
-                <GalaxyCard title="500" subtitle="XP Kazanç" emoji="💎" />
+                <GalaxyCard title="10" subtitle="Page Story" emoji="📖" />
+                <GalaxyCard title="AI" subtitle="Powered" emoji="🤖" />
+                <GalaxyCard title="500" subtitle="XP Earned" emoji="💎" />
             </div>
         </div>
     );

@@ -8,6 +8,7 @@ class Analytics {
     constructor() {
         this.events = [];
         this.sessionStart = Date.now();
+        this._saveTimer = null;
     }
 
     track(eventName, properties = {}) {
@@ -20,10 +21,11 @@ class Analytics {
 
         this.events.push(event);
 
-        // Store in localStorage for persistence
-        this.saveToStorage();
+        // Debounce storage writes: batch into a single write every 2s
+        if (this._saveTimer) clearTimeout(this._saveTimer);
+        this._saveTimer = setTimeout(() => this.saveToStorage(), 2000);
 
-        // Send to Google Analytics
+        // Send to Google Analytics immediately
         googleAnalytics.trackEvent(
             'app_interaction',
             eventName,
@@ -40,6 +42,7 @@ class Analytics {
             const combined = [...stored, ...this.events].slice(-100); // Keep last 100 events
             localStorage.setItem('koza-analytics', JSON.stringify(combined));
             this.events = [];
+            this._saveTimer = null;
         } catch (e) {
             console.error('Failed to save analytics:', e);
         }

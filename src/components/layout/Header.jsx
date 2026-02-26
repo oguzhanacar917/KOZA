@@ -76,6 +76,8 @@ const Header = () => {
                     <div className="relative pl-3 border-l border-white/20">
                         <button
                             onClick={toggleDropdown}
+                            aria-label={`User menu for ${authUser.displayName || authUser.email}`}
+                            aria-expanded={showDropdown}
                             className="flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
                         >
                             {authUser.photoURL && !imgError ? (

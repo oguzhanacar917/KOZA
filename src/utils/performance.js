@@ -13,17 +13,21 @@ class PerformanceMonitor {
         // Monitor page load performance
         if (typeof window !== 'undefined' && window.performance) {
             window.addEventListener('load', () => {
+                // Use modern PerformanceNavigationTiming (Navigation Timing Level 2)
+                // instead of the deprecated window.performance.timing Level 1 API
                 setTimeout(() => {
-                    const perfData = window.performance.timing;
-                    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-                    const connectTime = perfData.responseEnd - perfData.requestStart;
-                    const renderTime = perfData.domComplete - perfData.domLoading;
+                    const [navEntry] = performance.getEntriesByType('navigation');
+                    if (navEntry) {
+                        const pageLoadTime = navEntry.loadEventEnd - navEntry.startTime;
+                        const connectTime = navEntry.responseEnd - navEntry.requestStart;
+                        const renderTime = navEntry.domComplete - navEntry.domInteractive;
 
-                    this.recordMetric('page_load', {
-                        total: pageLoadTime,
-                        connect: connectTime,
-                        render: renderTime
-                    });
+                        this.recordMetric('page_load', {
+                            total: Math.round(pageLoadTime),
+                            connect: Math.round(connectTime),
+                            render: Math.round(renderTime)
+                        });
+                    }
                 }, 0);
             });
 

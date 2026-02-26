@@ -22,7 +22,7 @@ const App = () => {
     // Show loading state while checking auth
     if (authLoading) {
         return (
-            <KozaLoader fullScreen message="Dönüşüm Hazırlanıyor..." />
+            <KozaLoader fullScreen message="Preparing Your Transformation..." />
         );
     }
 
