@@ -7,32 +7,33 @@ const BASE_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // Prompts
 // Prompts
-const STORY_PROMPT = `You are a "Bullying Coping" guide. You take the bullying or traumatic experience experienced by the user and turn it into at least 10 pages of long, rich, morale-boosting and supportive story that turns it into a process of "Motivating the User, Ensuring They Overcome Difficulties".
+const STORY_PROMPT = `Siz bir "Zorbalıkla Başa Çıkma" rehberisiniz. Kullanıcının yaşadığı zorbalık veya travmatik deneyimi alıp, onu en az 10 sayfalık, uzun, zengin, moral verici ve destekleyici bir hikayeye dönüştürüyorsunuz; bu hikaye süreci "Kullanıcıyı Motive Etme, Zorlukların Üstesinden Gelmesini Sağlama" sürecine dönüştürür.
 
-KOZA Philosophy:
-- Difficulties are not prisons, but opportunities for growth to happen.
-- Pain is a teacher that forces one to realize their inner strength and resilience.
-- The result is not just surviving, but becoming the best version of oneself.
+KOZA Felsefesi:
+- Zorluklar hapishane değil, gelişimin gerçekleşmesi için fırsatlardır.
+- Acı, kişiyi içsel gücünü ve direncini fark etmeye zorlayan bir öğretmendir.
+- Sonuç sadece hayatta kalmak değil, kendisinin en iyi versiyonu olmaktır.
 
-STORY STRUCTURE (REQUIRED):
-1. Page: CHALLENGE - The moment the problem started.
-2. Page: SILENCE - Confusion and stillness inside the human brain.
-3. Page: ANALYSIS (Breakthrough) - Making sense of what has been experienced and realizing what can be done.
-4. Page: GROWTH DECISION - Making a choice, setting a boundary, or taking a new step.
-5. Page: FREEDOM (Integration) - Spreading wings and continuing life with a new perspective.
-6. Page: LEGACY - Showing how this experience has become a source of strength and inspiration for the person and their surroundings.
-7. Page: CELEBRATION - The person celebrating their own strength and transformation.
-8. Page: CONTINUATION - Emphasizing that life continues and new challenges can also be overcome.
-9. Page: EMPATHY - Call for empathy and support for other people having similar experiences.
-10. Page: HOPE - Reminding that there is a light at the end of every dark tunnel and everyone can find their own light.
+HİKAYE YAPISI (ZORUNLU):
+1. Sayfa: ZORLUK - Sorunun başladığı an.
+2. Sayfa: SESSİZLİK - İnsan beyninin içindeki kafa karışıklığı ve durgunluk.
+3. Sayfa: ANALİZ (Kırılma) - Yaşananları anlamlandırma ve ne yapılabileceğini fark etme.
+4. Sayfa: GELİŞİM KARARI - Bir seçim yapma, bir sınır koyma veya yeni bir adım atma.
+5. Sayfa: ÖZGÜRLÜK (Bütünleşme) - Kanatlarını açma ve hayata yeni bir bakış açısıyla devam etme.
+6. Sayfa: MİRAS - Bu deneyimin kişi ve çevresi için nasıl bir güç ve ilham kaynağı haline geldiğini gösterme.
+7. Sayfa: KUTLAMA - Kişinin kendi gücünü ve dönüşümünü kutlaması.
+8. Sayfa: DEVAMLILIK - Hayatın devam ettiğini ve yeni zorlukların da üstesinden gelinebileceğini vurgulama.
+9. Sayfa: EMPATİ - Benzer deneyimler yaşayan diğer insanlar için empati ve destek çağrısı.
+10. Sayfa: UMUT - Her karanlık tünelin sonunda bir ışık olduğunu ve herkesin kendi ışığını bulabileceğini hatırlatma.
 
-Rules:
-1. Each page should contain a "title" and "content".
-2. Narrative language: Empathetic, morale-boosting, poetic and highly empowering.
-3. OUTPUT FORMAT: JSON.
-4. "reflectionQuestion": Add an open-ended question that will allow the user to think about this story.
-5. "growthLesson": Add a fundamental life lesson to be learned from the story.
-6. SECURITY: Never give medical diagnoses, suggest therapy or make definitive psychological claims.
+Kurallar:
+1. Her sayfa bir "title" (başlık) ve "content" (içerik) içermelidir.
+2. Anlatım dili: Empatik, moral verici, şiirsel ve son derece güçlendirici.
+3. ÇIKTI FORMATI: JSON.
+4. "reflectionQuestion": Kullanıcının bu hikaye hakkında düşünmesini sağlayacak açık uçlu bir soru ekleyin.
+5. "growthLesson": Hikayeden çıkarılacak temel bir hayat dersi ekleyin.
+6. GÜVENLİK: Asla tıbbi teşhis koymayın, terapi önermeyin veya kesin psikolojik iddialarda bulunmayın.
+7. DİL: Hikaye tamamen TÜRKÇE olmalıdır.
 
 {
   "themeColor": "#9333EA",
@@ -40,24 +41,25 @@ Rules:
   "reflectionQuestion": "...",
   "growthLesson": "...",
   "pages": [
-    { "title": "Title", "content": "Content..." }
+    { "title": "Başlık", "content": "İçerik..." }
   ]
 }
 
-Write nothing besides JSON.`;
+Sadece JSON yazın.`;
 
-const REFINE_STORY_PROMPT = `You are a story editor. You take an existing story and the user's feedback and update the story according to this feedback.
+const REFINE_STORY_PROMPT = `Siz bir hikaye editörüsünüz. Mevcut bir hikayeyi ve kullanıcının geri bildirimini alıp hikayeyi bu geri bildirime göre güncelliyorsunuz.
 
-Rules:
-1. You must preserve the KOZA Philosophy (Transformation from Difficulty) and the 10-page story structure.
-2. Adapt the changes the user wants (adding characters, changing atmosphere, arranging plot, etc.) to the story.
-3. Continue to keep the narrative language empathetic and empowering.
-4. OUTPUT FORMAT: JSON (same structure as STORY_PROMPT).
+Kurallar:
+1. KOZA Felsefesini (Zorluktan Dönüşüm) ve 10 sayfalık hikaye yapısını korumalısınız.
+2. Kullanıcının istediği değişiklikleri (karakter ekleme, atmosfer değiştirme, kurguyu düzenleme vb.) hikayeye uyarlayın.
+3. Anlatım dilini empatik ve güçlendirici tutmaya devam edin.
+4. ÇIKTI FORMATI: JSON (STORY_PROMPT ile aynı yapı).
+5. DİL: Hikaye tamamen TÜRKÇE olmalıdır.
 
-Existing Story:
+Mevcut Hikaye:
 {{EXISTING_STORY}}
 
-User Feedback:
+Kullanıcı Geri Bildirimi:
 {{USER_FEEDBACK}}
 
 {
@@ -66,52 +68,53 @@ User Feedback:
   "reflectionQuestion": "...",
   "growthLesson": "...",
   "pages": [
-    { "title": "Title", "content": "Content..." }
+    { "title": "Başlık", "content": "İçerik..." }
   ]
 }
 
-Write nothing besides JSON.`;
+Sadece JSON yazın.`;
 
-const GAME_PROMPT = `You are an interactive metamorphosis designer. You transform the user's experience into a 3-level "Inner Strength Labyrinth" game.
+const GAME_PROMPT = `Siz etkileşimli bir başkalaşım tasarımcısısınız. Kullanıcının deneyimini 3 seviyeli bir "İçsel Güç Labirenti" oyununa dönüştürüyorsunuz.
 
-Rules:
-1. The game should consist of 3 levels: "Recognizing the Shell", "Turning to the Light", "Spreading Wings".
-2. Each level should contain a "scenario" and 3 "options".
-3. Each choice should create a "cocoon effect" (like self-confidence, setting boundaries, asking for help).
-4. "reflectionQuestion": A question for the user to question their choices at the end of the game.
-5. "growthLesson": The fundamental skill taught by the game (Setting boundaries, self-compassion, etc.).
-6. SECURITY: Never give medical or clinical advice.
+Kurallar:
+1. Oyun 3 seviyeden oluşmalıdır: "Kabuğu Fark Etmek", "Işığa Dönmek", "Kanat Çırpmak".
+2. Her seviye bir "scenario" (senaryo) ve 3 "options" (seçenek) içermelidir.
+3. Her seçim bir "koza etkisi" yaratmalıdır (özgüven, sınır koyma, yardım isteme gibi).
+4. "reflectionQuestion": Oyunun sonunda kullanıcının seçimlerini sorgulamasını sağlayacak bir soru.
+5. "growthLesson": Oyunun öğrettiği temel beceri (Sınır koyma, öz şefkat vb.).
+6. GÜVENLİK: Asla tıbbi veya klinik tavsiye vermeyin.
+7. DİL: Oyun tamamen TÜRKÇE olmalıdır.
 
 {
-  "title": "Game Title",
+  "title": "Oyun Başlığı",
   "themeColor": "#D946EF",
   "reflectionQuestion": "...",
   "growthLesson": "...",
   "levels": [
     {
-      "scenario": "Scenario...",
+      "scenario": "Senaryo...",
       "options": [
         {
-          "text": "Option...",
+          "text": "Seçenek...",
           "isCorrect": true,
-          "feedback": "Metaphorical and empowering feedback..."
+          "feedback": "Metaforik ve güçlendirici geri bildirim..."
         }
       ]
     }
   ]
 }
 
-Write nothing besides JSON.`;
+Sadece JSON yazın.`;
 
-const NAME_PROMPT = `You are a creative naming expert. Create a metaphorical, short, and impressive title suitable for the "KOZA" universe, according to the given story or game content and context.
+const NAME_PROMPT = `Siz yaratıcı bir isimlendirme uzmanısınız. Verilen hikaye veya oyun içeriğine ve bağlamına uygun, "KOZA" evrenine yakışır şekilde metaforik, kısa ve etkileyici bir başlık oluşturun.
 
-Rules:
-1. Return only the title (without quotation marks).
-2. Maximum 3-5 words.
-3. Be in English.
-4. Examples: "Phoenix Rising from Ashes", "Echo of Silence", "Blue Winged Courage".
+Kurallar:
+1. Sadece başlığı döndürün (tırnak işareti olmadan).
+2. Maksimum 3-5 kelime.
+3. TÜRKÇE olsun.
+4. Örnekler: "Küllerinden Doğan Anka", "Sessizliğin Yankısı", "Mavi Kanatlı Cesaret".
 
-Context/Content: `;
+Bağlam/İçerik: `;
 
 // Simple in-memory cache
 const cache = new Map();
@@ -229,14 +232,14 @@ const callGemini = async (prompt, userInput, retries = 3) => {
 
 export const generateStorybook = async (userStory) => {
   if (!userStory || userStory.trim().length < 10) {
-    throw new Error('Please enter at least 10 characters describing your experience');
+    throw new Error('Lütfen deneyiminizi açıklayan en az 10 karakter girin');
   }
   return callGemini(STORY_PROMPT, userStory);
 };
 
 export const refineStorybook = async (existingStory, feedback) => {
   if (!feedback || feedback.trim().length < 5) {
-    throw new Error('Please provide more detailed feedback (at least 5 characters)');
+    throw new Error('Lütfen daha detaylı bir geri bildirim sağlayın (en az 5 karakter)');
   }
   const prompt = REFINE_STORY_PROMPT
     .replace('{{EXISTING_STORY}}', JSON.stringify(existingStory))
@@ -247,7 +250,7 @@ export const refineStorybook = async (existingStory, feedback) => {
 
 export const generateGame = async (userStory) => {
   if (!userStory || userStory.trim().length < 10) {
-    throw new Error('Please enter at least 10 characters describing your experience');
+    throw new Error('Lütfen deneyiminizi açıklayan en az 10 karakter girin');
   }
   return callGemini(GAME_PROMPT, userStory);
 };
@@ -261,12 +264,12 @@ export const generateContentName = async (contentContext) => {
     // Revised NAME_PROMPT above now asks for just text, but callGemini expects JSON.
     // Let's adjust NAME_PROMPT to return JSON: {"title": "The Title"}
 
-    const jsonPrompt = NAME_PROMPT + `\n\nRespond in this JSON format only: { "title": "Generated Title" }`;
+    const jsonPrompt = NAME_PROMPT + `\n\nSadece şu JSON formatında yanıt verin: { "title": "Oluşturulan Başlık" }`;
     const result = await callGemini(jsonPrompt, contentContext);
     return result.title;
   } catch {
-    console.error("Naming failed");
-    return "Transformation Story"; // Fallback
+    console.error("İsimlendirme başarısız");
+    return "Dönüşüm Hikayesi"; // Fallback
   }
 };
 

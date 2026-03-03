@@ -98,7 +98,7 @@ export const NarrativeDomain = {
 
                 return finalResult;
             } catch (error) {
-                console.error('Domain Lifecycle Error:', error);
+                console.error('Anlatı Katmanı Hatası:', error);
                 throw new Error(`Optimizasyon Katmanı Hatası: ${error.message}`);
             } finally {
                 activeRequests.delete(requestId);
@@ -148,7 +148,7 @@ export const NarrativeDomain = {
                     }
                 };
             } catch (error) {
-                console.error('Refinement Domain Error:', error);
+                console.error('Düzenleme Katmanı Hatası:', error);
                 throw new Error(`Hikaye düzenleme hatası: ${error.message}`);
             } finally {
                 activeRequests.delete(requestId);

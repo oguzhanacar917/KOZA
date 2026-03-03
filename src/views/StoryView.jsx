@@ -29,10 +29,10 @@ const StoryHeader = memo(({ title, currentPage, totalPages, onPrev, onNext, onRe
         <div className="flex items-center gap-4">
             <Book size={20} className="text-neutral-400" />
             <h1 className="font-bold text-neutral-800 text-sm tracking-tight truncate max-w-[200px]">{title}</h1>
-            <button onClick={onReset} title="Back to Start" className="flex items-center gap-1 ml-4 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
+            <button onClick={onReset} title="Sıfırla" className="flex items-center gap-1 ml-4 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
                 <RotateCcw size={16} className="text-neutral-400" />
             </button>
-            <button onClick={onJump} title="Go to End" className="flex items-center gap-1 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
+            <button onClick={onJump} title="Sonuna Git" className="flex items-center gap-1 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer">
                 <RotateCw size={16} className="text-neutral-400" />
             </button>
         </div>
@@ -56,7 +56,7 @@ const StoryHeader = memo(({ title, currentPage, totalPages, onPrev, onNext, onRe
             <div className="flex items-center gap-1 ml-1">
                 <button onClick={onToggleAudio} className={`flex items-center gap-2 px-4 py-1.5 rounded-full transition-all text-sm font-bold ${isSpeaking ? 'bg-primary-500 text-white shadow-lg' : 'bg-primary-100 text-primary-600 hover:bg-primary-200'}`}>
                     {isSpeaking ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                    <span>Listen</span>
+                    <span>Dinle</span>
                 </button>
                 <button onClick={onClose} className="p-2 hover:bg-red-50 hover:text-red-500 rounded-lg text-neutral-400 ml-2 transition-colors"><X size={20} /></button>
             </div>
@@ -88,7 +88,7 @@ const StoryPage = memo(({ page, pageNumber, alignment = 'left', onPageClick, aut
             ) : (
                 <div className="flex-1 flex flex-col items-center justify-center animate-pulse text-neutral-300">
                     <Book size={64} className="mb-4 opacity-20" />
-                    <p className="font-serif italic text-lg">Last Page</p>
+                    <p className="font-serif italic text-lg">Son Sayfa</p>
                 </div>
             )}
             <div className={`mt-8 text-sm font-bold text-neutral-300 tabular-nums ${alignment === 'right' ? 'text-right' : 'text-left'}`}>
@@ -101,10 +101,10 @@ const StoryPage = memo(({ page, pageNumber, alignment = 'left', onPageClick, aut
 const StoryCompletionOverlay = memo(({ onClose }) => (
     <div className="absolute inset-0 z-40 bg-white/60 backdrop-blur-md flex items-center justify-center animate-fade-in">
         <div className="text-center p-12 bg-white rounded-[48px] shadow-2xl border border-neutral-100 scale-110">
-            <h3 className="text-3xl font-bold mb-4 text-primary-600">A Great Journey!</h3>
-            <p className="text-neutral-600 mb-8 max-w-xs mx-auto font-medium text-lg">This story has completed its metamorphosis. New stories await you.</p>
+            <h3 className="text-3xl font-bold mb-4 text-primary-600">Harika Bir Yolculuk!</h3>
+            <p className="text-neutral-600 mb-8 max-w-xs mx-auto font-medium text-lg">Bu hikaye başkalaşımını tamamladı. Yeni hikayeler sizi bekliyor.</p>
             <GalaxyButton onClick={onClose} className="!py-6 !px-16 !text-xl !rounded-full shadow-2xl" icon={Check}>
-                Finish and Return
+                Bitir ve Dön
             </GalaxyButton>
         </div>
     </div>
@@ -141,7 +141,7 @@ const StoryView = ({ story, onClose }) => {
         const shareData = { title: story.title, text: `Read this story I created with KOZA: ${story.title}`, url: window.location.href };
         try {
             if (navigator.share) await navigator.share(shareData);
-            else { await navigator.clipboard.writeText(window.location.href); alert("Link copied to clipboard!"); }
+            else { await navigator.clipboard.writeText(window.location.href); alert("Bağlantı kopyalandı!"); }
         } catch (err) { console.error('Share error:', err); }
     }, [story.title]);
 
@@ -158,15 +158,15 @@ const StoryView = ({ story, onClose }) => {
             }, 2000);
         } else {
             setRefinementStatus('error');
-            alert(result.message || "An error occurred.");
+            alert(result.message || "Bir hata oluştu.");
         }
     };
 
     if (!pages.length) return (
         <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-8">
             <div className="bg-white rounded-2xl border border-neutral-200 p-12 text-center shadow-xl">
-                <p className="text-neutral-600 mb-6 font-medium">Story could not be loaded</p>
-                <button onClick={onClose} className="text-primary-600 hover:text-primary-700 font-bold">← Go Back</button>
+                <p className="text-neutral-600 mb-6 font-medium">Hikaye yüklenemedi</p>
+                <button onClick={onClose} className="text-primary-600 hover:text-primary-700 font-bold">← Geri Dön</button>
             </div>
         </div>
     );
@@ -191,7 +191,7 @@ const StoryView = ({ story, onClose }) => {
                     className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all shadow-lg active:scale-95 ${isRefinementOpen ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600 hover:bg-neutral-50'}`}
                 >
                     <Sparkles size={16} />
-                    <span>Edit Story</span>
+                    <span>Hikayeyi Düzenle</span>
                 </button>
 
                 {isRefinementOpen && (
@@ -199,32 +199,32 @@ const StoryView = ({ story, onClose }) => {
                         <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider">
                                 <MessageSquare size={14} />
-                                <span>How shall we change it?</span>
+                                <span>Nasıl değiştirelim?</span>
                             </div>
                             <button onClick={() => setIsRefinementOpen(false)} className="text-neutral-400 hover:text-neutral-600">
                                 <X size={16} />
                             </button>
                         </div>
                         <p className="text-[10px] text-neutral-500 mb-4 leading-relaxed">
-                            E.g.: "Add a side character", "Create a more magical atmosphere" or "Change the ending".
+                            Örn: \"Yan bir karakter ekle\", \"Daha sihirli bir atmosfer yarat\" veya \"Sonunu değiştir\".
                         </p>
                         <MessageBox
                             value={feedback}
                             onChange={setFeedback}
                             onSend={handleRefine}
                             disabled={refinementStatus === 'loading'}
-                            placeholder="Your feedback..."
+                            placeholder="Geri bildiriminiz..."
                         />
                         {refinementStatus === 'loading' && (
                             <div className="mt-4 flex items-center justify-center gap-2 text-indigo-600 font-bold text-xs animate-pulse">
                                 <Loader2 size={16} className="animate-spin" />
-                                <span>KOZA is weaving your story again...</span>
+                                <span>KOZA hikayenizi yeniden örüyor...</span>
                             </div>
                         )}
                         {refinementStatus === 'success' && (
                             <div className="mt-4 flex items-center justify-center gap-2 text-green-600 font-bold text-xs">
                                 <Check size={16} />
-                                <span>Transformation Complete!</span>
+                                <span>Dönüşüm Tamamlandı!</span>
                             </div>
                         )}
                     </div>

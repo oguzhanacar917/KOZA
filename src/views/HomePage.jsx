@@ -10,8 +10,8 @@ import LoginForm from '../components/auth/LoginForm';
 const FeatureCard = memo(({ icon: Icon, title, description, colorClass }) => (
     <div className={`p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-neutral-100 transition-all shadow-sm hover:shadow-xl hover:-translate-y-1 will-change-transform ${colorClass}`}>
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 
-            ${colorClass.includes('secondary') ? 'bg-secondary-500/10 text-secondary-600' :
-                colorClass.includes('primary-900') ? 'bg-primary-500/5 text-primary-500' :
+            ${colorClass.includes('secondary') ? 'bg-secondary-400/10 text-secondary-600' :
+                colorClass.includes('primary-500') ? 'bg-primary-500/5 text-primary-500' :
                     'bg-primary-500/10 text-primary-600'}`}>
             <Icon size={24} />
         </div>
@@ -22,9 +22,9 @@ const FeatureCard = memo(({ icon: Icon, title, description, colorClass }) => (
 
 const HeroSection = memo(({ onStart }) => (
     <div className="text-center mb-16 animate-fade-in-up flex flex-col items-center">
-        <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-neutral-900 uppercase">
-            <span className="block italic text-neutral-400">Chaos is Noise.</span>
-            <span className="bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 bg-clip-text text-transparent">KOZA is Signal.</span>
+        <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight tracking-tighter text-neutral-900 italic">
+            <span className="block">Zorbalık Seni Kırmasın</span>
+            <span className="bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 bg-clip-text text-transparent">Seni Güçlendirmeli</span>
         </h1>
 
         <div className="w-full max-w-5xl relative mb-12 animate-float will-change-transform">
@@ -36,9 +36,9 @@ const HeroSection = memo(({ onStart }) => (
             </div>
         </div>
 
-        <p className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto font-bold leading-relaxed mb-12 opacity-80 border-l-2 border-primary-500 pl-6 text-left">
-            Eliminate cognitive entropy. Decompress narrative debt. <br className="hidden md:block" />
-            Establish sovereign mental agency through recursive structural auditing.
+        <p className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto font-bold leading-relaxed mb-12 opacity-80">
+            Zorbalığa karşı verdiğiniz mücadelede yalnız değilsiniz. <br className="hidden md:block" />
+            Koza'dan çıkın, hikayenizi yeniden yazın ve dönüşümün gücünü keşfedin.
         </p>
 
         <button
@@ -46,7 +46,7 @@ const HeroSection = memo(({ onStart }) => (
             className="group relative flex items-center justify-center gap-3 px-12 py-5 bg-neutral-900 text-white rounded-full font-black transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-neutral-900/20 cursor-pointer overflow-hidden"
         >
             <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-secondary-500/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
-            <span className="relative z-10 uppercase tracking-widest">Establish Sovereignty</span>
+            <span className="relative z-10 uppercase tracking-widest">Yolculuğa Başla</span>
             <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
         </button>
     </div>
@@ -61,13 +61,13 @@ const HomePage = () => {
     const closeLogin = useCallback(() => setShowLogin(false), []);
 
     const features = useMemo(() => [
-        { icon: Zap, title: "Audits", description: "Daily structural decompression of narrative vectors.", colorClass: "hover:border-secondary-500" },
-        { icon: Heart, title: "Precision", description: "Eliminate emotional noise with 99.9% structural accuracy.", colorClass: "hover:border-primary-500" },
-        { icon: Shield, title: "Privacy", description: "End-to-end encrypted cognitive data vault.", colorClass: "hover:border-primary-600" }
+        { icon: Zap, title: "Hikayeler", description: "Negatifliği güce dönüştüren, her gün yeni bir hikaye.", colorClass: "hover:border-secondary-500" },
+        { icon: Heart, title: "Topluluk", description: "Aynı yolu yürüyen binlerce kişiyle birlikte.", colorClass: "hover:border-primary-500" },
+        { icon: Shield, title: "Güvenlik", description: "Verileriniz uçtan uca şifrelenmiştir ve tamamen güvendedir.", colorClass: "hover:border-primary-600" }
     ], []);
 
     return (
-        <div className="min-h-screen bg-[#FDFDFD] text-[#1A1A1A] font-sans selection:bg-primary-100 selection:text-primary-600 overflow-x-hidden">
+        <div className="min-h-screen bg-[#FDFDFD] text-[#1A1A1A] font-sans selection:bg-primary-100 overflow-x-hidden">
             {/* Background Effects */}
             <div className="fixed inset-0 z-0 opacity-40 will-change-opacity pointer-events-none">
                 <TransformationCanvas color="#219EBC" intensity={0.08} active={!showLogin} />
@@ -100,7 +100,7 @@ const HomePage = () => {
             {error && isAdmin && (
                 <div className="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white text-neutral-900 px-8 py-4 rounded-2xl shadow-2xl z-[100] animate-slide-up flex items-center gap-4 border border-red-50 will-change-transform">
                     <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
-                    <span className="font-black text-sm uppercase tracking-tighter">System:</span>
+                    <span className="font-black text-sm uppercase tracking-tighter">Sistem:</span>
                     <span className="font-bold text-sm">{error}</span>
                     <button onClick={() => setError(null)} className="ml-4 text-neutral-400 hover:text-neutral-900 font-bold">✕</button>
                 </div>
@@ -109,12 +109,12 @@ const HomePage = () => {
             <footer className="py-24 border-t border-neutral-100 relative z-10 bg-neutral-50/20">
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
                     <div className="flex items-center gap-4 text-neutral-300 text-[10px] font-black tracking-[0.4em] uppercase opacity-50">
-                        KOZA DESIGN SYSTEMS // SCALE HARDENED // 2026
+                        KOZA TASARIM SİSTEMLERİ // 2026
                     </div>
                     <div className="flex items-center gap-10 text-neutral-400 text-[10px] font-black tracking-[0.2em] uppercase">
-                        <a href="#" className="hover:text-primary-600 transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-primary-600 transition-colors">Terms</a>
-                        <a href="#" className="hover:text-primary-600 transition-colors">Security</a>
+                        <a href="#" className="hover:text-primary-600 transition-colors">Gizlilik</a>
+                        <a href="#" className="hover:text-primary-600 transition-colors">Şartlar</a>
+                        <a href="#" className="hover:text-primary-600 transition-colors">Güvenlik</a>
                     </div>
                 </div>
             </footer>

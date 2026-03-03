@@ -547,7 +547,7 @@ const StoryHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onReset,
-                        title: "Back to Start",
+                        title: "Sıfırla",
                         className: "flex items-center gap-1 ml-4 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$rotate$2d$ccw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RotateCcw$3e$__["RotateCcw"], {
                             size: 16,
@@ -564,7 +564,7 @@ const StoryHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: onJump,
-                        title: "Go to End",
+                        title: "Sonuna Git",
                         className: "flex items-center gap-1 py-1 px-2 hover:bg-neutral-50 rounded-lg transition-colors cursor-pointer",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$rotate$2d$cw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RotateCw$3e$__["RotateCw"], {
                             size: 16,
@@ -719,7 +719,7 @@ const StoryHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project
                                         columnNumber: 59
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: "Listen"
+                                        children: "Dinle"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/StoryView.jsx",
                                         lineNumber: 59,
@@ -831,7 +831,7 @@ const StoryPage = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-serif italic text-lg",
-                                children: "Last Page"
+                                children: "Son Sayfa"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/StoryView.jsx",
                                 lineNumber: 91,
@@ -871,7 +871,7 @@ const StoryCompletionOverlay = /*#__PURE__*/ (0, __TURBOPACK__imported__module__
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                     className: "text-3xl font-bold mb-4 text-primary-600",
-                    children: "A Great Journey!"
+                    children: "Harika Bir Yolculuk!"
                 }, void 0, false, {
                     fileName: "[project]/src/views/StoryView.jsx",
                     lineNumber: 104,
@@ -879,7 +879,7 @@ const StoryCompletionOverlay = /*#__PURE__*/ (0, __TURBOPACK__imported__module__
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "text-neutral-600 mb-8 max-w-xs mx-auto font-medium text-lg",
-                    children: "This story has completed its metamorphosis. New stories await you."
+                    children: "Bu hikaye başkalaşımını tamamladı. Yeni hikayeler sizi bekliyor."
                 }, void 0, false, {
                     fileName: "[project]/src/views/StoryView.jsx",
                     lineNumber: 105,
@@ -889,7 +889,7 @@ const StoryCompletionOverlay = /*#__PURE__*/ (0, __TURBOPACK__imported__module__
                     onClick: onClose,
                     className: "!py-6 !px-16 !text-xl !rounded-full shadow-2xl",
                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"],
-                    children: "Finish and Return"
+                    children: "Bitir ve Dön"
                 }, void 0, false, {
                     fileName: "[project]/src/views/StoryView.jsx",
                     lineNumber: 106,
@@ -975,7 +975,7 @@ const StoryView = ({ story, onClose })=>{
                 if (navigator.share) await navigator.share(shareData);
                 else {
                     await navigator.clipboard.writeText(window.location.href);
-                    alert("Link copied to clipboard!");
+                    alert("Bağlantı kopyalandı!");
                 }
             } catch (err) {
                 console.error('Share error:', err);
@@ -997,7 +997,7 @@ const StoryView = ({ story, onClose })=>{
             }, 2000);
         } else {
             setRefinementStatus('error');
-            alert(result.message || "An error occurred.");
+            alert(result.message || "Bir hata oluştu.");
         }
     };
     if (!pages.length) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1007,7 +1007,7 @@ const StoryView = ({ story, onClose })=>{
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "text-neutral-600 mb-6 font-medium",
-                    children: "Story could not be loaded"
+                    children: "Hikaye yüklenemedi"
                 }, void 0, false, {
                     fileName: "[project]/src/views/StoryView.jsx",
                     lineNumber: 168,
@@ -1016,7 +1016,7 @@ const StoryView = ({ story, onClose })=>{
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                     onClick: onClose,
                     className: "text-primary-600 hover:text-primary-700 font-bold",
-                    children: "← Go Back"
+                    children: "← Geri Dön"
                 }, void 0, false, {
                     fileName: "[project]/src/views/StoryView.jsx",
                     lineNumber: 169,
@@ -1085,7 +1085,7 @@ const StoryView = ({ story, onClose })=>{
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                children: "Edit Story"
+                                children: "Hikayeyi Düzenle"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/StoryView.jsx",
                                 lineNumber: 194,
@@ -1114,7 +1114,7 @@ const StoryView = ({ story, onClose })=>{
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                children: "How shall we change it?"
+                                                children: "Nasıl değiştirelim?"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/views/StoryView.jsx",
                                                 lineNumber: 202,
@@ -1149,7 +1149,7 @@ const StoryView = ({ story, onClose })=>{
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-[10px] text-neutral-500 mb-4 leading-relaxed",
-                                children: 'E.g.: "Add a side character", "Create a more magical atmosphere" or "Change the ending".'
+                                children: 'Örn: \\"Yan bir karakter ekle\\", \\"Daha sihirli bir atmosfer yarat\\" veya \\"Sonunu değiştir\\".'
                             }, void 0, false, {
                                 fileName: "[project]/src/views/StoryView.jsx",
                                 lineNumber: 208,
@@ -1160,7 +1160,7 @@ const StoryView = ({ story, onClose })=>{
                                 onChange: setFeedback,
                                 onSend: handleRefine,
                                 disabled: refinementStatus === 'loading',
-                                placeholder: "Your feedback..."
+                                placeholder: "Geri bildiriminiz..."
                             }, void 0, false, {
                                 fileName: "[project]/src/views/StoryView.jsx",
                                 lineNumber: 211,
@@ -1178,7 +1178,7 @@ const StoryView = ({ story, onClose })=>{
                                         columnNumber: 33
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: "KOZA is weaving your story again..."
+                                        children: "KOZA hikayenizi yeniden örüyor..."
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/StoryView.jsx",
                                         lineNumber: 221,
@@ -1201,7 +1201,7 @@ const StoryView = ({ story, onClose })=>{
                                         columnNumber: 33
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: "Transformation Complete!"
+                                        children: "Dönüşüm Tamamlandı!"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/StoryView.jsx",
                                         lineNumber: 227,

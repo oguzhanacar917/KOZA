@@ -75,9 +75,9 @@ const GalaxyLabTab = () => {
             <GalaxyContainer>
                 <div className="mb-12 text-center">
                     <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 mb-4 animate-float">
-                        Galaxy Component Lab
+                        Galaxy Bileşen Laboratuvarı
                     </h1>
-                    <p className="text-neutral-500">Exhibit of 40+ Premium Glassmorphic Components</p>
+                    <p className="text-neutral-500">40'tan Fazla Premium Glassmorphic Bileşen Sergisi</p>
                 </div>
 
                 <GalaxyTabs
@@ -85,50 +85,50 @@ const GalaxyLabTab = () => {
                     activeTab={activeTab}
                     onChange={setActiveTab}
                     tabs={[
-                        { id: 'inputs', label: 'Inputs', icon: Zap },
-                        { id: 'feedback', label: 'Feedback', icon: Bell },
-                        { id: 'data', label: 'Data', icon: Activity },
-                        { id: 'nav', label: 'Navigation', icon: Map }
+                        { id: 'inputs', label: 'Girdiler', icon: Zap },
+                        { id: 'feedback', label: 'Geri Bildirim', icon: Bell },
+                        { id: 'data', label: 'Veri', icon: Activity },
+                        { id: 'nav', label: 'Gezinti', icon: Map }
                     ]}
                 />
 
                 {activeTab === 'inputs' && (
                     <div className="space-y-8 animate-fade-in">
                         <GalaxyPaper elevation={2}>
-                            <h2 className="text-2xl font-bold mb-6 text-neutral-800">Form Controls</h2>
+                            <h2 className="text-2xl font-bold mb-6 text-neutral-800">Form Kontrolleri</h2>
                             <GalaxyGrid cols={2}>
                                 <div className="space-y-4">
                                     <GalaxyToggle checked={toggle} onChange={setToggle} />
-                                    <GalaxyCheckbox label="Liquid Checkbox" checked={check} onChange={setCheck} />
+                                    <GalaxyCheckbox label="Likit Onay Kutusu" checked={check} onChange={setCheck} />
                                     <div className="flex gap-4">
-                                        <GalaxyRadio name="g-radio" value="1" label="Option A" checked={radio === '1'} onChange={setRadio} />
-                                        <GalaxyRadio name="g-radio" value="2" label="Option B" checked={radio === '2'} onChange={setRadio} />
+                                        <GalaxyRadio name="g-radio" value="1" label="Seçenek A" checked={radio === '1'} onChange={setRadio} />
+                                        <GalaxyRadio name="g-radio" value="2" label="Seçenek B" checked={radio === '2'} onChange={setRadio} />
                                     </div>
                                     <GalaxyRating value={rating} onChange={setRating} />
                                 </div>
                                 <div className="space-y-4">
-                                    <GalaxyInput placeholder="Standard Input" />
+                                    <GalaxyInput placeholder="Standart Girdi" />
                                     <GalaxySelect
                                         value={select}
                                         onChange={setSelect}
                                         options={[
-                                            { value: 'option1', label: 'Glass Option 1' },
-                                            { value: 'option2', label: 'Glass Option 2' },
-                                            { value: 'option3', label: 'Glass Option 3' }
+                                            { value: 'option1', label: 'Cam Seçenek 1' },
+                                            { value: 'option2', label: 'Cam Seçenek 2' },
+                                            { value: 'option3', label: 'Cam Seçenek 3' }
                                         ]}
                                     />
-                                    <GalaxyColorPicker value={color} onChange={setColor} label="Accent Color" />
+                                    <GalaxyColorPicker value={color} onChange={setColor} label="Vurgu Rengi" />
                                 </div>
                             </GalaxyGrid>
                             <GalaxyDivider />
                             <GalaxyGrid cols={2}>
                                 <div className="space-y-4">
-                                    <label className="text-sm font-bold text-neutral-500 uppercase">Range Slider</label>
+                                    <label className="text-sm font-bold text-neutral-500 uppercase">Aralık Sürgüsü</label>
                                     <GalaxySlider value={slider} onChange={setSlider} />
                                     <GalaxyRange value={range} onChange={setRange} />
                                 </div>
                                 <div>
-                                    <GalaxyTextarea placeholder="Type something magical..." value={text} onChange={setText} />
+                                    <GalaxyTextarea placeholder="Sihirli bir şeyler yazın..." value={text} onChange={setText} />
                                 </div>
                             </GalaxyGrid>
                             <div className="mt-8">
@@ -142,14 +142,14 @@ const GalaxyLabTab = () => {
                     <div className="space-y-8 animate-fade-in">
                         <GalaxyGrid cols={2}>
                             <GalaxyPaper>
-                                <h3 className="text-lg font-bold mb-4">Alerts</h3>
+                                <h3 className="text-lg font-bold mb-4">Uyarılar</h3>
                                 <div className="space-y-4">
-                                    <GalaxyAlert type="info" title="Information">This is a glass alert.</GalaxyAlert>
-                                    <GalaxyAlert type="success" title="Success">Operation completed successfully.</GalaxyAlert>
+                                    <GalaxyAlert type="info" title="Bilgi">Bu bir cam uyarıdır.</GalaxyAlert>
+                                    <GalaxyAlert type="success" title="Başarı">İşlem başarıyla tamamlandı.</GalaxyAlert>
                                 </div>
                             </GalaxyPaper>
                             <GalaxyPaper>
-                                <h3 className="text-lg font-bold mb-4">Loading States</h3>
+                                <h3 className="text-lg font-bold mb-4">Yükleme Durumları</h3>
                                 <div className="flex items-center gap-8 justify-center py-8">
                                     <GalaxySpinner size="small" />
                                     <GalaxySpinner size="medium" />
@@ -163,18 +163,18 @@ const GalaxyLabTab = () => {
                         </GalaxyGrid>
 
                         <GalaxyPaper>
-                            <h3 className="text-lg font-bold mb-4">Overlays</h3>
+                            <h3 className="text-lg font-bold mb-4">Katmanlar</h3>
                             <div className="flex gap-4">
-                                <GalaxyButton onClick={() => setModalOpen(true)}>Open Modal</GalaxyButton>
-                                <GalaxyButton variant="secondary" onClick={() => setDrawerOpen(true)}>Open Drawer</GalaxyButton>
-                                <GalaxyTooltip content="I am floating!">
-                                    <GalaxyButton variant="secondary">Hover Me</GalaxyButton>
+                                <GalaxyButton onClick={() => setModalOpen(true)}>Modeli Aç</GalaxyButton>
+                                <GalaxyButton variant="secondary" onClick={() => setDrawerOpen(true)}>Çekmeceyi Aç</GalaxyButton>
+                                <GalaxyTooltip content="Yüzüyorum!">
+                                    <GalaxyButton variant="secondary">Üzerime Gel</GalaxyButton>
                                 </GalaxyTooltip>
                             </div>
                         </GalaxyPaper>
 
                         <GalaxyPaper>
-                            <h3 className="text-lg font-bold mb-4">Progress</h3>
+                            <h3 className="text-lg font-bold mb-4">İlerleme</h3>
                             <GalaxyProgress value={slider} className="mb-4" />
                             <GalaxyProgress value={75} size="small" />
                         </GalaxyPaper>
@@ -184,9 +184,9 @@ const GalaxyLabTab = () => {
                 {activeTab === 'data' && (
                     <div className="space-y-8 animate-fade-in">
                         <GalaxyGrid cols={3}>
-                            <GalaxyStat label="Total Stars" value={1234} icon={Star} />
-                            <GalaxyStat label="Active Users" value={856} icon={User} suffix="k" />
-                            <GalaxyStat label="SYSTEM STATUS" value="99.9" icon={Activity} suffix="%" />
+                            <GalaxyStat label="Toplam Yıldız" value={1234} icon={Star} />
+                            <GalaxyStat label="Aktif Kullanıcılar" value={856} icon={User} suffix="k" />
+                            <GalaxyStat label="SİSTEM DURUMU" value="99.9" icon={Activity} suffix="%" />
                         </GalaxyGrid>
 
                         <GalaxyPaper>
@@ -195,7 +195,7 @@ const GalaxyLabTab = () => {
                                 <div>
                                     <h3 className="text-2xl font-bold">Dr. Galaxy</h3>
                                     <div className="flex gap-2 mt-2">
-                                        <GalaxyBadge variant="success">Admin</GalaxyBadge>
+                                        <GalaxyBadge variant="success">Yönetici</GalaxyBadge>
                                         <GalaxyBadge variant="primary" icon={Star}>Pro</GalaxyBadge>
                                     </div>
                                 </div>
@@ -215,9 +215,9 @@ const GalaxyLabTab = () => {
                         <GalaxyGrid cols={2}>
                             <GalaxyPaper>
                                 <GalaxyList>
-                                    <GalaxyListItem title="Notification 1" subtitle="Just now" icon={Bell} />
-                                    <GalaxyListItem title="New Message" subtitle="2 mins ago" icon={User} />
-                                    <GalaxyListItem title="System Update" subtitle="1 hour ago" icon={Settings} />
+                                    <GalaxyListItem title="Bildirim 1" subtitle="Şimdi" icon={Bell} />
+                                    <GalaxyListItem title="Yeni Mesaj" subtitle="2 dk önce" icon={User} />
+                                    <GalaxyListItem title="Sistem Güncellemesi" subtitle="1 saat önce" icon={Settings} />
                                 </GalaxyList>
                             </GalaxyPaper>
                             <GalaxyPaper>
@@ -237,9 +237,9 @@ const GalaxyLabTab = () => {
                     <div className="space-y-8 animate-fade-in">
                         <GalaxyPaper>
                             <GalaxyBreadcrumb items={[
-                                { id: 'home', label: 'Home' },
-                                { id: 'components', label: 'Components' },
-                                { id: 'lab', label: 'Lab' }
+                                { id: 'home', label: 'Ana Sayfa' },
+                                { id: 'components', label: 'Bileşenler' },
+                                { id: 'lab', label: 'Laboratuvar' }
                             ]} />
                             <GalaxyDivider />
                             <GalaxyStepper steps={['Design', 'Build', 'Launch']} currentStep={1} />
@@ -250,21 +250,21 @@ const GalaxyLabTab = () => {
                         </GalaxyPaper>
 
                         <GalaxyAccordion items={[
-                            { title: 'What is Galaxy?', content: 'Galaxy is a premium glassmorphic component system.' },
-                            { title: 'How do I use it?', content: 'Just import the components and enjoy the beauty.' },
-                            { title: 'Is it fast?', content: 'Yes, powered by hardware-accelerated CSS animations.' }
+                            { title: 'Galaxy nedir?', content: 'Galaxy, premium bir glassmorphic bileşen sistemidir.' },
+                            { title: 'Nasıl kullanırım?', content: 'Sadece bileşenleri içe aktarın ve güzelliğin tadını çıkarın.' },
+                            { title: 'Hızlı mı?', content: 'Evet, donanım hızlandırmalı CSS animasyonları ile desteklenmektedir.' }
                         ]} />
                     </div>
                 )}
             </GalaxyContainer>
 
             {/* Modals & Drawers */}
-            <GalaxyModal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Galaxy Modal">
-                <p>This is a blurred backdrop modal. It looks very premium.</p>
+            <GalaxyModal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Galaxy Modeli">
+                <p>Bu bulanık arka planlı bir modeldir. Çok premium görünür.</p>
             </GalaxyModal>
 
-            <GalaxyDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} title="Galaxy Drawer">
-                <p>Side panels are great for extra settings or details.</p>
+            <GalaxyDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} title="Galaxy Çekmecesi">
+                <p>Yan paneller, ekstra ayarlar veya detaylar için harikadır.</p>
             </GalaxyDrawer>
         </div>
     );

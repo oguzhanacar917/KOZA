@@ -1824,21 +1824,21 @@ const DEFAULT_USER = {
     totalXP: 0,
     dailyStreak: 0,
     lastVisit: null,
-    title: "Newcomer",
+    title: "Yeni Gelen",
     badges: [
         {
             id: 1,
-            name: "First Step",
+            name: "İlk Adım",
             unlocked: false
         },
         {
             id: 2,
-            name: "Storyteller",
+            name: "Hikayeci",
             unlocked: false
         },
         {
             id: 3,
-            name: "Transformation Specialist",
+            name: "Dönüşüm Uzmanı",
             unlocked: false
         }
     ],
@@ -1923,13 +1923,10 @@ const UserProvider = ({ children })=>{
             } else if (user.xp > prevUser.xp) {
                 const diff = user.xp - prevUser.xp;
                 if (diff > 0) {
-                    // We don't have the 'reason' here easily unless we store it in machine context 
-                    // or listen to the event. For now, generic reason or passed via a side-channel?
-                    // Actually, we can just say "XP Awarded".
                     setLastUserEvent({
                         type: 'xp',
                         amount: diff,
-                        reason: "Achievement"
+                        reason: "Başarım"
                     });
                 }
             }
@@ -1948,7 +1945,7 @@ const UserProvider = ({ children })=>{
                 const newAch = newIds.map({
                     "UserProvider.useEffect.newAch": (id)=>({
                             id,
-                            name: "New Achievement",
+                            name: "Yeni Başarım",
                             icon: "🏆"
                         })
                 }["UserProvider.useEffect.newAch"]); // Placeholder
@@ -2183,7 +2180,7 @@ const UserProvider = ({ children })=>{
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/UserContext.jsx",
-        lineNumber: 280,
+        lineNumber: 277,
         columnNumber: 12
     }, ("TURBOPACK compile-time value", void 0));
 // Note: The original returned children wrapped in provider. 

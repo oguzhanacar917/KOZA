@@ -18,7 +18,7 @@ const SidebarItem = memo(({ story, onClick, onDelete }) => {
                 </div>
                 <div className="flex-1 min-w-0">
                     <h4 className="font-bold text-sm text-neutral-900 break-words leading-snug">
-                        {story.title || 'Untitled Transformation'}
+                        {story.title || 'İsimsiz Dönüşüm'}
                     </h4>
                     <p className="text-[10px] font-bold text-neutral-400 mt-0.5 uppercase tracking-widest">
                         {new Date(story.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
@@ -30,17 +30,17 @@ const SidebarItem = memo(({ story, onClick, onDelete }) => {
             {confirmOpen ? (
                 <div className="mt-2 flex items-center gap-2 bg-red-50 border border-red-100 rounded-lg p-2">
                     <AlertTriangle size={12} className="text-red-500 shrink-0" />
-                    <span className="text-[10px] text-red-600 font-bold flex-1">Delete?</span>
+                    <span className="text-[10px] text-red-600 font-bold flex-1">Silinsin mi?</span>
                     <button
                         onClick={(e) => { e.stopPropagation(); onDelete(e, story.id); setConfirmOpen(false); }}
                         className="px-2 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold hover:bg-red-600"
-                        aria-label="Confirm delete"
-                    >Yes</button>
+                        aria-label="Silmeyi onayla"
+                    >Evet</button>
                     <button
                         onClick={(e) => { e.stopPropagation(); setConfirmOpen(false); }}
                         className="px-2 py-0.5 bg-neutral-200 text-neutral-600 rounded text-[10px] font-bold hover:bg-neutral-300"
-                        aria-label="Cancel delete"
-                    >No</button>
+                        aria-label="Silmeyi iptal et"
+                    >Hayır</button>
                 </div>
             ) : (
                 <button
@@ -89,12 +89,12 @@ const Sidebar = () => {
 
             <div className="flex-1 overflow-y-auto px-3 pb-4 custom-scrollbar">
                 <h3 className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-4 px-3 mt-6">
-                    Your Legacy
+                    Mirasın
                 </h3>
 
                 {savedStories.length === 0 ? (
                     <div className="text-center py-12 text-neutral-400 px-4 italic font-serif opacity-50">
-                        <p className="text-sm">You don't have a metamorphosis story yet.</p>
+                        <p className="text-sm">Henüz bir dönüşüm hikayeniz yok.</p>
                     </div>
                 ) : (
                     <div className="space-y-1">
@@ -109,7 +109,7 @@ const Sidebar = () => {
                     className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-neutral-500 hover:bg-red-50 hover:text-red-600 transition-colors text-sm font-bold"
                 >
                     <LogOut size={20} />
-                    <span>Sign Out</span>
+                    <span>Çıkış Yap</span>
                 </button>
             </div>
         </aside>

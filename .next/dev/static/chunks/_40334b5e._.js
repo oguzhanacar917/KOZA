@@ -481,7 +481,7 @@ const GameHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "text-[10px] text-neutral-500 uppercase tracking-widest font-bold",
-                            children: "Game Mode"
+                            children: "Oyun Modu"
                         }, void 0, false, {
                             fileName: "[project]/src/views/GameView.jsx",
                             lineNumber: 15,
@@ -586,7 +586,7 @@ const LevelContent = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "inline-block px-4 py-1.5 bg-neutral-100 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 border border-neutral-200 text-neutral-600",
                         children: [
-                            "Level ",
+                            "Seviye ",
                             currentLevel + 1,
                             " / ",
                             totalLevels
@@ -716,7 +716,7 @@ const CompletionCard = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                     className: "text-4xl font-extrabold mb-2 text-neutral-900",
-                    children: "Game Completed!"
+                    children: "Oyun Tamamlandı!"
                 }, void 0, false, {
                     fileName: "[project]/src/views/GameView.jsx",
                     lineNumber: 99,
@@ -724,7 +724,7 @@ const CompletionCard = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "text-neutral-600 mb-8",
-                    children: "You did an excellent job."
+                    children: "Mükemmel bir iş çıkardın."
                 }, void 0, false, {
                     fileName: "[project]/src/views/GameView.jsx",
                     lineNumber: 100,
@@ -738,7 +738,7 @@ const CompletionCard = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-sm text-neutral-500 mb-1",
-                                    children: "Total Score"
+                                    children: "Toplam Puan"
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/GameView.jsx",
                                     lineNumber: 104,
@@ -763,7 +763,7 @@ const CompletionCard = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-sm text-neutral-500 mb-1",
-                                    children: "Levels"
+                                    children: "Seviyeler"
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/GameView.jsx",
                                     lineNumber: 108,
@@ -793,7 +793,7 @@ const CompletionCard = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
                     onClick: onClose,
                     className: "w-full !py-4 !text-lg !rounded-xl shadow-lg",
                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"],
-                    children: "Adventure Completed"
+                    children: "Macera Tamamlandı"
                 }, void 0, false, {
                     fileName: "[project]/src/views/GameView.jsx",
                     lineNumber: 113,
