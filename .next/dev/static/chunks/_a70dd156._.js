@@ -1115,31 +1115,30 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "use strict";
 
 /**
- * ClarityService: Core engine for the Sovereign Mind retention loop.
- * Calculates "Entropy Reduction" and "Clarity Index" based on narrative structuralization.
+ * ClarityService: Koza gelişim ve dönüşüm motoru.
+ * Hikaye yapılandırmasına dayalı olarak "Dönüşüm Oranı" ve "Gelişim Puanı" hesaplar.
  */ __turbopack_context__.s([
     "ClarityService",
     ()=>ClarityService
 ]);
 const ClarityService = {
     /**
-     * Calculates the Clarity Index (formerly XP) based on the structural quality of the input/output.
-     * @param {string} input - Raw narrative data.
-     * @param {object} analysis - The structuralized output from the AI.
-     * @returns {number} The amount of Clarity Index gained.
+     * Gelişim Puanını (eski adıyla XP) hesaplar.
+     * @param {string} input - Ham anlatı verisi.
+     * @param {object} analysis - AI tarafından oluşturulan yapılandırılmış çıktı.
+     * @returns {number} Kazanılan Gelişim Puanı.
      */ calculateClarityGain: (input, analysis)=>{
-        const inputWeight = Math.min(Math.floor(input.length / 50), 50); // Reward depth, cap at 50
+        const inputWeight = Math.min(Math.floor(input.length / 50), 50); // Derinliği ödüllendir, 50 ile sınırla
         const signalStrength = analysis?.actionPoints?.length ? analysis.actionPoints.length * 10 : 20;
-        const entropyReductionBonus = 50; // Flat bonus for successful structuralization
-        return inputWeight + signalStrength + entropyReductionBonus;
+        const transformationBonus = 50; // Başarılı dönüşüm için sabit bonus
+        return inputWeight + signalStrength + transformationBonus;
     },
     /**
-     * Generates a "Cognitive Evolution" metric for the user.
-     * This simulates the "Self-mastery" and "Competence validation" progression.
+     * Kullanıcı için "Dönüşüm Oranı" metriği üretir.
      */ getEntropyReductionScore: (userStats)=>{
         const baseLevel = userStats?.storiesCreated || 0;
         const multiplier = userStats?.xp || 0;
-        // Return a normalized "Percentage of Chaos Controlled"
+        // "Kontrol Edilen Kaos Yüzdesi"ni döndür
         return Math.min(Math.round(baseLevel * 2 + multiplier / 1000), 99.9);
     }
 };
@@ -1881,7 +1880,7 @@ const CreateHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "galaxy-badge primary mb-6 group cursor-default border-neutral-800 bg-neutral-900/50 text-neutral-300",
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$zap$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Zap$3e$__["Zap"], {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"], {
                         size: 14,
                         className: "text-amber-500"
                     }, void 0, false, {
@@ -1890,7 +1889,7 @@ const CreateHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "Sovereign Cognitive Auditing"
+                        children: "Yeni Bir Hikaye Başlat"
                     }, void 0, false, {
                         fileName: "[project]/src/tabs/CreateTab.jsx",
                         lineNumber: 27,
@@ -1904,7 +1903,7 @@ const CreateHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                 className: "text-6xl font-black mb-4 tracking-tight uppercase text-neutral-900",
-                children: "Deneyimi Yapılandır"
+                children: "Dönüşümü Başlat"
             }, void 0, false, {
                 fileName: "[project]/src/tabs/CreateTab.jsx",
                 lineNumber: 29,
@@ -1912,7 +1911,7 @@ const CreateHeader = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: "text-neutral-500 text-lg font-medium max-w-xl mx-auto leading-relaxed border-l-2 border-neutral-200 pl-6 text-left",
-                children: "Karmaşık anlatıları eyleme geçirilebilir sinyallere dönüştürün. Karmaşayı en aza indirin."
+                children: "Zorlukları güce, acıyı hikayeye dönüştürün. Yalnız değilsiniz."
             }, void 0, false, {
                 fileName: "[project]/src/tabs/CreateTab.jsx",
                 lineNumber: 32,
@@ -1934,7 +1933,7 @@ const StatsSection = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$galaxy$2f$GalaxyStat$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$book$2d$open$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BookOpen$3e$__["BookOpen"],
-                    label: "Yapılandırılmış Anlatılar",
+                    label: "Tamamlanan Hikayeler",
                     value: user?.storiesCreated || 0
                 }, void 0, false, {
                     fileName: "[project]/src/tabs/CreateTab.jsx",
@@ -1943,7 +1942,7 @@ const StatsSection = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$galaxy$2f$GalaxyStat$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$zap$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Zap$3e$__["Zap"],
-                    label: "Netlik Endeksi",
+                    label: "Gelişim Puanı",
                     value: user?.xp || 0
                 }, void 0, false, {
                     fileName: "[project]/src/tabs/CreateTab.jsx",
@@ -1952,7 +1951,7 @@ const StatsSection = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$galaxy$2f$GalaxyStat$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                     icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chart$2d$column$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BarChart3$3e$__["BarChart3"],
-                    label: "Azaltılmış Karmaşa",
+                    label: "Dönüşüm Oranı",
                     value: `${entropyScore}%`
                 }, void 0, false, {
                     fileName: "[project]/src/tabs/CreateTab.jsx",
@@ -1986,7 +1985,7 @@ const CreateTab = ()=>{
             if (!activeStory.trim() || isProcessing) return;
             setError(null);
             setIsProcessing(true);
-            setStage('Anlatı vektörleri çözümleniyor...');
+            setStage('Hikayeniz işleniyor...');
             try {
                 const result = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$domain$2f$narrativeDomain$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["NarrativeDomain"].processNarrativeRequest(activeStory, creationMode);
                 if (result.isSafetyTriggered) {
@@ -2002,8 +2001,8 @@ const CreateTab = ()=>{
                 });
                 saveStory(data);
                 const clarityGain = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$ClarityService$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ClarityService"].calculateClarityGain(activeStory, data);
-                awardXP(clarityGain, creationMode === 'story' ? 'Anlatı yapılandırıldı' : 'Mantık simülasyonu oluşturuldu');
-                addToast('success', 'Netlik Arttı', `+${clarityGain} Netlik Endeksi`);
+                awardXP(clarityGain, creationMode === 'story' ? 'Hikaye tamamlandı' : 'Oyun oluşturuldu');
+                addToast('success', 'Gelişim Kaydedildi', `+${clarityGain} Gelişim Puanı`);
             } catch (error) {
                 console.error('Generation failed:', error);
                 setError(error.message || 'An error occurred. Please try again.');
@@ -2062,12 +2061,12 @@ const CreateTab = ()=>{
                                 tabs: [
                                     {
                                         id: 'story',
-                                        label: 'Yapısal Denetim',
+                                        label: 'Hikaye Modu',
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$book$2d$open$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BookOpen$3e$__["BookOpen"]
                                     },
                                     {
                                         id: 'game',
-                                        label: 'Mantık Simülasyonu',
+                                        label: 'Oyun Modu',
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$gamepad$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Gamepad2$3e$__["Gamepad2"]
                                     }
                                 ]
@@ -2087,7 +2086,7 @@ const CreateTab = ()=>{
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$galaxy$2f$GalaxyTextarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     value: activeStory,
                                     onChange: setActiveStory,
-                                    placeholder: creationMode === 'story' ? "Yapısal çözümleme için ham anlatı verilerini girin..." : "Mantık simülasyonu için bilişsel zorlukları girin...",
+                                    placeholder: creationMode === 'story' ? "Yaşadıklarınızı anlatın, birlikte dönüştürelim..." : "Karşılaştığınız engelleri yazın, bir oyuna çevirelim...",
                                     disabled: isProcessing,
                                     minHeight: "150px"
                                 }, void 0, false, {
@@ -2102,7 +2101,7 @@ const CreateTab = ()=>{
                                         disabled: !activeStory.trim() || isProcessing,
                                         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$sparkles$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Sparkles$3e$__["Sparkles"],
                                         variant: "primary",
-                                        children: creationMode === 'story' ? 'Yapılandırmayı Başlat' : 'Simülasyon Oluştur'
+                                        children: creationMode === 'story' ? 'Hikayeyi Oluştur' : 'Oyunu Başlat'
                                     }, void 0, false, {
                                         fileName: "[project]/src/tabs/CreateTab.jsx",
                                         lineNumber: 134,
@@ -2197,7 +2196,7 @@ const CreateTab = ()=>{
                                         setActiveStory('');
                                     },
                                     variant: "secondary",
-                                    children: "Yeni Vektör İşle"
+                                    children: "Yeni Hikaye Yaz"
                                 }, void 0, false, {
                                     fileName: "[project]/src/tabs/CreateTab.jsx",
                                     lineNumber: 180,

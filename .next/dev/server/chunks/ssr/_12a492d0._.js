@@ -274,20 +274,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ErrorBo
 ;
 ;
 const metadata = {
-    title: 'KOZA – The Sovereign Mind | Cognitive Processing System',
-    description: 'Transform chaos into structure. Decompress narratives into actionable insights with the world\'s first cognitive auditing platform.',
+    title: 'KOZA | Hikaye ve Dönüşüm Platformu',
+    description: 'Zorbalığa karşı verdiğiniz mücadelede yalnız değilsiniz. Hikayenizi paylaşın, dönüşümü başlatın.',
     openGraph: {
-        title: 'KOZA – The Sovereign Mind',
-        description: 'Elite cognitive processing for high-agency individuals.',
+        title: 'KOZA | Hikaye ve Dönüşüm',
+        description: 'Hikayenizi paylaşın, gücünüzü keşfedin.',
         url: 'https://koza-app.vercel.app',
         siteName: 'KOZA.AI',
-        locale: 'en_US',
+        locale: 'tr_TR',
         type: 'website'
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'KOZA – The Sovereign Mind',
-        description: 'Elite cognitive processing for high-agency individuals.'
+        title: 'KOZA | Hikaye ve Dönüşüm',
+        description: 'Hikayenizi paylaşın, gücünüzü keşfedin.'
     },
     robots: {
         index: true,

@@ -14,43 +14,43 @@ const PricingView = ({ onClose }) => {
 
     const tiers = [
         {
-            name: 'Observer',
+            name: 'Gözlemci',
             price: '0',
-            description: 'Basic cognitive structuralization.',
+            description: 'Hikaye dünyasına ilk adım.',
             features: [
-                '10 Narrative Structuralizations / mo',
-                'Basic Logic Simulation',
-                'Standard Clarity Indexing'
+                'Ayda 10 Hikaye Dönüşümü',
+                'Temel Oyun Simülasyonu',
+                'Standart Gelişim Takibi'
             ],
-            cta: 'Current Plan',
+            cta: 'Mevcut Plan',
             variant: 'secondary',
             disabled: true
         },
         {
-            name: 'Architect',
+            name: 'Mimar',
             price: '49',
-            description: 'Full pattern intelligence for strategic minds.',
+            description: 'Stratejik zihinler için tam gelişim paketi.',
             features: [
-                'Unlimited Structuralizations',
-                'Advanced Pattern Intelligence',
-                'Global Entropy Mapping',
-                'Data Vector Exports'
+                'Sınırsız Hikaye Dönüşümü',
+                'Gelişmiş Karakter Analizi',
+                'Küresel Dayanıklılık Haritası',
+                'Veri ve PDF Dışa Aktarma'
             ],
-            cta: 'Upgrade to Architect',
+            cta: "Mimar'a Yükselt",
             variant: 'primary',
             highlight: true
         },
         {
-            name: 'Sovereign',
+            name: 'Koza Pro',
             price: '499',
-            description: 'The peak tier of intellectual self-respect.',
+            description: 'En derin dönüşüm ve destek seviyesi.',
             features: [
-                'Priority Cognitive Auditing',
-                'Personalized AI Strategy Lead',
-                'Deep Systemic Pattern Forensics',
-                'Unlimited Everything'
+                'Öncelikli Hikaye İşleme',
+                'Kişisel AI Gelişim Rehberi',
+                'Derin Psikolojik Analizler',
+                'Her Şey Sınırsız'
             ],
-            cta: 'Claim Sovereignty',
+            cta: "Koza Pro'yu Keşfet",
             variant: 'gold'
         }
     ];
@@ -59,10 +59,10 @@ const PricingView = ({ onClose }) => {
         <GalaxyContainer className="py-20 animate-fade-in">
             <div className="text-center mb-16">
                 <h1 className="text-4xl font-black uppercase tracking-tight mb-4">
-                    Monetize Your Cognitive Evolution
+                    Gelişiminize Yatırım Yapın
                 </h1>
                 <p className="text-neutral-500 max-w-2xl mx-auto border-l-2 border-amber-500 pl-6 text-left">
-                    The difference between noise and signal is the system you use to process it. Choose your level of structural authority.
+                    Gürültü ile sinyal arasındaki fark, onu işlemek için kullandığınız sistemdir. Dönüşüm seviyenizi seçin.
                 </p>
             </div>
 
@@ -75,8 +75,8 @@ const PricingView = ({ onClose }) => {
                             <div className="mb-6">
                                 <h3 className="text-xl font-bold uppercase tracking-widest text-neutral-400 mb-1">{tier.name}</h3>
                                 <div className="flex items-baseline gap-1">
-                                    <span className="text-4xl font-black text-neutral-900">${tier.price}</span>
-                                    <span className="text-neutral-500">/mo</span>
+                                    <span className="text-4xl font-black text-neutral-900">{tier.price}₺</span>
+                                    <span className="text-neutral-500">/ay</span>
                                 </div>
                             </div>
 
@@ -95,7 +95,7 @@ const PricingView = ({ onClose }) => {
                                 variant={tier.variant}
                                 className="w-full justify-center"
                                 disabled={tier.disabled}
-                                onClick={() => addToast('success', 'Commitment Recorded', `Initiating ${tier.name} upgrade sequence.`)}
+                                onClick={() => addToast('success', 'Talep Alındı', `${tier.name} yükseltme süreci başlatılıyor.`)}
                             >
                                 {tier.cta}
                             </GalaxyButton>
@@ -110,28 +110,28 @@ const PricingView = ({ onClose }) => {
                     <div className="flex-1">
                         <div className="flex items-center gap-2 text-amber-500 mb-4 uppercase tracking-widest font-black text-sm">
                             <AlertTriangle size={20} />
-                            Critical Awareness
+                            Önemli Farkındalık
                         </div>
                         <h2 className="text-3xl font-black uppercase mb-6 leading-tight">
-                            The Cost of Inaction
+                            Hareketsiz Kalmanın Maliyeti
                         </h2>
                         <p className="text-neutral-400 text-lg leading-relaxed mb-8">
-                            Unprocessed narratives turn into structural debt. By opting for the **Observer** tier, you are choosing to lose **85% of your pattern intelligence** over a 12-month period.
+                            İşlenmemiş anlatılar yapısal yüke dönüşür. **Gözlemci** seviyesinde kalarak, hikayelerinizin sunduğu gelişim potansiyelinin büyük kısmını değerlendiremiyor olabilirsiniz.
                         </p>
                         <div className="flex gap-8">
                             <div>
                                 <div className="text-2xl font-black text-white">2.4k+</div>
-                                <div className="text-xs text-neutral-500 uppercase tracking-widest">Nodes Lost/Year</div>
+                                <div className="text-xs text-neutral-500 uppercase tracking-widest">Kazanılan İçgörü</div>
                             </div>
                             <div>
                                 <div className="text-2xl font-black text-white">92%</div>
-                                <div className="text-xs text-neutral-500 uppercase tracking-widest">Entropy Increase</div>
+                                <div className="text-xs text-neutral-500 uppercase tracking-widest">Dönüşüm Başarısı</div>
                             </div>
                         </div>
                     </div>
                     <div className="w-full md:w-72">
                         <GalaxyButton variant="gold" className="w-full h-16 text-lg" onClick={onClose}>
-                            Prevent Data Loss
+                            Kaybı Önleyin
                         </GalaxyButton>
                     </div>
                 </div>

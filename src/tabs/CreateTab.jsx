@@ -23,14 +23,14 @@ import KozaLoader from '../components/ui/KozaLoader';
 const CreateHeader = memo(() => (
     <div className="text-center mb-16 px-4">
         <div className="galaxy-badge primary mb-6 group cursor-default border-neutral-800 bg-neutral-900/50 text-neutral-300">
-            <Zap size={14} className="text-amber-500" />
-            <span>Sovereign Cognitive Auditing</span>
+            <Sparkles size={14} className="text-amber-500" />
+            <span>Yeni Bir Hikaye Başlat</span>
         </div>
         <h1 className="text-6xl font-black mb-4 tracking-tight uppercase text-neutral-900">
-            Deneyimi Yapılandır
+            Dönüşümü Başlat
         </h1>
         <p className="text-neutral-500 text-lg font-medium max-w-xl mx-auto leading-relaxed border-l-2 border-neutral-200 pl-6 text-left">
-            Karmaşık anlatıları eyleme geçirilebilir sinyallere dönüştürün. Karmaşayı en aza indirin.
+            Zorlukları güce, acıyı hikayeye dönüştürün. Yalnız değilsiniz.
         </p>
     </div>
 ));
@@ -41,9 +41,9 @@ const StatsSection = memo(({ user }) => {
     return (
         <div className="mt-20 border-t border-neutral-200 pt-12">
             <GalaxyGrid cols={3}>
-                <GalaxyStat icon={BookOpen} label="Yapılandırılmış Anlatılar" value={user?.storiesCreated || 0} />
-                <GalaxyStat icon={Zap} label="Netlik Endeksi" value={user?.xp || 0} />
-                <GalaxyStat icon={BarChart3} label="Azaltılmış Karmaşa" value={`${entropyScore}%`} />
+                <GalaxyStat icon={BookOpen} label="Tamamlanan Hikayeler" value={user?.storiesCreated || 0} />
+                <GalaxyStat icon={Zap} label="Gelişim Puanı" value={user?.xp || 0} />
+                <GalaxyStat icon={BarChart3} label="Dönüşüm Oranı" value={`${entropyScore}%`} />
             </GalaxyGrid>
         </div>
     );
@@ -68,7 +68,7 @@ const CreateTab = () => {
         if (!activeStory.trim() || isProcessing) return;
         setError(null);
         setIsProcessing(true);
-        setStage('Anlatı vektörleri çözümleniyor...');
+        setStage('Hikayeniz işleniyor...');
 
         try {
             const result = await NarrativeDomain.processNarrativeRequest(activeStory, creationMode);
@@ -83,8 +83,8 @@ const CreateTab = () => {
             saveStory(data);
 
             const clarityGain = ClarityService.calculateClarityGain(activeStory, data);
-            awardXP(clarityGain, creationMode === 'story' ? 'Anlatı yapılandırıldı' : 'Mantık simülasyonu oluşturuldu');
-            addToast('success', 'Netlik Arttı', `+${clarityGain} Netlik Endeksi`);
+            awardXP(clarityGain, creationMode === 'story' ? 'Hikaye tamamlandı' : 'Oyun oluşturuldu');
+            addToast('success', 'Gelişim Kaydedildi', `+${clarityGain} Gelişim Puanı`);
         } catch (error) {
             console.error('Generation failed:', error);
             setError(error.message || 'An error occurred. Please try again.');
@@ -115,8 +115,8 @@ const CreateTab = () => {
                                 activeTab={creationMode}
                                 onChange={setCreationMode}
                                 tabs={[
-                                    { id: 'story', label: 'Yapısal Denetim', icon: BookOpen },
-                                    { id: 'game', label: 'Mantık Simülasyonu', icon: Gamepad2 }
+                                    { id: 'story', label: 'Hikaye Modu', icon: BookOpen },
+                                    { id: 'game', label: 'Oyun Modu', icon: Gamepad2 }
                                 ]}
                             />
                         </div>
@@ -125,7 +125,7 @@ const CreateTab = () => {
                             <GalaxyTextarea
                                 value={activeStory}
                                 onChange={setActiveStory}
-                                placeholder={creationMode === 'story' ? "Yapısal çözümleme için ham anlatı verilerini girin..." : "Mantık simülasyonu için bilişsel zorlukları girin..."}
+                                placeholder={creationMode === 'story' ? "Yaşadıklarınızı anlatın, birlikte dönüştürelim..." : "Karşılaştığınız engelleri yazın, bir oyuna çevirelim..."}
                                 disabled={isProcessing}
                                 minHeight="150px"
                             />
@@ -137,7 +137,7 @@ const CreateTab = () => {
                                     icon={Sparkles}
                                     variant="primary"
                                 >
-                                    {creationMode === 'story' ? 'Yapılandırmayı Başlat' : 'Simülasyon Oluştur'}
+                                    {creationMode === 'story' ? 'Hikayeyi Oluştur' : 'Oyunu Başlat'}
                                 </GalaxyButton>
                             </div>
                         </div>
@@ -184,7 +184,7 @@ const CreateTab = () => {
                                 }}
                                 variant="secondary"
                             >
-                                Yeni Vektör İşle
+                                Yeni Hikaye Yaz
                             </GalaxyButton>
                         </div>
                     </GalaxyCard>

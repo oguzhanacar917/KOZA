@@ -399,43 +399,43 @@ const PricingView = ({ onClose })=>{
     const { addToast } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$UIContext$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUI"])();
     const tiers = [
         {
-            name: 'Observer',
+            name: 'Gözlemci',
             price: '0',
-            description: 'Basic cognitive structuralization.',
+            description: 'Hikaye dünyasına ilk adım.',
             features: [
-                '10 Narrative Structuralizations / mo',
-                'Basic Logic Simulation',
-                'Standard Clarity Indexing'
+                'Ayda 10 Hikaye Dönüşümü',
+                'Temel Oyun Simülasyonu',
+                'Standart Gelişim Takibi'
             ],
-            cta: 'Current Plan',
+            cta: 'Mevcut Plan',
             variant: 'secondary',
             disabled: true
         },
         {
-            name: 'Architect',
+            name: 'Mimar',
             price: '49',
-            description: 'Full pattern intelligence for strategic minds.',
+            description: 'Stratejik zihinler için tam gelişim paketi.',
             features: [
-                'Unlimited Structuralizations',
-                'Advanced Pattern Intelligence',
-                'Global Entropy Mapping',
-                'Data Vector Exports'
+                'Sınırsız Hikaye Dönüşümü',
+                'Gelişmiş Karakter Analizi',
+                'Küresel Dayanıklılık Haritası',
+                'Veri ve PDF Dışa Aktarma'
             ],
-            cta: 'Upgrade to Architect',
+            cta: "Mimar'a Yükselt",
             variant: 'primary',
             highlight: true
         },
         {
-            name: 'Sovereign',
+            name: 'Koza Pro',
             price: '499',
-            description: 'The peak tier of intellectual self-respect.',
+            description: 'En derin dönüşüm ve destek seviyesi.',
             features: [
-                'Priority Cognitive Auditing',
-                'Personalized AI Strategy Lead',
-                'Deep Systemic Pattern Forensics',
-                'Unlimited Everything'
+                'Öncelikli Hikaye İşleme',
+                'Kişisel AI Gelişim Rehberi',
+                'Derin Psikolojik Analizler',
+                'Her Şey Sınırsız'
             ],
-            cta: 'Claim Sovereignty',
+            cta: "Koza Pro'yu Keşfet",
             variant: 'gold'
         }
     ];
@@ -447,7 +447,7 @@ const PricingView = ({ onClose })=>{
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "text-4xl font-black uppercase tracking-tight mb-4",
-                        children: "Monetize Your Cognitive Evolution"
+                        children: "Gelişiminize Yatırım Yapın"
                     }, void 0, false, {
                         fileName: "[project]/src/views/PricingView.jsx",
                         lineNumber: 61,
@@ -455,7 +455,7 @@ const PricingView = ({ onClose })=>{
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-neutral-500 max-w-2xl mx-auto border-l-2 border-amber-500 pl-6 text-left",
-                        children: "The difference between noise and signal is the system you use to process it. Choose your level of structural authority."
+                        children: "Gürültü ile sinyal arasındaki fark, onu işlemek için kullandığınız sistemdir. Dönüşüm seviyenizi seçin."
                     }, void 0, false, {
                         fileName: "[project]/src/views/PricingView.jsx",
                         lineNumber: 64,
@@ -492,8 +492,8 @@ const PricingView = ({ onClose })=>{
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-4xl font-black text-neutral-900",
                                                     children: [
-                                                        "$",
-                                                        tier.price
+                                                        tier.price,
+                                                        "₺"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/views/PricingView.jsx",
@@ -502,7 +502,7 @@ const PricingView = ({ onClose })=>{
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-neutral-500",
-                                                    children: "/mo"
+                                                    children: "/ay"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/views/PricingView.jsx",
                                                     lineNumber: 79,
@@ -557,7 +557,7 @@ const PricingView = ({ onClose })=>{
                                     variant: tier.variant,
                                     className: "w-full justify-center",
                                     disabled: tier.disabled,
-                                    onClick: ()=>addToast('success', 'Commitment Recorded', `Initiating ${tier.name} upgrade sequence.`),
+                                    onClick: ()=>addToast('success', 'Talep Alındı', `${tier.name} yükseltme süreci başlatılıyor.`),
                                     children: tier.cta
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/PricingView.jsx",
@@ -598,7 +598,7 @@ const PricingView = ({ onClose })=>{
                                             lineNumber: 112,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        "Critical Awareness"
+                                        "Önemli Farkındalık"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/views/PricingView.jsx",
@@ -607,7 +607,7 @@ const PricingView = ({ onClose })=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "text-3xl font-black uppercase mb-6 leading-tight",
-                                    children: "The Cost of Inaction"
+                                    children: "Hareketsiz Kalmanın Maliyeti"
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/PricingView.jsx",
                                     lineNumber: 115,
@@ -615,7 +615,7 @@ const PricingView = ({ onClose })=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-neutral-400 text-lg leading-relaxed mb-8",
-                                    children: "Unprocessed narratives turn into structural debt. By opting for the **Observer** tier, you are choosing to lose **85% of your pattern intelligence** over a 12-month period."
+                                    children: "İşlenmemiş anlatılar yapısal yüke dönüşür. **Gözlemci** seviyesinde kalarak, hikayelerinizin sunduğu gelişim potansiyelinin büyük kısmını değerlendiremiyor olabilirsiniz."
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/PricingView.jsx",
                                     lineNumber: 118,
@@ -636,7 +636,7 @@ const PricingView = ({ onClose })=>{
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "text-xs text-neutral-500 uppercase tracking-widest",
-                                                    children: "Nodes Lost/Year"
+                                                    children: "Kazanılan İçgörü"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/views/PricingView.jsx",
                                                     lineNumber: 124,
@@ -660,7 +660,7 @@ const PricingView = ({ onClose })=>{
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "text-xs text-neutral-500 uppercase tracking-widest",
-                                                    children: "Entropy Increase"
+                                                    children: "Dönüşüm Başarısı"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/views/PricingView.jsx",
                                                     lineNumber: 128,
@@ -690,7 +690,7 @@ const PricingView = ({ onClose })=>{
                                 variant: "gold",
                                 className: "w-full h-16 text-lg",
                                 onClick: onClose,
-                                children: "Prevent Data Loss"
+                                children: "Kaybı Önleyin"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/PricingView.jsx",
                                 lineNumber: 133,

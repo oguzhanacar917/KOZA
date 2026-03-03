@@ -1,31 +1,30 @@
 /**
- * ClarityService: Core engine for the Sovereign Mind retention loop.
- * Calculates "Entropy Reduction" and "Clarity Index" based on narrative structuralization.
+ * ClarityService: Koza gelişim ve dönüşüm motoru.
+ * Hikaye yapılandırmasına dayalı olarak "Dönüşüm Oranı" ve "Gelişim Puanı" hesaplar.
  */
 export const ClarityService = {
     /**
-     * Calculates the Clarity Index (formerly XP) based on the structural quality of the input/output.
-     * @param {string} input - Raw narrative data.
-     * @param {object} analysis - The structuralized output from the AI.
-     * @returns {number} The amount of Clarity Index gained.
+     * Gelişim Puanını (eski adıyla XP) hesaplar.
+     * @param {string} input - Ham anlatı verisi.
+     * @param {object} analysis - AI tarafından oluşturulan yapılandırılmış çıktı.
+     * @returns {number} Kazanılan Gelişim Puanı.
      */
     calculateClarityGain: (input, analysis) => {
-        const inputWeight = Math.min(Math.floor(input.length / 50), 50); // Reward depth, cap at 50
+        const inputWeight = Math.min(Math.floor(input.length / 50), 50); // Derinliği ödüllendir, 50 ile sınırla
         const signalStrength = analysis?.actionPoints?.length ? analysis.actionPoints.length * 10 : 20;
-        const entropyReductionBonus = 50; // Flat bonus for successful structuralization
+        const transformationBonus = 50; // Başarılı dönüşüm için sabit bonus
 
-        return inputWeight + signalStrength + entropyReductionBonus;
+        return inputWeight + signalStrength + transformationBonus;
     },
 
     /**
-     * Generates a "Cognitive Evolution" metric for the user.
-     * This simulates the "Self-mastery" and "Competence validation" progression.
+     * Kullanıcı için "Dönüşüm Oranı" metriği üretir.
      */
     getEntropyReductionScore: (userStats) => {
         const baseLevel = userStats?.storiesCreated || 0;
         const multiplier = userStats?.xp || 0;
 
-        // Return a normalized "Percentage of Chaos Controlled"
+        // "Kontrol Edilen Kaos Yüzdesi"ni döndür
         return Math.min(Math.round((baseLevel * 2) + (multiplier / 1000)), 99.9);
     }
 };
