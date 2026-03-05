@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 
-const MASTODON_BASE_URL = process.env.MASTODON_BASE_URL;
-const MASTODON_CLIENT_ID = process.env.MASTODON_CLIENT_ID;
-const MASTODON_CLIENT_SECRET = process.env.MASTODON_CLIENT_SECRET;
-const MASTODON_REDIRECT_URI = process.env.MASTODON_REDIRECT_URI;
 const COOKIE_NAME = 'mastodon_token';
 
 export async function GET(request) {
+    const MASTODON_BASE_URL = process.env.MASTODON_BASE_URL;
+    const MASTODON_CLIENT_ID = process.env.MASTODON_CLIENT_ID;
+    const MASTODON_CLIENT_SECRET = process.env.MASTODON_CLIENT_SECRET;
+    const MASTODON_REDIRECT_URI = process.env.MASTODON_REDIRECT_URI;
+
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
     if (!code) return NextResponse.json({ error: 'No code' }, { status: 400 });

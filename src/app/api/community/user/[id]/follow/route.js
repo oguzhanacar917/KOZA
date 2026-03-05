@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getMastodonToken, mastodonFetch } from '../../../../services/mastodonServer';
+import { getMastodonToken, mastodonFetch } from '../../../../../../services/mastodonServer';
 
 export async function POST(request, { params }) {
     const token = getMastodonToken(request);
