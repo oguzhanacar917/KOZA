@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Users/orwell/KOZA/src/app/api/auth/me/route.js"],"sourcesContent":["import { NextResponse } from 'next/server';\nimport { getMastodonToken, mastodonFetch, normalizeAccount } from '../../../services/mastodonServer';\n\nexport async function GET(request) {\n    const token = getMastodonToken(request);\n    if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });\n    try {\n        const user = await mastodonFetch('/api/v1/accounts/verify_credentials', {}, token);\n        return NextResponse.json(normalizeAccount(user));\n    } catch (e) {\n        return NextResponse.json({ error: e.message }, { status: 401 });\n    }\n}\n"],"names":[],"mappings":";;;;AAAA;;;;;;;;AAGO,eAAe,IAAI,OAAO;IAC7B,MAAM,QAAQ,iBAAiB;IAC/B,IAAI,CAAC,OAAO,OAAO,gJAAY,CAAC,IAAI,CAAC;QAAE,OAAO;IAAe,GAAG;QAAE,QAAQ;IAAI;IAC9E,IAAI;QACA,MAAM,OAAO,MAAM,cAAc,uCAAuC,CAAC,GAAG;QAC5E,OAAO,gJAAY,CAAC,IAAI,CAAC,iBAAiB;IAC9C,EAAE,OAAO,GAAG;QACR,OAAO,gJAAY,CAAC,IAAI,CAAC;YAAE,OAAO,EAAE,OAAO;QAAC,GAAG;YAAE,QAAQ;QAAI;IACjE;AACJ"}}]
+}

@@ -1,0 +1,3 @@
+{
+  "/api/community/post/[id]/context/route": "app/api/community/post/[id]/context/route.js"
+}

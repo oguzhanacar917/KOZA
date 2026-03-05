@@ -1,0 +1,78 @@
+/* CommunityLoginPrompt.css */
+.login-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 32px;
+    background: white;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    max-width: 420px;
+    margin: 40px auto;
+}
+
+.login-prompt__icon {
+    font-size: 52px;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.login-prompt__title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.login-prompt__desc {
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.65;
+    margin-bottom: 24px;
+}
+
+.login-prompt__features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    width: 100%;
+}
+
+.login-prompt__feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #7c3aed;
+    font-weight: 600;
+}
+
+.login-prompt__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #9333ea, #7c3aed);
+    color: white;
+    text-decoration: none;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(147, 51, 234, 0.35);
+    transition: all 0.2s ease;
+    margin-bottom: 14px;
+}
+
+.login-prompt__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(147, 51, 234, 0.45);
+}
+
+.login-prompt__note {
+    font-size: 12px;
+    color: #94a3b8;
+}

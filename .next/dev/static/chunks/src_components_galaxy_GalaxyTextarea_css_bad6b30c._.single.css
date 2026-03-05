@@ -10,16 +10,18 @@
   resize: vertical;
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 16px;
   outline: none;
+  flex: 1;
   width: 100%;
-  min-height: 120px;
-  padding: 16px 20px;
+  height: 100%;
+  min-height: 200px;
+  padding: 20px 24px;
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.75;
   transition: all .2s;
-  box-shadow: 0 1px 2px #0000000d;
+  box-shadow: 0 1px 4px #0000000f;
 }
 
 .galaxy-textarea:focus {

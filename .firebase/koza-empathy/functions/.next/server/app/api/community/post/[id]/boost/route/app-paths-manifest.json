@@ -1,0 +1,3 @@
+{
+  "/api/community/post/[id]/boost/route": "app/api/community/post/[id]/boost/route.js"
+}

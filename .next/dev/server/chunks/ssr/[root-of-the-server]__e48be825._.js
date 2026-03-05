@@ -2694,10 +2694,35 @@ class ErrorBoundary extends __TURBOPACK__imported__module__$5b$project$5d2f$node
                         lineNumber: 25,
                         columnNumber: 21
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(AdminErrorDetails, {
-                        error: this.state.error,
-                        errorInfo: this.state.errorInfo
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "mt-8 max-w-2xl w-full p-6 bg-red-50 rounded-2xl border border-red-100 text-left overflow-auto shadow-sm",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "font-mono text-sm text-red-700 whitespace-pre-wrap font-bold mb-2 border-b border-red-100 pb-2",
+                                children: "DEBUG VIEW: Error Details"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ErrorBoundary.jsx",
+                                lineNumber: 43,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "font-mono text-sm text-red-700 whitespace-pre-wrap",
+                                children: this.state.error?.toString()
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ErrorBoundary.jsx",
+                                lineNumber: 46,
+                                columnNumber: 25
+                            }, this),
+                            this.state.errorInfo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
+                                className: "mt-4 font-mono text-xs text-red-600 whitespace-pre-wrap p-3 bg-white/50 rounded-xl",
+                                children: this.state.errorInfo.componentStack
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ErrorBoundary.jsx",
+                                lineNumber: 50,
+                                columnNumber: 29
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ErrorBoundary.jsx",
                         lineNumber: 42,
                         columnNumber: 21
@@ -2712,49 +2737,6 @@ class ErrorBoundary extends __TURBOPACK__imported__module__$5b$project$5d2f$node
         return this.props.children;
     }
 }
-;
-const AdminErrorDetails = ({ error, errorInfo })=>{
-    try {
-        const { isAdmin } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$AuthContext$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAuth"])();
-        if (!isAdmin || !error) return null;
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "mt-8 max-w-2xl w-full p-6 bg-red-50 rounded-2xl border border-red-100 text-left overflow-auto animate-fade-in shadow-sm",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "font-mono text-sm text-red-700 whitespace-pre-wrap font-bold mb-2 border-b border-red-100 pb-2",
-                    children: "Admin View: Error Details"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ErrorBoundary.jsx",
-                    lineNumber: 60,
-                    columnNumber: 17
-                }, ("TURBOPACK compile-time value", void 0)),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "font-mono text-sm text-red-700 whitespace-pre-wrap",
-                    children: error.toString()
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ErrorBoundary.jsx",
-                    lineNumber: 63,
-                    columnNumber: 17
-                }, ("TURBOPACK compile-time value", void 0)),
-                errorInfo && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
-                    className: "mt-4 font-mono text-xs text-red-600 whitespace-pre-wrap p-3 bg-white/50 rounded-xl",
-                    children: errorInfo.componentStack
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ErrorBoundary.jsx",
-                    lineNumber: 67,
-                    columnNumber: 21
-                }, ("TURBOPACK compile-time value", void 0))
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/ErrorBoundary.jsx",
-            lineNumber: 59,
-            columnNumber: 13
-        }, ("TURBOPACK compile-time value", void 0));
-    } catch (e) {
-        // If AuthContext isn't available (e.g. error happened during provider init)
-        return null;
-    }
-};
 const __TURBOPACK__default__export__ = ErrorBoundary;
 }),
 ];

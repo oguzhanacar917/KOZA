@@ -1,0 +1,24 @@
+{
+  "name": "koza",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "next": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@xstate/react": "^6.0.0",
+    "canvas-confetti": "^1.9.4",
+    "firebase": "^12.7.0",
+    "lucide-react": "^0.562.0",
+    "react-ga4": "^2.1.0",
+    "xstate": "^5.28.0",
+    "firebase-frameworks": "^0.11.0",
+    "firebase-functions": "^6.0.1",
+    "firebase-admin": "^11.11.1"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": "24"
+  }
+}

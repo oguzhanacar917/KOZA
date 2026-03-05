@@ -49,6 +49,8 @@ const CreateTab = () => {
     const [error, setError] = useState(null);
     const [creationMode, setCreationMode] = useState('story');
 
+    const entropyScore = ClarityService.getEntropyReductionScore(user);
+
     const handleGenerate = useCallback(async () => {
         if (!activeStory.trim() || isProcessing) return;
         setError(null);
@@ -88,93 +90,120 @@ const CreateTab = () => {
         }
     }, [analysisResult, setCurrentView, setActiveStory, setAnalysisResult]);
 
+    if (analysisResult) {
+        return (
+            <GalaxyContainer className="py-12">
+                <GalaxyCard
+                    className="text-center max-w-xl mx-auto"
+                    title={analysisResult.category}
+                    subtitle={analysisResult.type === 'story' ? 'Hikaye Hazır' : 'Oyun Hazır'}
+                    emoji={analysisResult.type === 'story' ? '📖' : '🎮'}
+                >
+                    <p className="text-neutral-500 text-lg mb-10">
+                        {analysisResult.type === 'story'
+                            ? 'Deneyiminiz artık moral verici bir hikaye.'
+                            : 'Zorluğunuz artık heyecan verici bir oyun.'}
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <GalaxyButton onClick={viewResult}>
+                            {analysisResult.type === 'story' ? 'Hikayeyi Oku' : 'Oyunu Oyna'}
+                        </GalaxyButton>
+                        <GalaxyButton
+                            onClick={() => {
+                                setAnalysisResult(null);
+                                setActiveStory('');
+                            }}
+                            variant="secondary"
+                        >
+                            Yeni Hikaye Yaz
+                        </GalaxyButton>
+                    </div>
+                </GalaxyCard>
+            </GalaxyContainer>
+        );
+    }
+
     return (
-        <GalaxyContainer className="py-8">
-            <GalaxyStack spacing={8} className="max-w-2xl mx-auto">
-                {!analysisResult ? (
-                    <GalaxyStack spacing={8}>
-                        <GalaxyCenter>
-                            <GalaxyTabs
-                                activeTab={creationMode}
-                                onChange={setCreationMode}
-                                tabs={[
-                                    { id: 'story', label: 'Hikaye Modu', icon: BookOpen },
-                                    { id: 'game', label: 'Oyun Modu', icon: Gamepad2 }
-                                ]}
-                            />
+        <GalaxyContainer className="py-10">
+            {/* Two-column horizontal layout */}
+            <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+
+                {/* LEFT: Textarea — takes up most horizontal space */}
+                <div className="flex-1 flex flex-col gap-4 animate-fade-in-up">
+                    <GalaxyTextarea
+                        value={activeStory}
+                        onChange={setActiveStory}
+                        placeholder={
+                            creationMode === 'story'
+                                ? "Yaşadıklarınızı anlatın, birlikte dönüştürelim..."
+                                : "Karşılaştığınız engelleri yazın, bir oyuna çevirelim..."
+                        }
+                        disabled={isProcessing}
+                        rows={14}
+                    />
+
+                    {isProcessing && (
+                        <GalaxyCenter className="py-6 animate-fade-in">
+                            <KozaLoader size="large" message={stage} />
                         </GalaxyCenter>
+                    )}
 
-                        <GalaxyStack spacing={6} className="animate-slide-up">
-                            <GalaxyTextarea
-                                value={activeStory}
-                                onChange={setActiveStory}
-                                placeholder={creationMode === 'story' ? "Yaşadıklarınızı anlatın, birlikte dönüştürelim..." : "Karşılaştığınız engelleri yazın, bir oyuna çevirelim..."}
-                                disabled={isProcessing}
-                                minHeight="150px"
-                            />
+                    {error && isAdmin && (
+                        <GalaxyAlert type="error" title="Giriş Hatası">
+                            {error}
+                        </GalaxyAlert>
+                    )}
+                </div>
 
-                            <GalaxyFlex justify="end">
-                                <GalaxyButton
-                                    onClick={handleGenerate}
-                                    disabled={!activeStory.trim() || isProcessing}
-                                    icon={Sparkles}
-                                    variant="magic"
-                                >
-                                    {creationMode === 'story' ? 'Hikayeyi Oluştur' : 'Oyunu Başlat'}
-                                </GalaxyButton>
-                            </GalaxyFlex>
-                        </GalaxyStack>
+                {/* RIGHT: Mode selector + button + stats panel */}
+                <div className="lg:w-72 flex flex-col gap-6 animate-fade-in-up" style={{ animationDelay: '50ms' }}>
 
-                        {error && isAdmin && (
-                            <GalaxyAlert type="error" title="Giriş Hatası">
-                                {error}
-                            </GalaxyAlert>
-                        )}
+                    {/* Mode Tabs */}
+                    <div>
+                        <p className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.2em] mb-3">Mod Seçimi</p>
+                        <GalaxyTabs
+                            activeTab={creationMode}
+                            onChange={setCreationMode}
+                            tabs={[
+                                { id: 'story', label: 'Hikaye', icon: BookOpen },
+                                { id: 'game', label: 'Oyun', icon: Gamepad2 }
+                            ]}
+                        />
+                    </div>
 
-                        {isProcessing && (
-                            <GalaxyCenter className="mt-12 animate-fade-in">
-                                <KozaLoader size="large" message={stage} />
-                            </GalaxyCenter>
-                        )}
-
-                        <div className="mt-8 p-4 bg-neutral-50/50 rounded-xl border border-neutral-100/50 text-center">
-                            <p className="text-xs text-neutral-400 font-medium italic">
-                                🔔 {SAFETY_DISCLAIMER}
-                            </p>
-                        </div>
-                    </GalaxyStack>
-                ) : (
-                    <GalaxyCard
-                        className="text-center"
-                        title={analysisResult.category}
-                        subtitle={analysisResult.type === 'story' ? 'Hikaye Hazır' : 'Oyun Hazır'}
-                        emoji={analysisResult.type === 'story' ? '📖' : '🎮'}
+                    {/* Generate Button */}
+                    <GalaxyButton
+                        onClick={handleGenerate}
+                        disabled={!activeStory.trim() || isProcessing}
+                        icon={Sparkles}
+                        variant="magic"
+                        className="w-full"
                     >
-                        <p className="text-neutral-500 text-lg mb-10">
-                            {analysisResult.type === 'story'
-                                ? 'Deneyiminiz artık moral verici bir hikaye.'
-                                : 'Zorluğunuz artık heyecan verici bir oyun.'}
+                        {creationMode === 'story' ? 'Hikayeyi Oluştur' : 'Oyunu Başlat'}
+                    </GalaxyButton>
+
+                    {/* Divider */}
+                    <div className="border-t border-neutral-100" />
+
+                    {/* Stats */}
+                    <div>
+                        <p className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.2em] mb-4">İstatistikler</p>
+                        <GalaxyStack spacing={4}>
+                            <GalaxyStat icon={BookOpen} label="Tamamlanan Hikayeler" value={user?.storiesCreated || 0} />
+                            <GalaxyStat icon={Zap} label="Gelişim Puanı" value={user?.xp || 0} />
+                            <GalaxyStat icon={BarChart3} label="Dönüşüm Oranı" value={`${entropyScore}%`} />
+                        </GalaxyStack>
+                    </div>
+
+                    {/* Disclaimer */}
+                    <div className="mt-auto p-4 bg-neutral-50/60 rounded-2xl border border-neutral-100/60 text-center">
+                        <p className="text-[10px] text-neutral-400 font-medium italic leading-relaxed">
+                            🔔 {SAFETY_DISCLAIMER}
                         </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <GalaxyButton onClick={viewResult}>
-                                {analysisResult.type === 'story' ? 'Hikayeyi Oku' : 'Oyunu Oyna'}
-                            </GalaxyButton>
-                            <GalaxyButton
-                                onClick={() => {
-                                    setAnalysisResult(null);
-                                    setActiveStory('');
-                                }}
-                                variant="secondary"
-                            >
-                                Yeni Hikaye Yaz
-                            </GalaxyButton>
-                        </div>
-                    </GalaxyCard>
-                )}
-            </GalaxyStack>
-
-            <StatsSection user={user} />
+                    </div>
+                </div>
+            </div>
         </GalaxyContainer>
     );
 };

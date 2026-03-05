@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
-import { Plus, BookOpen, Gamepad2, LogOut, Trash2, AlertTriangle, X } from 'lucide-react';
+import { Plus, BookOpen, Gamepad2, LogOut, Trash2, AlertTriangle, X, Users } from 'lucide-react';
 import { useUI } from '../../context/UIContext';
 import { useAuth } from '../../context/AuthContext';
 import { useStory } from '../../context/StoryContext';
@@ -101,6 +101,18 @@ const Sidebar = () => {
                         {storyItems}
                     </div>
                 )}
+            </div>
+
+            {/* Community Link */}
+            <div className="px-3 py-2 border-t border-neutral-100">
+                <button
+                    onClick={() => setCurrentView({ type: 'community' })}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-purple-600 hover:bg-purple-50 transition-colors text-sm font-bold"
+                >
+                    <Users size={18} />
+                    <span>Topluluk</span>
+                    <span className="ml-auto text-[9px] font-black uppercase tracking-widest text-purple-400 bg-purple-50 px-2 py-0.5 rounded-full">YENİ</span>
+                </button>
             </div>
 
             <div className="p-4 border-t border-neutral-100 bg-neutral-50/50">

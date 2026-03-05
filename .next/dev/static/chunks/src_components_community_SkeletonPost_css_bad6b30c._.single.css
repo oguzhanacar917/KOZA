@@ -1,0 +1,40 @@
+/* [project]/src/components/community/SkeletonPost.css [app-client] (css) */
+.skeleton-post {
+  border-bottom: 1px solid #0000000f;
+  gap: 12px;
+  padding: 16px 20px;
+  display: flex;
+}
+
+.skeleton-avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+}
+
+.skeleton-content {
+  flex: 1;
+}
+
+.skeleton-line {
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton-avatar, .skeleton-line {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e8edf4 50%, #f1f5f9 75%) 0 0 / 800px 100%;
+  animation: 1.4s ease-in-out infinite skeleton-shimmer;
+}
+
+/*# sourceMappingURL=src_components_community_SkeletonPost_css_bad6b30c._.single.css.map*/

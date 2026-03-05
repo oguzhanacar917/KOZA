@@ -1,0 +1,80 @@
+/* [project]/src/components/community/CommunityLoginPrompt.css [app-client] (css) */
+.login-prompt {
+  text-align: center;
+  background: #fff;
+  border: 1px solid #00000012;
+  border-radius: 24px;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 48px 32px;
+  display: flex;
+  box-shadow: 0 4px 20px #0000000f;
+}
+
+.login-prompt__icon {
+  margin-bottom: 16px;
+  font-size: 52px;
+  line-height: 1;
+}
+
+.login-prompt__title {
+  color: #0f172a;
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.login-prompt__desc {
+  color: #64748b;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.login-prompt__features {
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 28px;
+  display: flex;
+}
+
+.login-prompt__feature {
+  color: #7c3aed;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+}
+
+.login-prompt__btn {
+  color: #fff;
+  background: linear-gradient(135deg, #9333ea, #7c3aed);
+  border-radius: 24px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s;
+  display: inline-flex;
+  box-shadow: 0 4px 16px #9333ea59;
+}
+
+.login-prompt__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px #9333ea73;
+}
+
+.login-prompt__note {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=src_components_community_CommunityLoginPrompt_css_bad6b30c._.single.css.map*/
