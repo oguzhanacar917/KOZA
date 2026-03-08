@@ -46,10 +46,13 @@ module.exports = mod;
 
 __turbopack_context__.s([
     "GET",
-    ()=>GET
+    ()=>GET,
+    "dynamic",
+    ()=>dynamic
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 ;
+const dynamic = 'force-dynamic';
 async function GET() {
     const MASTODON_BASE_URL = process.env.MASTODON_BASE_URL;
     const MASTODON_CLIENT_ID = process.env.MASTODON_CLIENT_ID;

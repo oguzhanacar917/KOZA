@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 const COOKIE_NAME = 'mastodon_token';
 
 export async function GET(request) {

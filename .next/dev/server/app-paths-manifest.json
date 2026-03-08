@@ -1,6 +1,1 @@
-{
-  "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/api/auth/me/route": "app/api/auth/me/route.js",
-  "/api/community/timeline/route": "app/api/community/timeline/route.js",
-  "/page": "app/page.js"
-}
+{}

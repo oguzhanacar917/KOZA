@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     const MASTODON_BASE_URL = process.env.MASTODON_BASE_URL;
     const MASTODON_CLIENT_ID = process.env.MASTODON_CLIENT_ID;
